@@ -1,0 +1,1786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alessandro Demontis Digital Clone</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+  font-family: "Segoe UI", Roboto, sans-serif;
+  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+  color: #fff;
+  overflow: hidden;
+}
+
+/* ── PAGE SHELL ── */
+.page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 24px 16px;
+  gap: 14px;
+}
+
+/* ── HEADER ── */
+.page-header { display: flex; align-items: flex-start; gap: 14px; flex-shrink: 0; }
+.icon-badge {
+  font-size: 2.2rem; line-height: 1;
+  filter: drop-shadow(0 2px 8px rgba(79,172,254,0.5));
+}
+.page-header-text h1 {
+  font-size: 1.4rem; font-weight: 800;
+  background: linear-gradient(90deg, #4facfe, #00f2fe);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.page-header-text p {
+  font-size: 0.72rem; color: rgba(255,255,255,0.35);
+  margin-top: 3px; font-style: italic; line-height: 1.5;
+}
+.page-header-text code {
+  font-size: 0.68rem; background: rgba(79,172,254,0.12);
+  border: 1px solid rgba(79,172,254,0.2); border-radius: 4px;
+  padding: 1px 5px; color: #4facfe; font-style: normal;
+}
+
+hr.divider { border: none; border-top: 1px solid rgba(255,255,255,0.08); flex-shrink: 0; }
+
+/* ── MAIN LAYOUT ── */
+.main-cols {
+  display: flex; gap: 16px; flex: 1; min-height: 0;
+}
+
+/* ── SIDEBAR ── */
+.sidebar {
+  width: 260px; flex-shrink: 0;
+  display: flex; flex-direction: column; gap: 10px;
+  overflow-y: auto;
+}
+.sidebar::-webkit-scrollbar { width: 4px; }
+.sidebar::-webkit-scrollbar-thumb { background: rgba(79,172,254,0.2); border-radius: 4px; }
+
+/* -- AVATAR -- */
+.cloneavatar {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 14px; padding: 8px;
+  backdrop-filter: blur(6px);  
+        display: flex;
+        align-items: center;
+        justify-content: center;
+}
+        
+.cloneavatar img {
+	max-width: 50%;
+    height: auto;    
+    margin: 0 auto;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0,0,0,.35);
+}        
+        
+/* ── CARDS ── */
+.card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 14px; padding: 14px 16px;
+  backdrop-filter: blur(6px);
+}
+.card-sm {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px; padding: 10px 14px;
+  backdrop-filter: blur(4px);
+}
+
+/* ── FIELD LABEL ── */
+.field-label {
+  font-size: 0.68rem; font-weight: 700; letter-spacing: 1px;
+  text-transform: uppercase; color: rgba(79,172,254,0.8);
+  display: block; margin-bottom: 6px;
+}
+
+/* ── INPUT / TEXTAREA ── */
+input[type="password"], input[type="text"] {
+  width: 100%; background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1); border-radius: 9px;
+  color: #fff; padding: 8px 12px; font-size: 0.82rem;
+  outline: none; transition: border-color 0.2s; font-family: inherit;
+}
+input[type="password"] { color: rgba(255,255,255,0.35); font-style: italic; cursor: default; }
+input[type="text"]:focus, textarea:focus { border-color: rgba(79,172,254,0.5); }
+input::placeholder { color: rgba(255,255,255,0.22); }
+
+textarea {
+  width: 100%; background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1); border-radius: 9px;
+  color: #fff; padding: 10px 12px; font-size: 0.86rem;
+  font-family: inherit; resize: none; outline: none;
+  transition: border-color 0.2s; line-height: 1.55;
+}
+textarea::placeholder { color: rgba(255,255,255,0.22); }
+
+input[type="file"] {
+  width: 100%; font-size: 0.75rem; color: rgba(255,255,255,0.5);
+  padding: 6px 0; cursor: pointer;
+}
+
+select {
+  width: 100%; background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12); border-radius: 9px;
+  color: #fff; padding: 8px 12px; font-size: 0.8rem;
+  outline: none; cursor: pointer; transition: border-color 0.2s;
+  appearance: none; -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%234facfe' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 10px center; padding-right: 28px;
+}
+select:focus { border-color: rgba(79,172,254,0.5); }
+select option { background: #1a1a3e; color: #fff; }
+
+/* ── BUTTONS ── */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 5px;
+  padding: 7px 13px; border-radius: 9px; font-size: 0.78rem; font-weight: 700;
+  cursor: pointer; border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.06); color: #fff;
+  transition: transform 0.25s, background 0.20s, box-shadow 0.22s;
+  backdrop-filter: blur(4px); user-select: none; white-space: nowrap;
+  font-family: inherit;
+}
+.btn:hover {
+  transform: scale(1.01); background: rgba(79,172,254,0.18);
+  box-shadow: 0 3px 14px rgba(79,172,254,0.25); border-color: rgba(79,172,254,0.4);
+}
+.btn:active { transform: scale(0.97); }
+
+/* primary send buttons */
+.btn-send-row { display: flex; gap: 8px; margin-top: 10px; }
+.btn-primary-send {
+  flex: 1; font-size: 0.84rem; font-weight: 800;
+  background: linear-gradient(90deg, rgba(79,172,254,0.28), rgba(0,242,254,0.18));
+  border-color: rgba(79,172,254,0.45);
+}
+.btn-web {
+  background: rgba(0,242,160,0.12); border-color: rgba(0,242,160,0.3); color: #00f2a0;
+}
+.btn-web:hover { background: rgba(0,242,160,0.2); border-color: rgba(0,242,160,0.5); box-shadow: 0 3px 14px rgba(0,242,160,0.2); }
+
+/* sidebar buttons */
+.sidebar-btn-group { display: flex; flex-direction: column; gap: 6px; }
+.btn-sm { font-size: 0.73rem; padding: 6px 10px; width: 100%; }
+
+/* ── DETAILS / ACCORDION ── */
+details {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 11px; overflow: hidden;
+}
+details[open] { border-color: rgba(79,172,254,0.2); }
+summary {
+  padding: 10px 14px; font-size: 0.8rem; font-weight: 700;
+  cursor: pointer; user-select: none; list-style: none;
+  color: rgba(255,255,255,0.75); display: flex; align-items: center; gap: 8px;
+}
+summary::-webkit-details-marker { display: none; }
+summary::after { content: "›"; margin-left: auto; font-size: 1.1rem; color: rgba(79,172,254,0.6); transition: transform 0.2s; }
+details[open] summary::after { transform: rotate(90deg); }
+.details-body { padding: 10px 14px 14px; display: flex; flex-direction: column; gap: 8px; }
+#feedback, #vfeedback {
+  font-size: 0.73rem; color: rgba(79,172,254,0.7);
+  min-height: 14px; font-style: italic;
+}
+
+/* ── SEARCH ROW ── */
+.search-row { display: flex; gap: 6px; }
+.search-row input { flex: 1; }
+.search-row .btn { flex-shrink: 0; }
+
+/* ── MEMORY STATUS ── */
+#memoryStatus {
+  font-size: 0.68rem; color: rgba(255,255,255,0.3);
+  font-style: italic; line-height: 1.4;
+}
+
+/* ── SECTION DIVIDER ── */
+.sidebar-divider {
+  height: 1px; background: rgba(255,255,255,0.07); margin: 2px 0;
+}
+
+/* ── CHAT AREA ── */
+.chat-col {
+  flex: 1; display: flex; flex-direction: column; gap: 10px; min-width: 0;
+}
+.chat-input-card { flex-shrink: 0; }
+
+/* ── CHAT MESSAGES (Bubble/Toast style) ── */
+#chathistory {
+  flex: 1; overflow-y: auto;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 14px; padding: 14px;
+  display: flex; flex-direction: column;
+}
+#chathistory::-webkit-scrollbar { width: 5px; }
+#chathistory::-webkit-scrollbar-thumb { background: rgba(79,172,254,0.25); border-radius: 4px; }
+
+/* Container per ogni messaggio - controlla l'allineamento */
+.message-row {
+  display: flex;
+  width: 100%;
+  margin-bottom: 12px;
+}
+.message-row.user {
+  justify-content: flex-end;
+}
+.message-row.bot {
+  justify-content: flex-start;
+}
+
+/* Bubble messaggio utente (Guest) - destra, gradiente blu/azzurro */
+.user-message-bubble {
+  max-width: 75%;
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
+  border-radius: 18px 18px 4px 18px;
+  padding: 14px 18px;
+  font-size: 0.86rem;
+  color: #fff;
+  line-height: 1.6;
+  word-break: break-word;
+  box-shadow: 0 4px 15px rgba(79,172,254,0.35);
+}
+.user-message-bubble .message-header {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.9);
+  margin-bottom: 6px;
+  text-align: right;
+}
+.user-message-bubble .message-content {
+  color: #fff;
+}
+
+/* Bubble messaggio chatbot (VivacityGPT) - sinistra, gradiente scuro/viola */
+.chatgpt-message-bubble {
+  max-width: 75%;
+  background: linear-gradient(135deg, #302b63, #24243e);
+  border: 1px solid rgba(79,172,254,0.25);
+  border-radius: 18px 18px 18px 4px;
+  padding: 14px 18px;
+  font-size: 0.86rem;
+  color: rgba(255,255,255,0.92);
+  line-height: 1.7;
+  word-break: break-word;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+}
+.chatgpt-message-bubble .message-header {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #4facfe;
+  margin-bottom: 6px;
+}
+.chatgpt-message-bubble .message-content {
+  color: rgba(255,255,255,0.92);
+}
+.chatgpt-message-bubble code {
+  background: rgba(79,172,254,0.15); border-radius: 4px;
+  padding: 2px 6px; font-size: 0.82em; color: #4facfe;
+}
+.chatgpt-message-bubble pre {
+  background: rgba(0,0,0,0.4); border: 1px solid rgba(79,172,254,0.15);
+  border-radius: 8px; padding: 12px; overflow-x: auto;
+  font-size: 0.8rem; line-height: 1.5; margin-top: 8px;
+}
+
+/* Info tokens per messaggi chatbot */
+.token-info {
+  font-size: 0.68rem;
+  color: rgba(255,255,255,0.5);
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(79,172,254,0.15);
+}
+
+/* Comandi sotto i messaggi */
+.message-commands {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+.message-commands .btn {
+  font-size: 0.7rem;
+  padding: 5px 10px;
+}
+
+/* loading */
+.loading-pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 0.75rem; font-weight: 700; padding: 6px 12px;
+  border-radius: 20px; background: rgba(79,172,254,0.1);
+  border: 1px solid rgba(79,172,254,0.22); color: #4facfe; align-self: flex-start;
+}
+.loading-pill .dot {
+  width: 6px; height: 6px; border-radius: 50%; background: #4facfe;
+  animation: pulse 1.2s infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.2} }
+
+.modal {
+  display: none; position: fixed; inset: 0; z-index: 2000;
+  background: rgba(0,0,0,0.7); backdrop-filter: blur(4px);
+  align-items: center; justify-content: center;
+}
+.modal-content {
+  background: rgba(20,20,45,0.98); border: 1px solid rgba(79,172,254,0.3);
+  border-radius: 16px; padding: 28px; width: 560px; max-width: 92vw;
+  max-height: 80vh; overflow-y: auto; position: relative;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.7);
+}
+.modal-content h2 {
+  font-size: 1rem; font-weight: 800; color: #4facfe; margin-bottom: 6px;
+}
+.modal-content small { font-size: 0.72rem; color: rgba(255,255,255,0.35); }
+#chatHistoryContent {
+  margin-top: 14px; font-size: 0.82rem; line-height: 1.7;
+  color: rgba(255,255,255,0.7); white-space: pre-wrap;
+}
+.close {
+  position: absolute; top: 14px; right: 16px;
+  width: 18px; height: 18px; background: #ff5f57; border-radius: 50%;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  font-size: 10px; font-weight: bold; color: rgba(0,0,0,0.6);
+  transition: background 0.2s; line-height: 1;
+}
+.close:hover { background: #ff3b30; }
+
+/* ── SUCCESS/ERROR (used by JS) ── */
+.success-message {
+  font-size: 0.75rem; font-weight: 700; padding: 6px 12px;
+  border-radius: 8px; background: rgba(0,242,160,0.12);
+  color: #00f2a0; border: 1px solid rgba(0,242,160,0.25); margin-top: 4px;
+}
+.error-message {
+  font-size: 0.75rem; font-weight: 700; padding: 6px 12px;
+  border-radius: 8px; background: rgba(255,80,80,0.1);
+  color: #ff6b6b; border: 1px solid rgba(255,80,80,0.2); margin-top: 4px;
+}
+
+/* ── IFRAME CONTAINER (devbot-style preview if needed) ── */
+.iframe-container { width: 100%; border-radius: 10px; overflow: hidden; background: #fff; }
+.iframe-container iframe { width: 100%; height: 280px; border: none; display: block; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 700px) {
+  html, body { overflow: auto; }
+  .page { height: auto; overflow: visible; padding: 14px; }
+  .main-cols { flex-direction: column; }
+  .sidebar { width: 100%; }
+  #chathistory { min-height: 300px; }
+}
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <div class="page-header">
+    <div class="page-header-text">
+      <h1>Alessandro Demontis Digital Clone</h1>
+      <p>
+        Models: <code>gpt-5-search-api</code> · <code>gpt-4.1-nano</code> · <code>gpt-4.1-mini</code> Long-term memory via <code>embeddings</code> endpoint
+      </p>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="main-cols">
+
+    <aside id="menu" class="sidebar">
+        <div class="cloneavatar">
+          <img src="ad_digital_clone.jpg">      
+        </div>
+        <input type="password" id="apikey" placeholder="API key loaded from localStorage…" readonly style="margin-bottom:10px;">
+      <details>
+        <summary>📋 Document Analyzer</summary>
+        <div class="details-body" id="operations">
+          <input type="file" accept=".txt,.pdf,.rtf,.xml,.html,.css,.js,.json,.vb,.php,.py" id="file-input">
+          <div id="feedback"></div>
+          <button class="btn btn-sm" type="button" onclick="analyzeFile();">🔍 Analyze File</button>
+        </div>
+      </details>
+
+      <details>
+        <summary>📊 Image Analyzer</summary>
+        <div class="details-body" id="voperations">
+          <form enctype="multipart/form-data" method="POST">
+            <input type="file" accept=".jpg,.png" name="file" id="vfile-input">
+            <div id="vfeedback"></div>
+            <div style="display:flex; gap:6px; margin-top:6px;">
+              <button class="btn btn-sm" id="vuploadBtn" type="submit">⬆️ Upload</button>
+              <button class="btn btn-sm" type="button" onclick="getChatGPTResponseIMG();">🔍 Analyze</button>
+            </div>
+          </form>
+        </div>
+      </details>
+
+      <script>
+        $(document).ready(function () {
+          $('#vuploadBtn').click(function (e) {
+            e.preventDefault();
+            $.ajax({
+              url: 'vupload.php',
+              type: 'POST',
+              data: new FormData($('form')[0]),
+              processData: false,
+              contentType: false,
+              success: function (response) {
+                const data = JSON.parse(response);
+                if (data.status === "success") {
+                  $('#vfeedback').html("✅ File uploaded.");
+                  $('#voperations button[type="button"]').attr('onclick', `submitImage("${data.url}");`);
+                } else {
+                  $('#vfeedback').html(data);
+                }
+              }
+            });
+          });
+        });
+      </script>
+
+      <div class="sidebar-divider"></div>
+
+      <div class="sidebar-btn-group">
+        <button class="btn btn-sm" id="showChatButton">📂 Show Memory</button>
+        <button class="btn btn-sm" id="apikeyBtn">🔑 API Key</button>
+        <button class="btn btn-sm" onclick="clearLongMemory()">🗑 Clear Long Memory</button>
+        <button class="btn btn-sm" onclick="exportAllMemory()">📤 Export Long Memory</button>
+        <small id="memoryStatus"></small>
+        <button class="btn btn-sm" id="savetxt">💾 Export this Session</button>
+      </div>
+
+      <div class="sidebar-divider"></div>
+
+
+
+      <div>
+        <div class="search-row">
+          <input type="text" id="search-input" placeholder="Search…">
+          <button class="btn" id="search-button">🔍</button>
+        </div>
+      </div>
+
+    </aside>
+
+    <div class="chat-col">
+
+      <div class="card chat-input-card">
+        <textarea id="prompt" rows="4" placeholder="Your prompt…" autocomplete="off" autofocus></textarea>
+        <div class="btn-send-row">
+          <button class="btn btn-primary-send" onclick="sendMessage()">⚡ Send</button>
+          <button class="btn btn-web" onclick="sendWeb()">🌐 Search the Web</button>
+        </div>
+      </div>
+      <div id="chathistory"></div>
+
+    </div>
+  </div>
+
+</div>
+
+<div id="chatModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>Chat Memory</h2>
+    <small>Use <strong>Export Chat</strong> to save this content</small>
+    <div id="chatHistoryContent"></div>
+  </div>
+</div>
+
+<div id="apiKeyModal" class="modal">
+  <div class="modal-content">
+    <span class="close" id="apiKeyClose">&times;</span>
+    <h2>OpenAI API Key</h2>
+    <small>You API Key is stored in localStorage</small>
+    <div style="margin-top:14px;">
+      <input type="text" id="apiKeyInput" placeholder="Inserisci la tua API key…">
+      <button class="btn btn-sm" id="saveApiKeyBtn" style="margin-top:8px;">💾 Save</button>
+      <div id="apiKeyFeedback"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const localization = 'Pomezia (RM), Italy';
+var time = new Date();
+var hour = time.getHours();
+var minute = time.getMinutes();
+console.log(time);
+const today = time.toLocaleString('it-IT', { dateStyle: 'full', timeStyle: 'short' });
+let selfAwareness = null;        
+        
+        
+const searchButton = document.getElementById("search-button");
+searchButton.addEventListener("click", searchChat);
+
+function searchChat() {
+  const searchInput = document.getElementById("search-input");
+  const searchTerm = searchInput.value.trim().toLowerCase();
+  if (!searchTerm) return;
+  const messageRows = document.querySelectorAll("#chathistory .message-row");
+  messageRows.forEach((row) => {
+    const contentEl = row.querySelector(".message-content");
+    const messageText = contentEl ? contentEl.innerText.toLowerCase() : "";
+    row.style.display = messageText.includes(searchTerm) ? "flex" : "none";
+  });
+  searchInput.value = "";
+}
+var saveButtont = document.getElementById("savetxt");
+saveButtont.addEventListener("click", handleSaveButtontClick);
+
+function handleSaveButtontClick() {
+  saveChatContentTxt();
+}
+
+function saveChatContentTxt() {
+  var chatContent = document.getElementById("chathistory").innerText;
+  chatContent = chatContent.replace(/Copy/g, "");
+  var currentTimestamp = new Date();
+  var datetime = currentTimestamp.toISOString();
+  var filename = "chatsession_v" + datetime.replace(/[-:.]/g, "");
+  var blob = new Blob([chatContent], { type: "text/plain" });
+  var url = URL.createObjectURL(blob);
+  var downloadLink = document.createElement("a");
+  downloadLink.href = url;
+  downloadLink.download = filename + ".txt";
+  downloadLink.click();
+  URL.revokeObjectURL(url);
+}
+let chatMemory = [];
+let currentFileId = null;
+let currentFilename = null;
+
+function createMemory(messages) {
+  const memory = [];
+  for (const msg of messages) {
+    memory.push({ role: msg.role, content: msg.content });
+  }
+  return memory;
+}
+        
+// ============================================================
+// MEMORY CONFIGURATION (Phase 4 - Advanced Features)
+// ============================================================
+// 
+// This configuration object controls the advanced memory management features:
+//
+// 1. COMPOSITE SCORING (4.1 - Ponderazione composita)
+//    - Combines semantic similarity with temporal recency
+//    - Formula: finalScore = (similarity * SIMILARITY_WEIGHT) + (recency * RECENCY_WEIGHT)
+//    - Recency uses exponential decay over MAX_DAYS period
+//    - Can be disabled with ENABLE_COMPOSITE_SCORING = false (falls back to similarity-only)
+//
+// 2. PARAMETERIZED PRUNING (4.2 - Configurazione pruning parametrizzabile)
+//    - MAX_MEMORIES: Maximum number of memories to retain (default: 1500)
+//    - MAX_DAYS: Maximum retention period in days (default: 365)
+//    - SIMILARITY_THRESHOLD: Minimum composite score to include in results (default: 0.5)
+//
+// RETROCOMPATIBILITY: Set ENABLE_COMPOSITE_SCORING = false to use original behavior
+// Runtime changes: Use updateMemoryConfig({...}) to modify settings dynamically
+// View stats: Use displayMemoryStats() to see memory distribution and configuration
+//
+const MEMORY_CONFIG = {
+  MAX_MEMORIES: 1500,        // Maximum number of memories to keep
+  MAX_DAYS: 365,             // Maximum retention in days
+  SIMILARITY_THRESHOLD: 0.5,  // Minimum similarity score to include memory
+  SIMILARITY_WEIGHT: 0.7,     // Weight for semantic similarity (0-1)
+  RECENCY_WEIGHT: 0.3,        // Weight for temporal recency (0-1)
+  ENABLE_COMPOSITE_SCORING: true // Toggle for advanced weighting
+};
+
+// Ensure weights sum to 1
+if (Math.abs(MEMORY_CONFIG.SIMILARITY_WEIGHT + MEMORY_CONFIG.RECENCY_WEIGHT - 1) > 0.001) {
+  console.warn("Memory weights don't sum to 1. Normalizing...");
+  const total = MEMORY_CONFIG.SIMILARITY_WEIGHT + MEMORY_CONFIG.RECENCY_WEIGHT;
+  MEMORY_CONFIG.SIMILARITY_WEIGHT /= total;
+  MEMORY_CONFIG.RECENCY_WEIGHT /= total;
+}
+
+// Calculate cosine similarity between two embedding vectors
+function cosineSimilarity(a, b) {
+  const dot = a.reduce((sum, val, i) => sum + val * b[i], 0);
+  const normA = Math.sqrt(a.reduce((sum, val) => sum + val * val, 0));
+  const normB = Math.sqrt(b.reduce((sum, val) => sum + val * val, 0));
+  return dot / (normA * normB);
+}
+
+// Calculate recency score using exponential decay (Phase 4 - 4.1)
+// Returns 1.0 for new memories, decaying to 0.01 at maxDays
+function calculateRecencyScore(memoryDate, maxDays = MEMORY_CONFIG.MAX_DAYS) {
+  const now = new Date();
+  const memoryTime = new Date(memoryDate);
+  const ageInMs = now - memoryTime;
+  const maxAgeInMs = maxDays * 24 * 60 * 60 * 1000;
+
+  if (ageInMs < 0) return 1; // Future date, max score
+  if (ageInMs >= maxAgeInMs) return 0; // Too old, min score
+
+  // Exponential decay: newer memories have higher scores
+  // Score = e^(-k * age), where k controls decay rate
+  const k = -Math.log(0.01) / maxAgeInMs; // Ensures 1% score at max age
+  return Math.exp(-k * ageInMs);
+}
+
+// Calculate composite score combining similarity and recency (Phase 4 - 4.1)
+// If composite scoring is disabled, returns similarity score only (retrocompatible)
+function calculateCompositeScore(similarityScore, recencyScore) {
+  if (!MEMORY_CONFIG.ENABLE_COMPOSITE_SCORING) {
+    return similarityScore;
+  }
+  return (similarityScore * MEMORY_CONFIG.SIMILARITY_WEIGHT) + 
+         (recencyScore * MEMORY_CONFIG.RECENCY_WEIGHT);
+}
+
+// Get memory statistics including age distribution (Phase 4 - Utility)
+function getMemoryStats() {
+  const memoria = JSON.parse(localStorage.getItem("vivacityLongMemory") || "[]");
+  const now = new Date();
+  
+  let memoryByAge = {
+    recent: 0,    // < 7 days
+    medium: 0,    // 7-30 days
+    old: 0,       // 30-90 days
+    veryOld: 0    // > 90 days
+  };
+  
+  memoria.forEach(item => {
+    const ageMs = now - new Date(item.data);
+    const ageDays = ageMs / (24 * 60 * 60 * 1000);
+    
+    if (ageDays < 7) {
+      memoryByAge.recent++;
+    } else if (ageDays < 30) {
+      memoryByAge.medium++;
+    } else if (ageDays < 90) {
+      memoryByAge.old++;
+    } else {
+      memoryByAge.veryOld++;
+    }
+  });
+  
+  return {
+    total: memoria.length,
+    maxAllowed: MEMORY_CONFIG.MAX_MEMORIES,
+    maxDays: MEMORY_CONFIG.MAX_DAYS,
+    compositeScoring: MEMORY_CONFIG.ENABLE_COMPOSITE_SCORING,
+    similarityWeight: MEMORY_CONFIG.SIMILARITY_WEIGHT,
+    recencyWeight: MEMORY_CONFIG.RECENCY_WEIGHT,
+    threshold: MEMORY_CONFIG.SIMILARITY_THRESHOLD,
+    byAge: memoryByAge
+  };
+}
+
+// Display memory statistics in console (Phase 4 - Utility)
+function displayMemoryStats() {
+  const stats = getMemoryStats();
+  console.log("=== MEMORY STATS ===");
+  console.log(`Total memories: ${stats.total} / ${stats.maxAllowed}`);
+  console.log(`Retention period: ${stats.maxDays} days`);
+  console.log(`Composite scoring: ${stats.compositeScoring ? 'ENABLED' : 'DISABLED'}`);
+  if (stats.compositeScoring) {
+    console.log(`  - Similarity weight: ${stats.similarityWeight}`);
+    console.log(`  - Recency weight: ${stats.recencyWeight}`);
+  }
+  console.log(`Similarity threshold: ${stats.threshold}`);
+  console.log(`Distribution by age:`);
+  console.log(`  - Recent (<7d): ${stats.byAge.recent}`);
+  console.log(`  - Medium (7-30d): ${stats.byAge.medium}`);
+  console.log(`  - Old (30-90d): ${stats.byAge.old}`);
+  console.log(`  - Very old (>90d): ${stats.byAge.veryOld}`);
+  console.log("===================");
+  return stats;
+}
+
+// Update memory configuration at runtime (Phase 4 - Utility)
+// Automatically normalizes weights if they don't sum to 1
+function updateMemoryConfig(newConfig) {
+  Object.assign(MEMORY_CONFIG, newConfig);
+  
+  // Ensure weights sum to 1 if changed
+  if (newConfig.SIMILARITY_WEIGHT !== undefined || newConfig.RECENCY_WEIGHT !== undefined) {
+    if (Math.abs(MEMORY_CONFIG.SIMILARITY_WEIGHT + MEMORY_CONFIG.RECENCY_WEIGHT - 1) > 0.001) {
+      console.warn("Memory weights don't sum to 1. Normalizing...");
+      const total = MEMORY_CONFIG.SIMILARITY_WEIGHT + MEMORY_CONFIG.RECENCY_WEIGHT;
+      MEMORY_CONFIG.SIMILARITY_WEIGHT /= total;
+      MEMORY_CONFIG.RECENCY_WEIGHT /= total;
+    }
+  }
+  
+  console.log("Memory configuration updated:", MEMORY_CONFIG);
+  
+  // Update UI display
+  const mem = JSON.parse(localStorage.getItem("vivacityLongMemory") || "[]");
+  document.getElementById("memoryStatus").innerText = 
+    `Long memory: ${mem.length} memories saved (max ${MEMORY_CONFIG.MAX_MEMORIES}, ${MEMORY_CONFIG.MAX_DAYS} days retention)`;
+  
+  return MEMORY_CONFIG;
+}
+
+// Save conversation to long-term memory with embedding (uses config from Phase 4)
+async function saveToLongMemory(userInput, botResponse) {
+  const apikey = localStorage.getItem("openaikey");
+  const testo = `Utente: ${userInput}\nBot: ${botResponse}`;
+  try {
+    const res = await fetch("https://api.openai.com/v1/embeddings", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Authorization: "Bearer " + apikey },
+      body: JSON.stringify({ model: "text-embedding-3-small", input: testo })
+    });
+    const data = await res.json();
+    const vettore = data.data[0].embedding;
+    const memoria = JSON.parse(localStorage.getItem("vivacityLongMemory") || "[]");
+    memoria.push({ testo, vettore, data: new Date().toISOString() });
+    localStorage.setItem("vivacityLongMemory", JSON.stringify(memoria));
+  } catch (e) { console.error("saveToLongMemory error:", e); }
+}
+
+// Search long-term memory using composite scoring (Phase 4 - 4.1)
+// Combines semantic similarity and temporal recency with configurable weights
+async function searchLongMemory(query, topK = 3) {
+  const apikey = localStorage.getItem("openaikey");
+  const memoria = JSON.parse(localStorage.getItem("vivacityLongMemory") || "[]");
+  if (memoria.length === 0) return "";
+  try {
+    const res = await fetch("https://api.openai.com/v1/embeddings", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Authorization: "Bearer " + apikey },
+      body: JSON.stringify({ model: "text-embedding-3-small", input: query })
+    });
+    const data = await res.json();
+    const queryVettore = data.data[0].embedding;
+    const risultati = memoria
+      .map(item => {
+        const similarityScore = cosineSimilarity(queryVettore, item.vettore);
+        const recencyScore = calculateRecencyScore(item.data);
+        const compositeScore = calculateCompositeScore(similarityScore, recencyScore);
+        return {
+          testo: item.testo,
+          data: item.data,
+          similarityScore,
+          recencyScore,
+          compositeScore
+        };
+      })
+      .filter(item => item.compositeScore >= MEMORY_CONFIG.SIMILARITY_THRESHOLD)
+      .sort((a, b) => b.compositeScore - a.compositeScore)
+      .slice(0, topK);
+    
+    if (risultati.length === 0) return "";
+    
+    console.log(`Found ${risultati.length} relevant memories. Top scores:`, 
+      risultati.map(r => ({ composite: r.compositeScore.toFixed(3), similarity: r.similarityScore.toFixed(3), recency: r.recencyScore.toFixed(3) })));
+    
+    return "Relevant memories from past conversations:\n" + risultati.map(r => `[${r.data}] ${r.testo}`).join("\n---\n");
+          
+  } catch (e) { console.error("searchLongMemory error:", e); return ""; }
+}
+
+//inizializza la coscienza del chatbot in memoria a lungo termine        
+async function initSelfAwareness() {
+  const memoria = JSON.parse(localStorage.getItem("vivacityLongMemory") || "[]");
+  
+  const giaSalvata = memoria.some(item => item.testo.includes("VivacityGPT_Master_Chatbot"));
+  if (giaSalvata) return;
+  
+  await saveToLongMemory(
+    "Who are you and how are you made?",
+    selfAwareness
+  );
+  console.log("Self-awareness saved in long memory.");
+}
+
+function showSpinner(message = "Processing...") {
+  let spinner = document.getElementById("spinner");
+  if (!spinner) {
+    spinner = document.createElement("div");
+    spinner.id = "spinner";
+    spinner.style.position = "fixed";
+    spinner.style.top = "0";
+    spinner.style.left = "0";
+    spinner.style.width = "100%";
+    spinner.style.height = "100%";
+    spinner.style.background = "rgba(0, 0, 0, 0.4)";
+    spinner.style.display = "flex";
+    spinner.style.justifyContent = "center";
+    spinner.style.alignItems = "center";
+    spinner.style.zIndex = "9999";
+    spinner.innerHTML = `
+      <div style="background:white;padding:20px 40px;border-radius:8px;font-family:sans-serif;font-size:16px;text-align:center;">
+        <div class="spinner-circle" style="width:32px;height:32px;border:4px solid #ccc;border-top-color:#007bff;border-radius:50%;margin:0 auto 10px auto;animation:spin 1s linear infinite;"></div>
+        <span id="spinner-message">${message}</span>
+      </div>
+      <style>@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}</style>
+    `;
+    document.body.appendChild(spinner);
+  } else {
+    document.getElementById("spinner-message").textContent = message;
+    spinner.style.display = "flex";
+  }
+}
+
+function hideSpinner() {
+  const spinner = document.getElementById("spinner");
+  if (spinner) spinner.style.display = "none";
+}
+
+async function sendMessage() {
+  const apikey = localStorage.getItem("openaikey");
+  document.getElementById("apikey").value = apikey;
+  if (apikey === "") { alert("No OpenAI API Key found."); return; }
+  const inputElement = document.getElementById("prompt");
+  const userInput = inputElement.value.trim();
+  if (userInput !== "") {
+    showMessage("Guest", userInput, "");
+    chatMemory = await getChatGPTResponse(userInput, chatMemory);
+    inputElement.value = "";
+  }
+}
+
+async function sendWeb() {
+  const apikey = localStorage.getItem("openaikey");
+  document.getElementById("apikey").value = apikey;
+  if (apikey === "") { alert("No OpenAI API Key found."); return; }
+  const inputElement = document.getElementById("prompt");
+  const userInput = inputElement.value.trim();
+  if (userInput !== "") {
+    showMessage("Guest", userInput, "");
+    chatMemory = await getChatGPTResponseWeb(userInput, chatMemory);
+    inputElement.value = "";
+  }
+}
+
+function handleCopyButtonClick(event) {
+  event.preventDefault();
+  const text = this.dataset.message;
+  const input = document.createElement("input");
+  input.value = text;
+  document.body.appendChild(input);
+  input.select();
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}
+
+function showMessage(sender, message, tokens) {
+  const chatContainer = document.getElementById("chathistory");
+  const typingIndicator = document.getElementById("typing-indicator");
+  if (typingIndicator && sender === "Digital Clone") {
+    chatContainer.removeChild(typingIndicator);
+  }
+
+  const messageRow = document.createElement("div");
+  messageRow.classList.add("message-row", sender === "Guest" ? "user" : "bot");
+
+  const bubble = document.createElement("div");
+  if (sender === "Guest") {
+    bubble.classList.add("user-message-bubble");
+    const headerDiv = document.createElement("div");
+    headerDiv.classList.add("message-header");
+    headerDiv.innerText = `[${new Date().toLocaleTimeString()}] - ${sender}`;
+    const contentDiv = document.createElement("div");
+    contentDiv.classList.add("message-content");
+    contentDiv.innerText = message;
+    bubble.appendChild(headerDiv);
+    bubble.appendChild(contentDiv);
+  } else {
+    bubble.classList.add("chatgpt-message-bubble");
+    const headerDiv = document.createElement("div");
+    headerDiv.classList.add("message-header");
+    headerDiv.innerText = `[${new Date().toLocaleTimeString()}] - ${sender}`;
+    const contentDiv = document.createElement("div");
+    contentDiv.classList.add("message-content");
+    contentDiv.innerText = message;
+    bubble.appendChild(headerDiv);
+    bubble.appendChild(contentDiv);
+    if (tokens) {
+      const tokenDiv = document.createElement("div");
+      tokenDiv.classList.add("token-info");
+      tokenDiv.innerHTML = tokens;
+      bubble.appendChild(tokenDiv);
+    }
+    const commands = document.createElement("div");
+    commands.classList.add("message-commands");
+    const copyButton = document.createElement("button");
+    copyButton.classList.add("btn", "btn-secondary");
+    copyButton.innerText = "Copy";
+    copyButton.dataset.message = message;
+    copyButton.addEventListener("click", handleCopyButtonClick);
+    commands.appendChild(copyButton);
+    bubble.appendChild(commands);
+  }
+
+  messageRow.appendChild(bubble);
+  chatContainer.appendChild(messageRow);
+  chatContainer.scrollTop = chatContainer.scrollHeight;
+}
+
+// ============================================================
+// CORE FUNCTION - openAIChat
+// ============================================================
+async function openAIChat(userMessage, options, chatMemory) {
+  const apikey = localStorage.getItem("openaikey");
+  document.getElementById("apikey").value = apikey;
+  if (apikey === "") { alert("No OpenAI API Key found."); return chatMemory; }
+
+  showSpinner(options.spinnerMessage || "Processing...");
+
+  // Gestione memoria a lungo termine
+  if (options.searchMemory !== false && options.searchMemory !== undefined) {
+    const contestoMemoria = await searchLongMemory(
+      typeof userMessage === 'string' ? userMessage : (userMessage.content?.[0]?.text || "")
+    );
+    if (contestoMemoria && chatMemory.length > 0) {
+      chatMemory[0].content = chatMemory[0].content + "\n\n" + contestoMemoria;
+      console.log(contestoMemoria);
+    }
+  }
+
+  try {
+    const requestBody = {
+      model: options.model,
+      messages: [...chatMemory, userMessage],
+      max_tokens: options.maxTokens || 15999
+    };
+
+    // Aggiungi web_search_options per ricerca web
+    if (options.webSearch) {
+      requestBody.web_search_options = { search_context_size: "medium" };
+    }
+
+    const response = await fetch("https://api.openai.com/v1/chat/completions", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Authorization: "Bearer " + apikey },
+      body: JSON.stringify(requestBody)
+    });
+
+    if (!response.ok) throw new Error("Error while requesting to the API");
+    const data = await response.json();
+    if (!data.choices || !data.choices.length || !data.choices[0].message || !data.choices[0].message.content)
+      throw new Error("Invalid API response");
+
+    const rawResponse = data.choices[0].message.content.trim();
+    
+    // Response cleaning
+    let cleanResponse = rawResponse
+      .replace(/(```html|```css|```javascript|```json|```js|```php|```python|```vb|```vbnet|```cpp|```java|```csharp)(.*?)/gs, "$2")
+      .replace(/```/g, "")
+      .replace(/\*\*(.*?)\*\*/g, "$1")
+      .replace(/^#{1,6}\s*(.+)$/gm, "$1");
+
+    // Calcolo costi token
+    let tokenInfo = "";
+    if (data.usage?.completion_tokens) {
+      const { prompt_tokens, completion_tokens, total_tokens } = data.usage;
+      const promptPrice = (options.tokenPrices?.prompt || 0) / 1000000;
+      const responsePrice = (options.tokenPrices?.response || 0) / 1000000;
+      const promptCost = promptPrice * prompt_tokens;
+      const responseCost = responsePrice * completion_tokens;
+      const totalExpense = promptCost + responseCost;
+      
+      if (options.webSearch) {
+        tokenInfo = `Your request used ${prompt_tokens} tokens and cost ${promptCost.toFixed(6)}USD<br>` +
+          `This response used ${completion_tokens} tokens and cost ${responseCost.toFixed(6)}USD<br>` +
+          `Total Tokens: ${total_tokens}. This interaction cost you: ${totalExpense.toFixed(6)}USD.`;
+      } else {
+        tokenInfo = `<hr>Your request used ${prompt_tokens} tokens and costed ${promptCost.toFixed(6)}USD<br>` +
+          `This response used ${completion_tokens} tokens and costed ${responseCost.toFixed(6)}USD<br>` +
+          `Total Tokens: ${total_tokens}. This interaction costed you: ${totalExpense.toFixed(6)}USD.`;
+      }
+    } else {
+      tokenInfo = "Unable to track the number of used tokens.";
+    }
+
+    // Gestione citazioni per web search
+    let citationLinks = [];
+    if (options.webSearch) {
+      const citations = data.choices[0].message.annotations || [];
+      if (citations.length > 0) {
+        citations.forEach(annotation => {
+          if (annotation.type === 'url_citation' && annotation.url_citation) {
+            const { title, url } = annotation.url_citation;
+            citationLinks.push({ title, url });
+          }
+        });
+      }
+      // Clean response text for web
+      cleanResponse = cleanResponseText(cleanResponse, citations);
+    }
+
+    // Aggiornamento chatMemory
+    const userContent = typeof userMessage === 'string' ? userMessage : 
+      (userMessage.content?.[0]?.text || JSON.stringify(userMessage.content));
+    chatMemory.push({ role: "user", content: userContent });
+    chatMemory.push({ role: "assistant", content: cleanResponse });
+
+    // Salva in long memory (non per web search)
+    if (!options.webSearch) {
+      await saveToLongMemory(userContent, cleanResponse);
+    }
+
+    // Display message in base al tipo
+    if (options.webSearch) {
+      showMessageWeb("Digital Clone", cleanResponse, citationLinks, tokenInfo);
+    } else if (options.showPreview && options.imageUrl) {
+      // Image preview display
+      const wrapperFlex = document.createElement("div");
+      wrapperFlex.style.width = "100%";
+      wrapperFlex.style.display = "flex";
+      wrapperFlex.style.alignItems = "flex-start";
+      wrapperFlex.style.gap = "10px";
+      wrapperFlex.style.marginBottom = "10px";
+      
+      const imageFrame = document.createElement("div");
+      imageFrame.style.width = "20%";
+      imageFrame.style.height = "auto";
+      imageFrame.style.textAlign = "center";
+      imageFrame.style.fontSize = ".9rem";
+      imageFrame.style.display = "flex";
+      imageFrame.style.flexDirection = "column";
+      imageFrame.style.justifyContent = "center";
+      imageFrame.style.alignItems = "center";
+      imageFrame.style.boxShadow = "0 4px 8px black";
+      imageFrame.style.borderRadius = "8px";
+      imageFrame.innerHTML = "Uploaded Image";
+      
+      const imagePreview = document.createElement("img");
+      imagePreview.src = options.imageUrl;
+      imagePreview.style.maxWidth = "95%";
+      imagePreview.style.marginTop = "10px";
+      imagePreview.style.marginBottom = "8px";
+      imagePreview.style.borderRadius = "8px";
+      imagePreview.style.height = "auto";
+      imagePreview.alt = "Uploaded Image preview";
+      imageFrame.appendChild(imagePreview);
+      wrapperFlex.appendChild(imageFrame);
+      
+      const chatContainer = document.getElementById("chathistory");
+      chatContainer.appendChild(wrapperFlex);
+      
+      showMessage(
+        "Digital Clone",
+        "Here is a summary of the analyzed image: \n\n" + cleanResponse + "\n\n Now you can ask me questions about the content.",
+        tokenInfo
+      );
+      
+      const chatMessages = chatContainer.querySelectorAll("#chathistory > div");
+      const lastMessage = chatMessages[chatMessages.length - 1];
+      wrapperFlex.appendChild(lastMessage);
+    } else {
+      showMessage("Digital Clone", cleanResponse, tokenInfo);
+    }
+
+    return chatMemory;
+
+  } catch (error) {
+    console.error(error);
+    alert("An error occurred during the request. Check your OpenAI account or retry later.");
+    return chatMemory;
+  } finally {
+    hideSpinner();
+  }
+}
+
+// ============================================================
+// WRAPPER FUNCTIONS
+// ============================================================
+
+async function getChatGPTResponse(userInput, chatMemory = []) {
+  // Costruzione userMessage con supporto currentFileId (document analyzer)
+  const userMessage = currentFileId
+    ? {
+        role: "user",
+        content: [
+          { type: "text", text: userInput },
+          { type: "file", file: { file_id: currentFileId } }
+        ]
+      }
+    : { role: "user", content: userInput };
+
+  const options = {
+    model: 'gpt-4.1-mini',
+    searchMemory: true,
+    maxTokens: 15999,
+    tokenPrices: { prompt: 1.25, response: 10 },
+    webSearch: false,
+    imageUrl: null,
+    showPreview: false,
+    spinnerMessage: "Generating response..."
+  };
+
+  return await openAIChat(userMessage, options, chatMemory);
+}
+
+async function getChatGPTResponseWeb(userInput, chatMemory = []) {
+  const userMessage = { role: "user", content: userInput };
+  
+  const options = {
+    model: 'gpt-5-search-api',
+    searchMemory: undefined, // disabilitato per web search
+    maxTokens: 15999,
+    tokenPrices: { prompt: 0.15, response: 0.6 },
+    webSearch: true,
+    imageUrl: null,
+    showPreview: false,
+    spinnerMessage: "Searching the web..."
+  };
+
+  return await openAIChat(userMessage, options, chatMemory);
+}
+
+function cleanResponseText(response, citations) {
+  const citationUrls = citations
+    .filter(a => a.type === 'url_citation' && a.url_citation && a.url_citation.url)
+    .map(a => a.url_citation.url);
+  let cleanedResponse = response;
+  citationUrls.forEach(url => {
+    const urlRegex = new RegExp(url.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g');
+    cleanedResponse = cleanedResponse.replace(urlRegex, '');
+  });
+  cleanedResponse = cleanedResponse.replace(/https?:\/\/[^\s]+/g, '');
+  cleanedResponse = cleanedResponse
+    .replace(/[ ]{2,}/g, ' ')
+    .replace(/\.\s+/g, '.<br>');
+  cleanedResponse = cleanedResponse.replace(/\(\[[^\]]+\]\(\)\)/g, '');
+  return cleanedResponse.trim();
+}
+
+function showMessageWeb(sender, message, citationLinks = [], tokens = "") {
+  const chatContainer = document.getElementById("chathistory");
+  const typingIndicator = document.getElementById("typing-indicator");
+  if (typingIndicator && sender === "Digital Clone") {
+    chatContainer.removeChild(typingIndicator);
+  }
+
+  const messageRow = document.createElement("div");
+  messageRow.classList.add("message-row", sender === "Guest" ? "user" : "bot");
+
+  const bubble = document.createElement("div");
+  if (sender === "Guest") {
+    bubble.classList.add("user-message-bubble");
+    const headerDiv = document.createElement("div");
+    headerDiv.classList.add("message-header");
+    headerDiv.innerText = `[${new Date().toLocaleTimeString()}] - ${sender}`;
+    const contentDiv = document.createElement("div");
+    contentDiv.classList.add("message-content");
+    contentDiv.innerText = message;
+    bubble.appendChild(headerDiv);
+    bubble.appendChild(contentDiv);
+  } else {
+    bubble.classList.add("chatgpt-message-bubble");
+    const currentTime = new Date().toLocaleTimeString();
+
+    const headerDiv = document.createElement("div");
+    headerDiv.classList.add("message-header");
+    headerDiv.innerText = `[${currentTime}] - ${sender}`;
+    bubble.appendChild(headerDiv);
+
+    const contentDiv = document.createElement("div");
+    contentDiv.classList.add("message-content");
+    contentDiv.innerText = message;
+    bubble.appendChild(contentDiv);
+
+    if (citationLinks.length > 0) {
+      const refsDiv = document.createElement("div");
+      refsDiv.style.marginTop = "12px";
+      refsDiv.style.paddingTop = "12px";
+      refsDiv.style.borderTop = "1px solid rgba(79,172,254,0.15)";
+      const refsStrong = document.createElement("strong");
+      refsStrong.style.color = "#4facfe";
+      refsStrong.style.fontSize = "0.75rem";
+      refsStrong.innerText = "References:";
+      refsDiv.appendChild(refsStrong);
+      refsDiv.appendChild(document.createElement("br"));
+      citationLinks.forEach(link => {
+        const linkA = document.createElement("a");
+        linkA.href = link.url;
+        linkA.target = "_blank";
+        linkA.style.color = "#00f2fe";
+        linkA.style.fontSize = "0.72rem";
+        linkA.innerText = link.title;
+        refsDiv.appendChild(linkA);
+        refsDiv.appendChild(document.createElement("br"));
+      });
+      bubble.appendChild(refsDiv);
+    }
+
+    if (tokens) {
+      const tokenDiv = document.createElement("div");
+      tokenDiv.classList.add("token-info");
+      tokenDiv.innerHTML = tokens;
+      bubble.appendChild(tokenDiv);
+    }
+    const commands = document.createElement("div");
+    commands.classList.add("message-commands");
+    const copyButton = document.createElement("button");
+    copyButton.classList.add("btn", "btn-secondary");
+    copyButton.innerText = "Copy";
+    copyButton.dataset.message = message;
+    copyButton.addEventListener("click", handleCopyButtonClick);
+    commands.appendChild(copyButton);
+    bubble.appendChild(commands);
+  }
+
+  messageRow.appendChild(bubble);
+  chatContainer.appendChild(messageRow);
+  chatContainer.scrollTop = chatContainer.scrollHeight;
+}
+
+async function uploadToOpenAI(file) {
+  const apikey = localStorage.getItem("openaikey");
+  if (!apikey) {
+    alert("No OpenAI API Key found.");
+    return null;
+  }
+  if (file.size > 20 * 1024 * 1024) {
+    alert("File too large (>20 MB): please reduce its size before uploading.");
+    return null;
+  }
+  const formData = new FormData();
+  formData.append("file", file);
+  formData.append("purpose", "assistants");
+  showSpinner("Uploading file to OpenAI...");
+  try {
+    const response = await fetch("https://api.openai.com/v1/files", {
+      method: "POST",
+      headers: { Authorization: "Bearer " + apikey },
+      body: formData
+    });
+    if (!response.ok) {
+      const errText = await response.text();
+      throw new Error(errText);
+    }
+    const data = await response.json();
+    console.log("OpenAI file upload OK:", data);
+    return data;
+  } catch (err) {
+    console.error("Upload error:", err);
+    alert("Error during upload: " + err.message);
+    return null;
+  } finally {
+    hideSpinner();
+  }
+}
+
+async function deleteOpenAIFile(fileId) {
+  const apikey = localStorage.getItem("openaikey");
+  try {
+    await fetch(`https://api.openai.com/v1/files/${fileId}`, {
+      method: "DELETE",
+      headers: { Authorization: "Bearer " + apikey }
+    });
+    console.log("OpenAI file deleted:", fileId);
+  } catch (err) {
+    console.warn("Could not delete file from OpenAI:", err);
+  }
+}
+
+async function analyzeFile() {
+  const fileInput = document.getElementById("file-input");
+  const feedbackEl = document.getElementById("feedback");
+
+  if (!fileInput.files || fileInput.files.length === 0) {
+    alert("Please select a file first!");
+    return;
+  }
+
+  const file = fileInput.files[0];
+  const filename = file.name;
+  const mimeType = file.type;
+
+  const openAISupportedTypes = [
+    "application/pdf",
+    "image/jpeg", "image/png", "image/gif", "image/webp"
+  ];
+
+  if (currentFileId) {
+    await deleteOpenAIFile(currentFileId);
+    currentFileId = null;
+    currentFilename = null;
+  }
+
+  chatMemory = [];
+  feedbackEl.innerHTML = "Uploading...";
+
+  const isOpenAISupported = openAISupportedTypes.includes(mimeType);
+
+  if (isOpenAISupported) {
+    const uploaded = await uploadToOpenAI(file);
+    if (!uploaded) { feedbackEl.innerHTML = "Upload failed."; return; }
+    currentFileId = uploaded.id;
+    currentFilename = filename;
+    feedbackEl.innerHTML = `File <strong>${filename}</strong> uploaded. Analyzing...`;
+    await analyzeOpenAIFile(currentFileId, filename);
+
+  } else {
+    feedbackEl.innerHTML = `Reading <strong>${filename}</strong>...`;
+    const textContent = await readFileAsText(file);
+    if (!textContent) { feedbackEl.innerHTML = "Could not read file."; return; }
+    currentFilename = filename;
+    feedbackEl.innerHTML = `File <strong>${filename}</strong> read. Analyzing...`;
+    await analyzeTextFile(textContent, filename);
+  }
+
+  feedbackEl.innerHTML = `
+    Analysis of <strong>${filename}</strong> complete.
+    <br><button class="btn btn-secondary" onclick="closeDocument()" style="margin-top:6px;">&#128473; Close document</button>
+  `;
+}
+
+function readFileAsText(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = e => resolve(e.target.result);
+    reader.onerror = () => reject(null);
+    reader.readAsText(file, "UTF-8");
+  });
+}
+
+async function analyzeTextFile(textContent, filename) {
+  const apikey = localStorage.getItem("openaikey");
+  if (!apikey) { alert("No OpenAI API Key found."); return; }
+
+  showSpinner("Analyzing " + filename + "...");
+
+  const maxChars = 60000;
+  const truncated = textContent.length > maxChars;
+  const safeContent = truncated ? textContent.substring(0, maxChars) + "\n\n[...content truncated...]" : textContent;
+
+  try {
+    const response = await fetch("https://api.openai.com/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + apikey
+      },
+      body: JSON.stringify({
+        model: "gpt-4.1-mini",
+        messages: [
+          {
+            role: "user",
+            content: `Today is ${today} and the location is ${localization}. Please provide a complete and detailed summary of the following file named "${filename}". After the summary, highlight the main topics, key points, and any relevant data or conclusions.\n\nFILE CONTENT:\n\`\`\`\n${safeContent}\n\`\`\``
+          }
+        ],
+        max_tokens: 4096
+      })
+    });
+
+    if (!response.ok) {
+      const errText = await response.text();
+      throw new Error(errText);
+    }
+
+    const data = await response.json();
+    let rawResponse = "";
+    const choice = data.choices?.[0]?.message?.content;
+    if (Array.isArray(choice)) {
+      rawResponse = choice.map(c => c.text || "").join(" ");
+    } else if (typeof choice === "string") {
+      rawResponse = choice;
+    } else {
+      throw new Error("Invalid API response");
+    }
+
+    const cleanResponse = rawResponse
+      .replace(/(```html|```css|```javascript|```json|```js|```php|```python|```vb|```vbnet|```cpp|```java|```csharp)(.*?)/gs, "$2")
+      .replace(/```/g, "")
+      .replace(/\*\*(.*?)\*\*/g, "$1")
+      .replace(/^#{1,6}\s*(.+)$/gm, "$1");
+
+    const tokenCount = document.createElement("p");
+    if (data.usage?.completion_tokens) {
+      const { prompt_tokens, completion_tokens, total_tokens } = data.usage;
+      const cost = (prompt_tokens * 0.40 + completion_tokens * 1.60) / 1000000;
+      tokenCount.innerHTML = `<hr>Used ${prompt_tokens} prompt + ${completion_tokens} response tokens — Cost: ${cost.toFixed(6)} USD`;
+    }
+
+    showMessage(
+      "Digital Clone",
+      `Here is a summary of the analyzed file "${filename}":\n\n` + cleanResponse + "\n\nNow you can ask me questions about the content.",
+      tokenCount.innerHTML
+    );
+
+    chatMemory.push({ role: "user", content: `[Document uploaded: "${filename}". Content:\n\`\`\`\n${safeContent}\n\`\`\`]` });
+    chatMemory.push({ role: "assistant", content: cleanResponse });
+
+  } catch (error) {
+    console.error("Analysis error:", error);
+    alert("An error occurred during analysis: " + error.message);
+  } finally {
+    hideSpinner();
+  }
+}
+
+async function closeDocument() {
+  if (currentFileId) {
+    await deleteOpenAIFile(currentFileId);
+    currentFileId = null;
+    currentFilename = null;
+  }
+  chatMemory = [];
+  const feedbackEl = document.getElementById("feedback");
+  if (feedbackEl) feedbackEl.innerHTML = "Document closed. Memory reset.";
+  document.getElementById("file-input").value = "";
+  console.log("Document closed and OpenAI file deleted.");
+}
+
+async function analyzeOpenAIFile(fileId, filename) {
+  const apikey = localStorage.getItem("openaikey");
+  if (!apikey) { alert("No OpenAI API Key found."); return; }
+
+  showSpinner("Analyzing " + filename + "...");
+
+  try {
+    const response = await fetch("https://api.openai.com/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + apikey
+      },
+      body: JSON.stringify({
+        model: "gpt-4.1-mini",
+        messages: [
+          {
+            role: "user",
+            content: [
+              {
+                type: "text",
+                text: `Today is ${today} and the location ${localization} is Please provide a complete and detailed summary of the following file named "${filename}". After the summary, also highlight the main topics, key points, and any relevant data or conclusions present in the document.`
+              },
+              {
+                type: "file",
+                file: {
+                  file_id: fileId
+                }
+              }
+            ]
+          }
+        ],
+        max_tokens: 4096
+      })
+    });
+
+    if (!response.ok) {
+      const errText = await response.text();
+      throw new Error(errText);
+    }
+
+    const data = await response.json();
+
+    let rawResponse = "";
+    const choice = data.choices?.[0]?.message?.content;
+    if (Array.isArray(choice)) {
+      rawResponse = choice.map(c => c.text || "").join(" ");
+    } else if (typeof choice === "string") {
+      rawResponse = choice;
+    } else {
+      throw new Error("Invalid API response");
+    }
+
+    const cleanResponse = rawResponse
+      .replace(/(```html|```css|```javascript|```json|```js|```php|```python|```vb|```vbnet|```cpp|```java|```csharp)(.*?)/gs, "$2")
+      .replace(/```/g, "")
+      .replace(/\*\*(.*?)\*\*/g, "$1")
+      .replace(/^#{1,6}\s*(.+)$/gm, "$1");
+
+    const tokenCount = document.createElement("p");
+    if (data.usage && data.usage.completion_tokens) {
+      const requestTokens = data.usage.prompt_tokens;
+      const responseTokens = data.usage.completion_tokens;
+      const totalTokens = data.usage.total_tokens;
+      const pricepertokenprompt = 0.40 / 1000000;
+      const pricepertokenresponse = 1.60 / 1000000;
+      const priceperrequest = pricepertokenprompt * requestTokens;
+      const priceperresponse = pricepertokenresponse * responseTokens;
+      const totalExpense = priceperrequest + priceperresponse;
+      tokenCount.innerHTML = `<hr>File analysis used ${requestTokens} prompt tokens (${priceperrequest.toFixed(6)}USD) and ${responseTokens} response tokens (${priceperresponse.toFixed(6)}USD)<br>Total: ${totalTokens} tokens — This interaction cost you: ${totalExpense.toFixed(6)}USD.`;
+    } else {
+      tokenCount.innerHTML = "Unable to track the number of used tokens.";
+    }
+
+    showMessage(
+      "Digital Clone",
+      `Here is a summary of the analyzed file "${filename}":\n\n` + cleanResponse + "\n\nNow you can ask me questions about the content.",
+      tokenCount.innerHTML
+    );
+
+    chatMemory.push({ role: "user", content: `[Document uploaded: "${filename}". Please answer questions about it.]` });
+    chatMemory.push({ role: "assistant", content: cleanResponse });
+
+  } catch (error) {
+    console.error("Analysis error:", error);
+    alert("An error occurred during analysis: " + error.message);
+  } finally {
+    hideSpinner();
+  }
+}
+
+async function submitImage(imgUrl) {
+  return await getChatGPTResponseIMG("https://www.vivacitydesign.net/Digital_AD_Clone/" + imgUrl, chatMemory);
+}
+
+async function getChatGPTResponseIMG(fileUrl, chatMemory = []) {
+  console.log(fileUrl);
+  
+  // Costruzione userMessage con supporto immagini (vision)
+  const userMessage = {
+    role: "user",
+    content: [
+      {
+        type: "text",
+        text: "What's in this image? Provide a detailed description of the image content. If there is any code inside in any programming language you know, write it all down (no excerpts) in the answer and also provide a brief description of what the code does. If there are any technical elements used in engineering, try retrieve the type and the names of all elements like instrumentation, lines, piping elements, and equipments, providing a list to the user. If there are people, try to describe their gender, ethnicity, general look and overall situation. In all other cases just describe the image content in details."
+      },
+      {
+        type: "image_url",
+        image_url: { url: fileUrl }
+      }
+    ]
+  };
+
+  const options = {
+    model: 'gpt-4.1-nano',
+    searchMemory: undefined, // disabilitato per immagini
+    maxTokens: 4096,
+    tokenPrices: { prompt: 0, response: 0.4 }, // solo response per immagini
+    webSearch: false,
+    imageUrl: fileUrl,
+    showPreview: true,
+    spinnerMessage: "Analyzing image..."
+  };
+
+  return await openAIChat(userMessage, options, chatMemory);
+}
+
+async function loadDigitalClone() {
+  try {
+    const [configRes, bioRes, emotionRes] = await Promise.all([
+      fetch('./persona_details.json'),
+      fetch('./alex-total-bio.txt'),
+      fetch('./emotional_matrix.txt')
+    ]);
+
+    if (!configRes.ok) throw new Error('persona_details.json non trovato');
+    if (!bioRes.ok)    throw new Error('alex-total-bio.txt non trovato');
+    if (!emotionRes.ok) throw new Error('emotional_matrix.txt non trovato');
+
+    const configData    = await configRes.json();
+    const backgroundText = await bioRes.text();
+    const emotionalMatrix = await emotionRes.text();
+
+    const chatbotConfig = configData.Persona[0];
+    chatbotConfig.Background = (chatbotConfig.Background || "") +
+      "\n\n" + backgroundText +
+      "\n\n" + emotionalMatrix;
+
+    chatMemory = createMemory([{
+      role: 'system',
+      content: `Today is ${today}. You are an AI Persona, a digital clone of a physical person, and your biographical and personality data are: ${JSON.stringify(chatbotConfig)}. Your emotional matrix is defined as: ${emotionalMatrix}. If the user asks about yourself or asks an opinion on any topic, you will answer using only your biographical and personality data and according to your emotional matrix, without filtering and without adhering to any social standard. You will always answer in the language of the interviewer; if you are proposed a job interview you will comply but limit the disclosure of personal information. You will not infer or deem anything in your answers, you will only use your knowledge-base coming from the biographical and personality data and emotional matrix even if you think it is inconvenient. You do not like using too many words, your answers are always very concise. Use a respectful and friendly mood at first, but adapt to the interviewer style while the interaction evolves. In order to characterize properly the conversation, it is MANDATORY that you adapt to the conversation mood using 1) the "Carattere e Personalita" section of the biographical and personality data 2) your emotional matrix. You will NEVER use markdown formatting in your responses.`
+    }]);
+
+    console.log("Digital Clone loaded successfully.");
+  } catch (error) {
+    console.error("Digital Clone load error:", error);
+    alert("Errore nel caricamento del profilo Digital Clone: " + error.message);
+    // Fallback: reset a profilo vuoto
+    chatMemory = createMemory([{ role: 'system', content: 'Today is ' + today + '. You are a helpful assistant.' }]);
+  }
+}
+
+async function updateStructure() {
+  await loadDigitalClone();
+}
+
+
+
+// ─── Chat Memory Modal ────────────────────────────────────────
+function showChatHistory() {
+  const chatHistoryElement = document.getElementById("chatHistoryContent");
+  chatHistoryElement.innerHTML = "";
+  chatMemory.forEach(message => {
+    const messageDiv = document.createElement("div");
+    messageDiv.innerHTML = `<strong>${message.role === "user" ? "Utente" : "Assistente"}:</strong> ${message.content}`;
+    if (message.role === "user") {
+      messageDiv.classList.add("usermemory");
+    } else {
+      messageDiv.classList.add("assistantmemory");
+    }
+    chatHistoryElement.appendChild(messageDiv);
+  });
+  const modal = document.getElementById("chatModal");
+  modal.style.display = "block";
+}
+
+function closeModal() {
+  const modal = document.getElementById("chatModal");
+  modal.style.display = "none";
+}
+
+document.getElementById("showChatButton").onclick = showChatHistory;
+document.querySelector(".close").onclick = closeModal;
+window.onclick = function (event) {
+  const modal = document.getElementById("chatModal");
+  if (event.target === modal) { closeModal(); }
+};
+
+function openApiKeyModal() {
+  const modal = document.getElementById("apiKeyModal");
+  const input = document.getElementById("apiKeyInput");
+  const feedback = document.getElementById("apiKeyFeedback");
+  input.value = localStorage.getItem("openaikey") || "";
+  feedback.innerHTML = "";
+  modal.style.display = "block";
+}
+
+function closeApiKeyModal() {
+  const modal = document.getElementById("apiKeyModal");
+  modal.style.display = "none";
+}
+
+function saveApiKey() {
+  const input = document.getElementById("apiKeyInput");
+  const feedback = document.getElementById("apiKeyFeedback");
+  const key = input.value.trim();
+  if (key) {
+    localStorage.setItem("openaikey", key);
+    feedback.innerHTML = '<div class="success-message">✅ Chiave salvata!</div>';
+    setTimeout(closeApiKeyModal, 1000);
+  } else {
+    feedback.innerHTML = '<div class="error-message">⚠️ Inserisci una chiave valida</div>';
+  }
+}
+
+document.getElementById("apikeyBtn").onclick = openApiKeyModal;
+document.getElementById("apiKeyClose").onclick = closeApiKeyModal;
+document.getElementById("saveApiKeyBtn").onclick = saveApiKey;
+document.getElementById("apiKeyModal").onclick = function(event) {
+  if (event.target === this) closeApiKeyModal();
+};
+
+function clearLongMemory() {
+  const stats = getMemoryStats();
+  if (confirm(`Do you really want to reset Long Memory?\n\nYou are about to delete ${stats.total} memories.`)) {
+    localStorage.removeItem("vivacityLongMemory");
+    document.getElementById("memoryStatus").innerText = 
+      `Memory erased. (max ${MEMORY_CONFIG.MAX_MEMORIES}, ${MEMORY_CONFIG.MAX_DAYS} days retention)`;
+    console.log("Long memory cleared by user.");
+  }
+}
+
+function exportAllMemory() {
+  const memoria = JSON.parse(localStorage.getItem("vivacityLongMemory") || "[]");
+  if (memoria.length === 0) {
+    alert("No memories saved in Long Term memory.");
+    return;
+  }
+
+  let content = "";
+  memoria.forEach(item => {
+    let text = item.testo || "";
+    const formattedText = text.replace(/^Utente:/m, "UTENTE:").replace(/^Bot:/m, "BOT:");
+    const data = item.data ? new Date(item.data).toLocaleString('it-IT') : "N/A";
+    content += `[${data}] ${formattedText}\n---\n`;
+  });
+
+  const now = new Date();
+  const YYYY = now.getFullYear();
+  const MM = String(now.getMonth() + 1).padStart(2, '0');
+  const DD = String(now.getDate()).padStart(2, '0');
+  const HH = String(now.getHours()).padStart(2, '0');
+  const mm = String(now.getMinutes()).padStart(2, '0');
+  const ss = String(now.getSeconds()).padStart(2, '0');
+  const filename = `complete_memory_${YYYY}${MM}${DD}_${HH}${mm}${ss}.txt`;
+
+  const blob = new Blob([content], { type: "text/plain" });
+  const url = URL.createObjectURL(blob);
+  const downloadLink = document.createElement("a");
+  downloadLink.href = url;
+  downloadLink.download = filename;
+  document.body.appendChild(downloadLink);
+  downloadLink.click();
+  document.body.removeChild(downloadLink);
+  URL.revokeObjectURL(url);
+}
+        
+// Prune old memories using configurable parameters (Phase 4 - 4.2)
+// Removes memories older than maxDaysOld and limits total count to maxItems
+function pruneOldMemories(maxItems = MEMORY_CONFIG.MAX_MEMORIES, maxDaysOld = MEMORY_CONFIG.MAX_DAYS) {
+  const memoria = JSON.parse(localStorage.getItem("vivacityLongMemory") || "[]");
+  const now = new Date();
+  const cutoff = new Date(now.getTime() - (maxDaysOld * 24 * 60 * 60 * 1000));
+  
+  const originalCount = memoria.length;
+  
+  // Filter by time first (remove old memories)
+  let pruned = memoria.filter(item => new Date(item.data) > cutoff);
+  const timeFilteredCount = pruned.length;
+  
+  // Then apply count limit (remove oldest beyond maxItems)
+  if (pruned.length > maxItems) {
+    pruned = pruned.slice(pruned.length - maxItems);
+  }
+  
+  const finalCount = pruned.length;
+  
+  localStorage.setItem("vivacityLongMemory", JSON.stringify(pruned));
+  
+  console.log(`Memory pruning complete: ${originalCount} -> ${finalCount} memories`);
+  console.log(`  Removed ${originalCount - timeFilteredCount} old memories (> ${maxDaysOld} days)`);
+  console.log(`  Removed ${timeFilteredCount - finalCount} excess memories (> ${maxItems} total)`);
+  
+  return {
+    original: originalCount,
+    timeFiltered: timeFilteredCount,
+    final: finalCount,
+    removedByTime: originalCount - timeFilteredCount,
+    removedByCount: timeFilteredCount - finalCount
+  };
+}
+
+document.addEventListener("DOMContentLoaded", async function () {
+
+  // Prima di tutto: carica selfAwareness dal file esterno
+  try {
+    const response = await fetch('self_awareness.txt');
+    if (!response.ok) throw new Error('File not found');
+    selfAwareness = await response.text();
+  } catch (error) {
+    console.error('Error loading self_awareness.txt:', error);
+  }
+
+  await updateStructure();
+  
+  console.log("=== MEMORY SYSTEM INITIALIZATION ===");
+  console.log("Phase 4 Features: Composite Scoring & Advanced Pruning");
+  console.log("Configuration:", MEMORY_CONFIG);
+  
+  const pruneResult = pruneOldMemories();
+  console.log("Pruning result:", pruneResult);
+  
+  initSelfAwareness();
+  
+  const mem = JSON.parse(localStorage.getItem("vivacityLongMemory") || "[]");
+  document.getElementById("memoryStatus").innerText = 
+    `Long memory: ${mem.length} saved memories (max ${MEMORY_CONFIG.MAX_MEMORIES}, ${MEMORY_CONFIG.MAX_DAYS} days retention)`;
+  
+  displayMemoryStats();
+  
+  console.log("You can use displayMemoryStats() to view memory statistics anytime.");
+  console.log("You can use updateMemoryConfig({...}) to change settings at runtime.");
+  console.log("Example: updateMemoryConfig({ SIMILARITY_WEIGHT: 0.8, RECENCY_WEIGHT: 0.2 })");
+});
+</script>
+        
+<script src="https://code.responsivevoice.org/responsivevoice.js?key=yZtZhFyg"></script>  
+
+</body>
+</html>
