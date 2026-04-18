@@ -41,10 +41,22 @@ if (!$exists) {
     $memoria[] = $data;
 }
 
+// Arrotonda TUTTI i vettori per evitare precisioni eccessive (corregge anche record esistenti)
+foreach ($memoria as &$item) {
+    if (isset($item['vettore']) && is_array($item['vettore'])) {
+        foreach ($item['vettore'] as &$v) {
+            $v = round((float)$v, 5);
+        }
+    }
+}
+
+// Forza la precisione di serializzazione per i float
+ini_set('serialize_precision', -1);
+
 // Salva su file
 if (file_put_contents($filename, json_encode($memoria, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE))) {
     if ($exists) {
-        echo json_encode(["status" => "success", "message" => "Memoria già presente"]);
+        echo json_encode(["status" => "success", "message" => "Memoria aggiornata"]);
     } else {
         echo json_encode(["status" => "success", "message" => "Memoria salvata"]);
     }

@@ -1911,12 +1911,21 @@ document.addEventListener("DOMContentLoaded", async function () {
   const existingMem = JSON.parse(localStorage.getItem("vivacityLongMemory") || "[]");
   let migrated = false;
   existingMem.forEach(item => {
-    if (item.vettore && item.vettore.length > 512) {
-      item.vettore = item.vettore.slice(0, 512).map(v => parseFloat(v.toFixed(5)));
-      migrated = true;
-    } else if (item.vettore && item.vettore.some(v => v.toString().split('.')[1]?.length > 5)) {
+    if (item.vettore) {
+      const originalLen = item.vettore.length;
+      const originalJSON = JSON.stringify(item.vettore);
+      
+      // Normalizzazione dimensione a 512
+      if (originalLen > 512) {
+        item.vettore = item.vettore.slice(0, 512);
+      }
+      
+      // Arrotondamento a 5 decimali
       item.vettore = item.vettore.map(v => parseFloat(v.toFixed(5)));
-      migrated = true;
+      
+      if (originalLen !== item.vettore.length || JSON.stringify(item.vettore) !== originalJSON) {
+        migrated = true;
+      }
     }
   });
   if (migrated) {
