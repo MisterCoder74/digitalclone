@@ -624,9 +624,14 @@ if (Math.abs(MEMORY_CONFIG.SIMILARITY_WEIGHT + MEMORY_CONFIG.RECENCY_WEIGHT - 1)
 
 // Calculate cosine similarity between two embedding vectors
 function cosineSimilarity(a, b) {
-  const dot = a.reduce((sum, val, i) => sum + val * b[i], 0);
-  const normA = Math.sqrt(a.reduce((sum, val) => sum + val * val, 0));
-  const normB = Math.sqrt(b.reduce((sum, val) => sum + val * val, 0));
+  // Ensure both vectors have the same dimension (handle potential old 1536-dim vectors)
+  const minLen = Math.min(a.length, b.length);
+  const vecA = a.length > minLen ? a.slice(0, minLen) : a;
+  const vecB = b.length > minLen ? b.slice(0, minLen) : b;
+  
+  const dot = vecA.reduce((sum, val, i) => sum + val * vecB[i], 0);
+  const normA = Math.sqrt(vecA.reduce((sum, val) => sum + val * val, 0));
+  const normB = Math.sqrt(vecB.reduce((sum, val) => sum + val * val, 0));
   return dot / (normA * normB);
 }
 
@@ -750,17 +755,20 @@ async function saveToLongMemory(userInput, botResponse, target = 'local') {
     const res = await fetch("https://api.openai.com/v1/embeddings", {
       method: "POST",
       headers: { "Content-Type": "application/json", Authorization: "Bearer " + apikey },
-      body: JSON.stringify({ model: "text-embedding-3-small", input: testo })
+      body: JSON.stringify({ model: "text-embedding-3-small", input: testo, dimensions: 512 })
     });
     const data = await res.json();
     if (!data.data || !data.data[0]) throw new Error("Embedding failed");
-    const vettore = data.data[0].embedding;
+    const vettore = data.data[0].embedding.map(v => parseFloat(v.toFixed(5)));
     const memoryObj = { testo, vettore, data: new Date().toISOString() };
 
     if (target === 'local' || target === 'both') {
       const memoria = JSON.parse(localStorage.getItem("vivacityLongMemory") || "[]");
-      memoria.push(memoryObj);
-      localStorage.setItem("vivacityLongMemory", JSON.stringify(memoria));
+      const exists = memoria.some(item => item.testo === memoryObj.testo);
+      if (!exists) {
+        memoria.push(memoryObj);
+        localStorage.setItem("vivacityLongMemory", JSON.stringify(memoria));
+      }
     }
 
     if (target === 'server' || target === 'both') {
@@ -788,6 +796,13 @@ async function searchLongMemory(query, topK = 3) {
         // Merge and deduplicate by 'testo'
         const existingTexts = new Set(memoria.map(m => m.testo));
         serverMemoria.forEach(item => {
+          // Normalization to 512 dimensions and 5 decimal places
+          if (item.vettore) {
+            if (item.vettore.length > 512) {
+              item.vettore = item.vettore.slice(0, 512);
+            }
+            item.vettore = item.vettore.map(v => parseFloat(v.toFixed(5)));
+          }
           if (!existingTexts.has(item.testo)) {
             memoria.push(item);
             existingTexts.add(item.testo);
@@ -804,10 +819,10 @@ async function searchLongMemory(query, topK = 3) {
     const res = await fetch("https://api.openai.com/v1/embeddings", {
       method: "POST",
       headers: { "Content-Type": "application/json", Authorization: "Bearer " + apikey },
-      body: JSON.stringify({ model: "text-embedding-3-small", input: query })
+      body: JSON.stringify({ model: "text-embedding-3-small", input: query, dimensions: 512 })
     });
     const data = await res.json();
-    const queryVettore = data.data[0].embedding;
+    const queryVettore = data.data[0].embedding.map(v => parseFloat(v.toFixed(5)));
     const risultati = memoria
       .map(item => {
         const similarityScore = cosineSimilarity(queryVettore, item.vettore);
@@ -1842,6 +1857,13 @@ async function syncServerMemory() {
                 const existingTexts = new Set(localMemoria.map(m => m.testo));
                 let added = 0;
                 serverMemoria.forEach(item => {
+                    // Normalization to 512 dimensions and 5 decimal places
+                    if (item.vettore) {
+                        if (item.vettore.length > 512) {
+                            item.vettore = item.vettore.slice(0, 512);
+                        }
+                        item.vettore = item.vettore.map(v => parseFloat(v.toFixed(5)));
+                    }
                     if (!existingTexts.has(item.testo)) {
                         localMemoria.push(item);
                         existingTexts.add(item.testo);
@@ -1884,6 +1906,23 @@ document.addEventListener("DOMContentLoaded", async function () {
   console.log("=== MEMORY SYSTEM INITIALIZATION ===");
   console.log("Phase 4 Features: Composite Scoring & Advanced Pruning");
   console.log("Configuration:", MEMORY_CONFIG);
+  
+  // Migration for old embeddings (1536 -> 512) and rounding
+  const existingMem = JSON.parse(localStorage.getItem("vivacityLongMemory") || "[]");
+  let migrated = false;
+  existingMem.forEach(item => {
+    if (item.vettore && item.vettore.length > 512) {
+      item.vettore = item.vettore.slice(0, 512).map(v => parseFloat(v.toFixed(5)));
+      migrated = true;
+    } else if (item.vettore && item.vettore.some(v => v.toString().split('.')[1]?.length > 5)) {
+      item.vettore = item.vettore.map(v => parseFloat(v.toFixed(5)));
+      migrated = true;
+    }
+  });
+  if (migrated) {
+    localStorage.setItem("vivacityLongMemory", JSON.stringify(existingMem));
+    console.log("LocalStorage memory migrated to 512 dimensions and 5 decimal places.");
+  }
   
   const pruneResult = pruneOldMemories();
   console.log("Pruning result:", pruneResult);
