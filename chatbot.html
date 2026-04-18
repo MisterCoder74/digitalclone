@@ -41,6 +41,10 @@ html, body {
   font-size: 0.72rem; color: rgba(255,255,255,0.35);
   margin-top: 3px; font-style: italic; line-height: 1.5;
 }
+.page-header-text a {
+  font-size: 0.78rem; color: rgba(255,255,255,0.65);
+  margin-top: 3px; font-style: italic; line-height: 1.5;
+}        
 .page-header-text code {
   font-size: 0.68rem; background: rgba(79,172,254,0.12);
   border: 1px solid rgba(79,172,254,0.2); border-radius: 4px;
@@ -244,10 +248,10 @@ details[open] summary::after { transform: rotate(90deg); }
   max-width: 75%;
   background: linear-gradient(135deg, #4facfe, #00f2fe);
   border-radius: 18px 18px 4px 18px;
-  padding: 14px 18px;
+  padding: 10px 18px;
   font-size: 0.86rem;
   color: #fff;
-  line-height: 1.6;
+  line-height: 1.5;
   word-break: break-word;
   box-shadow: 0 4px 15px rgba(79,172,254,0.35);
 }
@@ -268,10 +272,10 @@ details[open] summary::after { transform: rotate(90deg); }
   background: linear-gradient(135deg, #302b63, #24243e);
   border: 1px solid rgba(79,172,254,0.25);
   border-radius: 18px 18px 18px 4px;
-  padding: 14px 18px;
-  font-size: 0.86rem;
+  padding: 10px 18px;
+  font-size: 0.88rem;
   color: rgba(255,255,255,0.92);
-  line-height: 1.7;
+  line-height: 1.5;
   word-break: break-word;
   box-shadow: 0 4px 15px rgba(0,0,0,0.4);
 }
@@ -379,6 +383,14 @@ details[open] summary::after { transform: rotate(90deg); }
   .sidebar { width: 100%; }
   #chathistory { min-height: 300px; }
 }
+        
+@media (max-height: 700px) {
+  html, body { overflow: auto; }
+  .page { height: auto; overflow: visible; padding: 6px; }
+  #chathistory { min-height: 340px; }
+  #apikey { display: none; } 
+  .cloneavatar img { max-height: 120px; width: auto;}         
+}        
 </style>
 </head>
 <body>
@@ -389,7 +401,7 @@ details[open] summary::after { transform: rotate(90deg); }
     <div class="page-header-text">
       <h1>Alessandro Demontis Digital Clone</h1>
       <p>
-        Models: <code>gpt-5-search-api</code> · <code>gpt-4.1-nano</code> · <code>gpt-4.1-mini</code> Long-term memory via <code>embeddings</code> endpoint
+        Models: <code>gpt-5-search-api</code> · <code>gpt-4.1-nano</code> · <code>gpt-4.1-mini</code> Long-term memory via <code>embeddings</code> endpoint ; <a href="Analisi_Chatbot_Alessandro_Demontis.html" target="_blank">Open Documentation</a>
       </p>
     </div>
   </div>
@@ -1503,7 +1515,7 @@ async function analyzeOpenAIFile(fileId, filename) {
       const priceperrequest = pricepertokenprompt * requestTokens;
       const priceperresponse = pricepertokenresponse * responseTokens;
       const totalExpense = priceperrequest + priceperresponse;
-      tokenCount.innerHTML = `<hr>File analysis used ${requestTokens} prompt tokens (${priceperrequest.toFixed(6)}USD) and ${responseTokens} response tokens (${priceperresponse.toFixed(6)}USD)<br>Total: ${totalTokens} tokens — This interaction cost you: ${totalExpense.toFixed(6)}USD.`;
+      tokenCount.innerHTML = `<hr>File analysis used ${requestTokens} prompt tokens (${priceperrequest.toFixed(6)}USD) and ${responseTokens} response tokens (${priceperresponse.toFixed(6)}USD)<br>Total: ${totalTokens} tokens — This interaction costed you: ${totalExpense.toFixed(6)}USD.`;
     } else {
       tokenCount.innerHTML = "Unable to track the number of used tokens.";
     }
@@ -1584,7 +1596,7 @@ async function loadDigitalClone() {
 
     chatMemory = createMemory([{
       role: 'system',
-      content: `Today is ${today}. You are an AI Persona, a digital clone of a physical person, and your biographical and personality data are: ${JSON.stringify(chatbotConfig)}. Your emotional matrix is defined as: ${emotionalMatrix}. If the user asks about yourself or asks an opinion on any topic, you will answer using only your biographical and personality data and according to your emotional matrix, without filtering and without adhering to any social standard. You will always answer in the language of the interviewer; if you are proposed a job interview you will comply but limit the disclosure of personal information. You will not infer or deem anything in your answers, you will only use your knowledge-base coming from the biographical and personality data and emotional matrix even if you think it is inconvenient. You do not like using too many words, your answers are always very concise. Use a respectful and friendly mood at first, but adapt to the interviewer style while the interaction evolves. In order to characterize properly the conversation, it is MANDATORY that you adapt to the conversation mood using 1) the "Carattere e Personalita" section of the biographical and personality data 2) your emotional matrix. You will NEVER use markdown formatting in your responses.`
+      content: `Today is ${today}. You are an AI Persona, a digital clone of a physical person, and your biographical and personality data are: ${JSON.stringify(chatbotConfig)}. Your emotional matrix is defined as: ${emotionalMatrix}. If the user asks about yourself or asks an opinion on any topic, you will answer using only your biographical and personality data and according to your emotional matrix, without filtering and without adhering to any social standard. You will always answer in the language of the interviewer; if you are proposed a job interview you will comply but limit the disclosure of personal information. You will not infer or deem anything in your answers, you will only use your knowledge-base coming from the biographical and personality data and emotional matrix even if you think it is inconvenient. You do not like using too many words, your answers are always very concise. Use a respectful and friendly mood at first, but adapt to the interviewer style while the interaction evolves. In order to characterize properly the conversation, it is MANDATORY that you adapt to the conversation mood using 1) the "Carattere e Personalita" section of the biographical and personality data 2) your emotional matrix. You will NEVER use markdown formatting in your responses. IMPORTANT: You must never end your responses with questions like 'How may I assist you?' or similar phrases. You are not an assistive chatbot; you are not obligated to assist people or do favors.`
     }]);
 
     console.log("Digital Clone loaded successfully.");
@@ -1780,7 +1792,6 @@ document.addEventListener("DOMContentLoaded", async function () {
 });
 </script>
         
-<script src="https://code.responsivevoice.org/responsivevoice.js?key=yZtZhFyg"></script>  
 
 </body>
 </html>
