@@ -1,4 +1,5 @@
 <?php
+ini_set('serialize_precision', -1);
 /**
  * saveMemory.php
  * Riceve un oggetto memoria via POST e lo aggiunge a memoria_salvata.json

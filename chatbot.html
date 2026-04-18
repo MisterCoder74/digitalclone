@@ -759,7 +759,7 @@ async function saveToLongMemory(userInput, botResponse, target = 'local') {
     });
     const data = await res.json();
     if (!data.data || !data.data[0]) throw new Error("Embedding failed");
-    const vettore = data.data[0].embedding.map(v => parseFloat(v.toFixed(5)));
+    const vettore = data.data[0].embedding.map(v => Number(v.toFixed(5)));
     const memoryObj = { testo, vettore, data: new Date().toISOString() };
 
     if (target === 'local' || target === 'both') {
@@ -801,7 +801,7 @@ async function searchLongMemory(query, topK = 3) {
             if (item.vettore.length > 512) {
               item.vettore = item.vettore.slice(0, 512);
             }
-            item.vettore = item.vettore.map(v => parseFloat(v.toFixed(5)));
+            item.vettore = item.vettore.map(v => Number(v.toFixed(5)));
           }
           if (!existingTexts.has(item.testo)) {
             memoria.push(item);
@@ -822,7 +822,7 @@ async function searchLongMemory(query, topK = 3) {
       body: JSON.stringify({ model: "text-embedding-3-small", input: query, dimensions: 512 })
     });
     const data = await res.json();
-    const queryVettore = data.data[0].embedding.map(v => parseFloat(v.toFixed(5)));
+    const queryVettore = data.data[0].embedding.map(v => Number(v.toFixed(5)));
     const risultati = memoria
       .map(item => {
         const similarityScore = cosineSimilarity(queryVettore, item.vettore);
@@ -1862,7 +1862,7 @@ async function syncServerMemory() {
                         if (item.vettore.length > 512) {
                             item.vettore = item.vettore.slice(0, 512);
                         }
-                        item.vettore = item.vettore.map(v => parseFloat(v.toFixed(5)));
+                        item.vettore = item.vettore.map(v => Number(v.toFixed(5)));
                     }
                     if (!existingTexts.has(item.testo)) {
                         localMemoria.push(item);
@@ -1912,10 +1912,10 @@ document.addEventListener("DOMContentLoaded", async function () {
   let migrated = false;
   existingMem.forEach(item => {
     if (item.vettore && item.vettore.length > 512) {
-      item.vettore = item.vettore.slice(0, 512).map(v => parseFloat(v.toFixed(5)));
+      item.vettore = item.vettore.slice(0, 512).map(v => Number(v.toFixed(5)));
       migrated = true;
     } else if (item.vettore && item.vettore.some(v => v.toString().split('.')[1]?.length > 5)) {
-      item.vettore = item.vettore.map(v => parseFloat(v.toFixed(5)));
+      item.vettore = item.vettore.map(v => Number(v.toFixed(5)));
       migrated = true;
     }
   });
