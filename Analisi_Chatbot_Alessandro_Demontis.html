@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analisi Chatbot Alessandro Demontis</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #eee;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(255,255,255,.15);
+            padding: 50px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+        h1 {
+            text-align: center;
+            color: #1a73e8;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+        h2 {
+            text-align: center;
+            color: #4285f4;
+            margin-bottom: 30px;
+            font-size: 1.3em;
+        }
+        .subtitle {
+            text-align: center;
+            color: #eee;
+            font-style: italic;
+            margin-bottom: 40px;
+            font-size: 0.95em;
+        }
+        .toc {
+            background: #f0f7ff;
+            padding: 20px;
+            border-left: 4px solid #1a73e8;
+            margin: 30px 0;
+            border-radius: 4px;
+        }
+        .toc h3 {
+            color: #1a73e8;
+            margin-bottom: 15px;
+        }
+        .toc ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .toc li {
+            padding: 8px 0;
+            color: #333;
+        }
+        .toc a {
+            color: #1a73e8;
+            text-decoration: none;
+        }
+        .toc a:hover {
+            text-decoration: underline;
+        }
+        h3 {
+            color: #1a73e8;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+            border-bottom: 2px solid #e8f0fe;
+            padding-bottom: 10px;
+        }
+        h4 {
+            color: #4285f4;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1.05em;
+        }
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        .indent {
+            margin-left: 30px;
+            margin-bottom: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        th {
+            background: #1a73e8;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+                color: #000;
+        }
+        tr {
+            background: #f0f0f0;
+        }
+        tr:hover {
+            background: #f0f7ff;
+        }
+        .code-block {
+            background: #f5f5f5;
+                color: #000;
+            border-left: 3px solid #1a73e8;
+            padding: 15px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            overflow-x: auto;
+            border-radius: 4px;
+        }
+        .highlight {
+            background: #fff3cd;
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+        .section {
+            page-break-inside: avoid;
+            margin-bottom: 40px;
+        }
+        .workflow {
+            background: #e8f5e9;
+                color: #000;
+            padding: 15px;
+            border-left: 4px solid #4caf50;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .pros {
+            background: #e8f5e9;
+                color: #000;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .cons {
+            background: #ffebee;
+                color: #000;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 2px solid #e8f0fe;
+            color: #ddd;
+            font-style: italic;
+        }
+        @media print {
+            body { background: white; }
+            .container { box-shadow: none; }
+            h1, h2, h3 { page-break-after: avoid; }
+            table { page-break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Alessandro Demontis Digital Clone - Chatbot</h2>
+        <p class="subtitle">Documento di analisi tecnica</p>
+
+        <div class="toc">
+            <h3>📋 INDICE</h3>
+            <ul>
+                <li><a href="#sezione1">1. Descrizione di Massima del Progetto</a></li>
+                <li><a href="#sezione2">2. Report Dettagliata delle Funzionalità e Workflow</a></li>
+                <li><a href="#sezione3">3. Dipendenze Esterne e Principi di Gestione Memoria</a></li>
+            </ul>
+        </div>
+
+        <!-- SEZIONE 1 -->
+        <div class="section" id="sezione1">
+            <h3>1. DESCRIZIONE DI MASSIMA DEL PROGETTO</h3>
+
+            <h4>1.1 Cos'è</h4>
+            <p>Un'applicazione web interattiva che simula un "clone digitale" di Alessandro Demontis, basato su modelli GPT di OpenAI. È un chatbot avanzato con memoria a lungo termine, analisi di documenti, analisi di immagini e ricerca web integrata.</p>
+
+            <h4>1.2 Tecnologie Utilizzate</h4>
+            <div class="indent">
+                <p><strong>Frontend:</strong> HTML5, CSS3 (glassmorphism e gradient), JavaScript vanilla + jQuery</p>
+                <p><strong>Backend API:</strong> OpenAI API (GPT-4.1-mini, GPT-5-search-api, text-embedding-3-small)</p>
+                <p><strong>Storage:</strong> localStorage del browser (per API key e memoria)</p>
+                <p><strong>Architettura:</strong> Single Page Application (SPA) con interfaccia moderna</p>
+            </div>
+
+            <h4>1.3 Descrizione Interfaccia</h4>
+            <p>L'interfaccia è divisa in due colonne principali:</p>
+            <div class="indent">
+                <p><strong>SIDEBAR (260px):</strong> Contiene avatar del clone, gestione API key, analizzatore documenti, analizzatore immagini, gestione memoria, ricerca chat.</p>
+                <p><strong>CHAT AREA (flex):</strong> Cronologia messaggi con bubble style (blu per utente, viola per bot), area input con textarea e bottoni Send/Search Web.</p>
+            </div>
+            <p><strong>Stile:</strong> Glassmorphism moderno con gradiente di sfondo (blu scuro → viola → nero), blur effect, trasparenza, icone emoji, responsive design.</p>
+        </div>
+
+        <!-- SEZIONE 2 -->
+        <div class="section" id="sezione2">
+            <h3>2. REPORT DETTAGLIATA DELLE FUNZIONALITÀ E WORKFLOW</h3>
+
+            <h4>2.1 Gestione API Key</h4>
+            <p><strong>Storage:</strong> localStorage.getItem("openaikey") / localStorage.setItem("openaikey", apiKey)</p>
+            <p><strong>Funzionalità:</strong> Salva/carica API key di OpenAI in localStorage</p>
+            <p><strong>Workflow:</strong></p>
+            <div class="indent">
+                <p>1. Utente clicca "🔑 API Key"</p>
+                <p>2. Modal si apre con input field</p>
+                <p>3. API key salvata in localStorage</p>
+                <p>4. Visualizzata (mascherata) nel campo password</p>
+            </div>
+
+            <h4>2.2 Chat Principale - sendMessage()</h4>
+            <div class="workflow">
+                <strong>Workflow:</strong> User Input → sendMessage() → getChatGPTResponse() → openAIChat() → searchLongMemory() → OpenAI API Call → saveToLongMemory() → showMessage() → Display
+            </div>
+            <div class="indent">
+                <p><strong>Model:</strong> gpt-4.1-mini</p>
+                <p><strong>Max tokens:</strong> 15,999</p>
+                <p><strong>Token pricing:</strong> Prompt €0.00000125, Response €0.00001</p>
+                <p><strong>Memoria:</strong> Ricerca memoria a lungo termine prima della richiesta</p>
+                <p><strong>Output:</strong> Messaggio con header timestamp, contenuto, token info, bottone copy</p>
+            </div>
+
+            <h4>2.3 Ricerca Web - sendWeb()</h4>
+            <div class="workflow">
+                <strong>Workflow:</strong> User Input → sendWeb() → getChatGPTResponseWeb() → openAIChat() → web_search_options: "medium" → OpenAI API (gpt-5-search-api) → Extract Citations → showMessageWeb() → Display con References
+            </div>
+            <div class="indent">
+                <p><strong>Model:</strong> gpt-5-search-api</p>
+                <p><strong>Token pricing:</strong> Prompt €0.00000015, Response €0.0000006</p>
+                <p><strong>Features:</strong> Ricerca web in tempo reale, estrazione automatica di citazioni/riferimenti, link cliccabili alle fonti, pulizia URL dalla risposta</p>
+            </div>
+
+            <h4>2.4 Analisi Documenti - analyzeFile()</h4>
+            <p><strong>Tipi supportati:</strong></p>
+            <div class="indent">
+                <p><strong>OpenAI native:</strong> .pdf, .jpg, .png, .gif, .webp</p>
+                <p><strong>Text-based:</strong> .txt, .xml, .html, .css, .js, .json, .vb, .php, .py</p>
+            </div>
+            <p><strong>Workflow:</strong></p>
+            <div class="indent">
+                <p>1. Upload file a OpenAI (max 20MB)</p>
+                <p>2. Ricevi file_id</p>
+                <p>3. Includi file_id nelle richieste chat successive</p>
+                <p>4. Analisi contestuale del documento</p>
+            </div>
+
+            <h4>2.5 Analisi Immagini - getChatGPTResponseIMG()</h4>
+            <div class="workflow">
+                <strong>Workflow:</strong> Image Upload → vupload.php → Get Image URL → openAIChat() with vision → Extract image analysis → showMessage() with image preview
+            </div>
+            <p><strong>Features:</strong> Upload tramite form multipart, preview dell'immagine nel chat, analisi con vision capabilities</p>
+
+            <h4>2.6 Memoria a Lungo Termine</h4>
+
+            <h5>2.6.1 Salvataggio - saveToLongMemory()</h5>
+            <p><strong>Processo:</strong></p>
+            <div class="indent">
+                <p>1. Combina user input + bot response</p>
+                <p>2. Genera embedding via OpenAI (text-embedding-3-small)</p>
+                <p>3. Salva in localStorage con timestamp</p>
+            </div>
+            <p><strong>Configurazione MEMORY_CONFIG:</strong></p>
+            <div class="code-block">
+MAX_MEMORIES: 1500 (max memories da mantenere)<br>
+MAX_DAYS: 365 (retention period)<br>
+SIMILARITY_THRESHOLD: 0.5 (min score per inclusione)<br>
+SIMILARITY_WEIGHT: 0.7 (peso similarità semantica)<br>
+RECENCY_WEIGHT: 0.3 (peso recency temporale)<br>
+ENABLE_COMPOSITE_SCORING: true
+            </div>
+
+            <h5>2.6.2 Ricerca - searchLongMemory()</h5>
+            <p><strong>Algoritmo:</strong></p>
+            <div class="indent">
+                <p>1. Query → Generate Embedding</p>
+                <p>2. For each Memory: Calculate Cosine Similarity + Recency Score</p>
+                <p>3. Composite Score = (similarity × 0.7) + (recency × 0.3)</p>
+                <p>4. Filter by SIMILARITY_THRESHOLD (0.5)</p>
+                <p>5. Sort by Composite Score (descending)</p>
+                <p>6. Return Top-K (default: 3)</p>
+            </div>
+            <p><strong>Formula Recency Score:</strong> e^(-k × age), dove k = -ln(0.01) / maxAgeMs</p>
+            <p><strong>Assicura:</strong> 1.0 (oggi) → 0.01 (MAX_DAYS)</p>
+
+            <h4>2.7 Gestione Memoria - Memory Management UI</h4>
+            <div class="indent">
+                <p><strong>Show Memory:</strong> Apre modal con cronologia chat completa</p>
+                <p><strong>Clear Long Memory:</strong> Cancella tutti i memories salvati</p>
+                <p><strong>Export Long Memory:</strong> Scarica memories in JSON</p>
+                <p><strong>Export this Session:</strong> Scarica chat corrente in TXT</p>
+                <p><strong>Memory Status:</strong> Mostra numero memories salvati e limiti</p>
+            </div>
+
+            <h4>2.8 Ricerca Chat - searchChat()</h4>
+            <div class="workflow">
+                <strong>Workflow:</strong> Search Term → Filter message-rows → Match case-insensitive → Show/Hide based on match → Clear search input
+            </div>
+        </div>
+
+        <!-- SEZIONE 3 -->
+        <div class="section" id="sezione3">
+            <h3>3. DIPENDENZE ESTERNE E PRINCIPI DI GESTIONE MEMORIA</h3>
+
+            <h4>3.1 Dipendenze Esterne</h4>
+            <table>
+                <tr>
+                    <th>Dipendenza</th>
+                    <th>Versione</th>
+                    <th>Utilizzo</th>
+                </tr>
+                <tr>
+                    <td>jQuery</td>
+                    <td>3.6.0</td>
+                    <td>AJAX calls, DOM manipulation</td>
+                </tr>
+                <tr>
+                    <td>OpenAI API</td>
+                    <td>v1</td>
+                    <td>Chat completions, embeddings, file upload</td>
+                </tr>
+                <tr>
+                    <td>localStorage</td>
+                    <td>Browser API</td>
+                    <td>Persistenza API key e memories</td>
+                </tr>
+                <tr>
+                    <td>FileReader API</td>
+                    <td>Browser API</td>
+                    <td>Lettura file locali</td>
+                </tr>
+                <tr>
+                    <td>FormData API</td>
+                    <td>Browser API</td>
+                    <td>Upload multipart</td>
+                </tr>
+            </table>
+
+            <p><strong>URL Endpoints:</strong></p>
+            <div class="code-block">
+https://api.openai.com/v1/chat/completions (Chat)<br>
+https://api.openai.com/v1/embeddings (Embeddings)<br>
+https://api.openai.com/v1/files (File upload/delete)<br>
+vupload.php (Image upload - backend)
+            </div>
+
+            <h4>3.2 Principi Gestione Memoria a Breve Termine</h4>
+            <p><strong>chatMemory Array:</strong> Array JavaScript che mantiene la cronologia della conversazione</p>
+            <p><strong>Struttura:</strong></p>
+            <div class="code-block">
+[<br>
+&nbsp;&nbsp;{ role: "user", content: "user message" },<br>
+&nbsp;&nbsp;{ role: "assistant", content: "bot response" },<br>
+&nbsp;&nbsp;...<br>
+]
+            </div>
+
+            <p><strong>Lifecycle:</strong></p>
+            <div class="indent">
+                <p>• Inizializzazione: chatMemory = [] (vuoto all'inizio)</p>
+                <p>• Accumulo: Ogni scambio aggiunge 2 elementi (user + assistant)</p>
+                <p>• Passaggio API: Intero array inviato a OpenAI per context</p>
+                <p>• Reset: chatMemory = [] quando si carica un nuovo documento</p>
+                <p>• Limite: Max 15,999 tokens per richiesta (OpenAI limit)</p>
+            </div>
+
+            <div class="pros">
+                <strong>✓ Vantaggi:</strong>
+                <div class="indent">
+                    <p>• Context completo della conversazione</p>
+                    <p>• Coerenza nelle risposte</p>
+                    <p>• Memoria conversazionale immediata</p>
+                </div>
+            </div>
+
+            <div class="cons">
+                <strong>✗ Svantaggi:</strong>
+                <div class="indent">
+                    <p>• Cresce linearmente con conversazione</p>
+                    <p>• Costo token aumenta</p>
+                    <p>• Perso al refresh pagina</p>
+                </div>
+            </div>
+
+            <h4>3.3 Principi Gestione Memoria a Lungo Termine</h4>
+            <p><strong>Struttura dati localStorage["vivacityLongMemory"]:</strong></p>
+            <div class="code-block">
+[<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;testo: "Utente: ...\\nBot: ...",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;vettore: [0.123, -0.456, ...],&nbsp;&nbsp;// 1536 dimensioni<br>
+&nbsp;&nbsp;&nbsp;&nbsp;data: "2025-04-11T10:30:00.000Z"<br>
+&nbsp;&nbsp;},<br>
+&nbsp;&nbsp;...<br>
+]
+            </div>
+
+            <p><strong>Algoritmo di Scoring Composito (Phase 4):</strong></p>
+            <div class="indent">
+                <p><strong>1. SIMILARITY SCORE (Semantic):</strong> Cosine similarity tra query embedding e memory (range [0,1])</p>
+                <p><strong>2. RECENCY SCORE (Temporal):</strong> Exponential decay basato su age (range [0,1])</p>
+                <p><strong>3. COMPOSITE SCORE:</strong> (similarity × 0.7) + (recency × 0.3)</p>
+                <p><strong>4. FILTERING & RANKING:</strong> Filter by threshold (0.5), sort descending, return top-3</p>
+            </div>
+
+            <p><strong>Formula Recency Score:</strong> e^(-k × age), dove k = -ln(0.01) / MAX_DAYS_MS</p>
+            <p><strong>Assicura:</strong> 1.0 (oggi) → 0.01 (MAX_DAYS = 365 giorni)</p>
+
+            <div class="pros">
+                <strong>✓ Vantaggi:</strong>
+                <div class="indent">
+                    <p>• Memoria persistente tra sessioni</p>
+                    <p>• Ricerca semantica (non keyword-based)</p>
+                    <p>• Bilanciamento tra relevanza e recency</p>
+                    <p>• Configurabile a runtime</p>
+                    <p>• Retrocompatibile (può disabilitare composite scoring)</p>
+                </div>
+            </div>
+
+            <div class="cons">
+                <strong>✗ Svantaggi:</strong>
+                <div class="indent">
+                    <p>• Storage limitato (localStorage ~5-10MB)</p>
+                    <p>• Costo embedding per ogni salvataggio</p>
+                    <p>• Costo embedding per ogni ricerca</p>
+                    <p>• Latenza ricerca aumenta con numero memories</p>
+                </div>
+            </div>
+
+            <h4>3.4 Tabella Riepilogativa</h4>
+            <table>
+                <tr>
+                    <th>Aspetto</th>
+                    <th>Dettagli</th>
+                </tr>
+                <tr>
+                    <td>Linguaggio</td>
+                    <td>JavaScript + HTML5 + CSS3</td>
+                </tr>
+                <tr>
+                    <td>Modelli GPT</td>
+                    <td>gpt-4.1-mini, gpt-5-search-api, gpt-4.1-nano</td>
+                </tr>
+                <tr>
+                    <td>Embedding Model</td>
+                    <td>text-embedding-3-small (1536 dims)</td>
+                </tr>
+                <tr>
+                    <td>Max Chat Memory</td>
+                    <td>15,999 tokens per richiesta</td>
+                </tr>
+                <tr>
+                    <td>Max Long Memory</td>
+                    <td>1,500 memories (~5-10MB localStorage)</td>
+                </tr>
+                <tr>
+                    <td>Retention Period</td>
+                    <td>365 giorni</td>
+                </tr>
+                <tr>
+                    <td>Similarity Weight</td>
+                    <td>70% (semantic relevance)</td>
+                </tr>
+                <tr>
+                    <td>Recency Weight</td>
+                    <td>30% (temporal freshness)</td>
+                </tr>
+                <tr>
+                    <td>Similarity Threshold</td>
+                    <td>0.5 (minimum composite score)</td>
+                </tr>
+                <tr>
+                    <td>Token Pricing</td>
+                    <td>Chat: €0.00000125/€0.00001; Web: €0.00000015/€0.0000006</td>
+                </tr>
+                <tr>
+                    <td>File Upload Max</td>
+                    <td>20 MB</td>
+                </tr>
+                <tr>
+                    <td>Supported File Types</td>
+                    <td>PDF, JPG, PNG, GIF, WebP, TXT, XML, JSON, HTML, CSS, JS, PHP, Python, VB</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="footer">
+            <p>Fine Documento</p>
+            <p>Analisi tecnica completa - Alessandro Demontis Digital Clone</p>
+        </div>
+    </div>
+</body>
+</html>
