@@ -79,7 +79,7 @@ hr.divider { border: none; border-top: 1px solid rgba(255,255,255,0.08); flex-sh
 }
         
 .cloneavatar img {
-	max-width: 50%;
+    max-width: 50%;
     height: auto;    
     margin: 0 auto;
     border-radius: 12px;
@@ -469,6 +469,8 @@ details[open] summary::after { transform: rotate(90deg); }
         <button class="btn btn-sm" id="apikeyBtn">🔑 API Key</button>
         <button class="btn btn-sm" onclick="clearLongMemory()">🗑 Clear Long Memory</button>
         <button class="btn btn-sm" onclick="exportAllMemory()">📤 Export Long Memory</button>
+        <button class="btn btn-sm" onclick="window.location.href='exportMemory.php'">📤 Export Server Memory</button>
+        <button class="btn btn-sm" onclick="syncServerMemory()">🔄 Sync Server Memory</button>
         <small id="memoryStatus"></small>
         <button class="btn btn-sm" id="savetxt">💾 Export this Session</button>
       </div>
@@ -741,7 +743,7 @@ function updateMemoryConfig(newConfig) {
 }
 
 // Save conversation to long-term memory with embedding (uses config from Phase 4)
-async function saveToLongMemory(userInput, botResponse) {
+async function saveToLongMemory(userInput, botResponse, target = 'local') {
   const apikey = localStorage.getItem("openaikey");
   const testo = `Utente: ${userInput}\nBot: ${botResponse}`;
   try {
@@ -751,10 +753,23 @@ async function saveToLongMemory(userInput, botResponse) {
       body: JSON.stringify({ model: "text-embedding-3-small", input: testo })
     });
     const data = await res.json();
+    if (!data.data || !data.data[0]) throw new Error("Embedding failed");
     const vettore = data.data[0].embedding;
-    const memoria = JSON.parse(localStorage.getItem("vivacityLongMemory") || "[]");
-    memoria.push({ testo, vettore, data: new Date().toISOString() });
-    localStorage.setItem("vivacityLongMemory", JSON.stringify(memoria));
+    const memoryObj = { testo, vettore, data: new Date().toISOString() };
+
+    if (target === 'local' || target === 'both') {
+      const memoria = JSON.parse(localStorage.getItem("vivacityLongMemory") || "[]");
+      memoria.push(memoryObj);
+      localStorage.setItem("vivacityLongMemory", JSON.stringify(memoria));
+    }
+
+    if (target === 'server' || target === 'both') {
+      await fetch("saveMemory.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(memoryObj)
+      });
+    }
   } catch (e) { console.error("saveToLongMemory error:", e); }
 }
 
@@ -762,7 +777,28 @@ async function saveToLongMemory(userInput, botResponse) {
 // Combines semantic similarity and temporal recency with configurable weights
 async function searchLongMemory(query, topK = 3) {
   const apikey = localStorage.getItem("openaikey");
-  const memoria = JSON.parse(localStorage.getItem("vivacityLongMemory") || "[]");
+  let memoria = JSON.parse(localStorage.getItem("vivacityLongMemory") || "[]");
+
+  // Fetch server memory
+  try {
+    const serverRes = await fetch("getMemory.php");
+    if (serverRes.ok) {
+      const serverMemoria = await serverRes.json();
+      if (Array.isArray(serverMemoria)) {
+        // Merge and deduplicate by 'testo'
+        const existingTexts = new Set(memoria.map(m => m.testo));
+        serverMemoria.forEach(item => {
+          if (!existingTexts.has(item.testo)) {
+            memoria.push(item);
+            existingTexts.add(item.testo);
+          }
+        });
+      }
+    }
+  } catch (e) {
+    console.error("Error fetching server memory:", e);
+  }
+
   if (memoria.length === 0) return "";
   try {
     const res = await fetch("https://api.openai.com/v1/embeddings", {
@@ -884,7 +920,7 @@ function handleCopyButtonClick(event) {
   document.body.removeChild(input);
 }
 
-function showMessage(sender, message, tokens) {
+function showMessage(sender, message, tokens, originalPrompt = "") {
   const chatContainer = document.getElementById("chathistory");
   const typingIndicator = document.getElementById("typing-indicator");
   if (typingIndicator && sender === "Digital Clone") {
@@ -929,12 +965,32 @@ function showMessage(sender, message, tokens) {
     copyButton.dataset.message = message;
     copyButton.addEventListener("click", handleCopyButtonClick);
     commands.appendChild(copyButton);
+
+    // Save to Memory button
+    if (sender !== "Guest" && originalPrompt) {
+      const saveBtn = document.createElement("button");
+      saveBtn.classList.add("btn", "btn-secondary");
+      saveBtn.innerHTML = "💾 Save to Memory";
+      saveBtn.onclick = function() {
+          manualSaveToMemory(originalPrompt, message, saveBtn);
+      };
+      commands.appendChild(saveBtn);
+    }
+
     bubble.appendChild(commands);
   }
 
   messageRow.appendChild(bubble);
   chatContainer.appendChild(messageRow);
   chatContainer.scrollTop = chatContainer.scrollHeight;
+}
+
+async function manualSaveToMemory(userQuery, botResponse, btn) {
+    btn.disabled = true;
+    btn.innerHTML = "⏳ Saving...";
+    await saveToLongMemory(userQuery, botResponse, 'both');
+    btn.innerHTML = "✅ Saved";
+    btn.classList.replace("btn-secondary", "btn-success");
 }
 
 // ============================================================
@@ -1035,14 +1091,15 @@ async function openAIChat(userMessage, options, chatMemory) {
     chatMemory.push({ role: "user", content: userContent });
     chatMemory.push({ role: "assistant", content: cleanResponse });
 
-    // Salva in long memory (non per web search)
+    /* AUTOMATIC SAVE DISABLED - Now manual via UI
     if (!options.webSearch) {
       await saveToLongMemory(userContent, cleanResponse);
     }
+    */
 
     // Display message in base al tipo
     if (options.webSearch) {
-      showMessageWeb("Digital Clone", cleanResponse, citationLinks, tokenInfo);
+      showMessageWeb("Digital Clone", cleanResponse, citationLinks, tokenInfo, userContent);
     } else if (options.showPreview && options.imageUrl) {
       // Image preview display
       const wrapperFlex = document.createElement("div");
@@ -1082,14 +1139,15 @@ async function openAIChat(userMessage, options, chatMemory) {
       showMessage(
         "Digital Clone",
         "Here is a summary of the analyzed image: \n\n" + cleanResponse + "\n\n Now you can ask me questions about the content.",
-        tokenInfo
+        tokenInfo,
+        userContent
       );
       
       const chatMessages = chatContainer.querySelectorAll("#chathistory > div");
       const lastMessage = chatMessages[chatMessages.length - 1];
       wrapperFlex.appendChild(lastMessage);
     } else {
-      showMessage("Digital Clone", cleanResponse, tokenInfo);
+      showMessage("Digital Clone", cleanResponse, tokenInfo, userContent);
     }
 
     return chatMemory;
@@ -1167,7 +1225,7 @@ function cleanResponseText(response, citations) {
   return cleanedResponse.trim();
 }
 
-function showMessageWeb(sender, message, citationLinks = [], tokens = "") {
+function showMessageWeb(sender, message, citationLinks = [], tokens = "", originalPrompt = "") {
   const chatContainer = document.getElementById("chathistory");
   const typingIndicator = document.getElementById("typing-indicator");
   if (typingIndicator && sender === "Digital Clone") {
@@ -1240,6 +1298,18 @@ function showMessageWeb(sender, message, citationLinks = [], tokens = "") {
     copyButton.dataset.message = message;
     copyButton.addEventListener("click", handleCopyButtonClick);
     commands.appendChild(copyButton);
+
+    // Save to Memory button
+    if (sender !== "Guest" && originalPrompt) {
+      const saveBtn = document.createElement("button");
+      saveBtn.classList.add("btn", "btn-secondary");
+      saveBtn.innerHTML = "💾 Save to Memory";
+      saveBtn.onclick = function() {
+          manualSaveToMemory(originalPrompt, message, saveBtn);
+      };
+      commands.appendChild(saveBtn);
+    }
+
     bubble.appendChild(commands);
   }
 
@@ -1416,13 +1486,15 @@ async function analyzeTextFile(textContent, filename) {
       tokenCount.innerHTML = `<hr>Used ${prompt_tokens} prompt + ${completion_tokens} response tokens — Cost: ${cost.toFixed(6)} USD`;
     }
 
+    const userPrompt = `[Document uploaded: "${filename}". Content:\n\`\`\`\n${safeContent}\n\`\`\`]`;
     showMessage(
       "Digital Clone",
       `Here is a summary of the analyzed file "${filename}":\n\n` + cleanResponse + "\n\nNow you can ask me questions about the content.",
-      tokenCount.innerHTML
+      tokenCount.innerHTML,
+      userPrompt
     );
 
-    chatMemory.push({ role: "user", content: `[Document uploaded: "${filename}". Content:\n\`\`\`\n${safeContent}\n\`\`\`]` });
+    chatMemory.push({ role: "user", content: userPrompt });
     chatMemory.push({ role: "assistant", content: cleanResponse });
 
   } catch (error) {
@@ -1520,13 +1592,15 @@ async function analyzeOpenAIFile(fileId, filename) {
       tokenCount.innerHTML = "Unable to track the number of used tokens.";
     }
 
+    const userPrompt = `[Document uploaded: "${filename}". Please answer questions about it.]`;
     showMessage(
       "Digital Clone",
       `Here is a summary of the analyzed file "${filename}":\n\n` + cleanResponse + "\n\nNow you can ask me questions about the content.",
-      tokenCount.innerHTML
+      tokenCount.innerHTML,
+      userPrompt
     );
 
-    chatMemory.push({ role: "user", content: `[Document uploaded: "${filename}". Please answer questions about it.]` });
+    chatMemory.push({ role: "user", content: userPrompt });
     chatMemory.push({ role: "assistant", content: cleanResponse });
 
   } catch (error) {
@@ -1756,6 +1830,42 @@ function pruneOldMemories(maxItems = MEMORY_CONFIG.MAX_MEMORIES, maxDaysOld = ME
     removedByTime: originalCount - timeFilteredCount,
     removedByCount: timeFilteredCount - finalCount
   };
+}
+
+async function syncServerMemory() {
+    let localMemoria = JSON.parse(localStorage.getItem("vivacityLongMemory") || "[]");
+    try {
+        const serverRes = await fetch("getMemory.php");
+        if (serverRes.ok) {
+            const serverMemoria = await serverRes.json();
+            if (Array.isArray(serverMemoria)) {
+                const existingTexts = new Set(localMemoria.map(m => m.testo));
+                let added = 0;
+                serverMemoria.forEach(item => {
+                    if (!existingTexts.has(item.testo)) {
+                        localMemoria.push(item);
+                        existingTexts.add(item.testo);
+                        added++;
+                    }
+                });
+                if (added > 0) {
+                    localStorage.setItem("vivacityLongMemory", JSON.stringify(localMemoria));
+                }
+                
+                // Update UI
+                const total = localMemoria.length;
+                document.getElementById("memoryStatus").innerText = 
+                    `Long memory: ${total} saved memories (max ${MEMORY_CONFIG.MAX_MEMORIES}, ${MEMORY_CONFIG.MAX_DAYS} days retention)`;
+                
+                alert(`Synchronization complete. ${added} new memories retrieved from server. Total: ${total}`);
+            }
+        } else {
+            alert("Error retrieving memory from server.");
+        }
+    } catch (e) {
+        console.error("Sync error:", e);
+        alert("An error occurred during synchronization.");
+    }
 }
 
 document.addEventListener("DOMContentLoaded", async function () {

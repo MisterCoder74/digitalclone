@@ -1,0 +1,41 @@
+<?php
+/**
+ * saveMemory.php
+ * Riceve un oggetto memoria via POST e lo aggiunge a memoria_salvata.json
+ */
+
+header('Content-Type: application/json');
+
+// Leggi il corpo della richiesta
+$input = file_get_contents('php://input');
+$data = json_decode($input, true);
+
+if (!$data) {
+    http_response_code(400);
+    echo json_encode(["status" => "error", "message" => "Dati non validi"]);
+    exit;
+}
+
+$filename = 'memoria_salvata.json';
+
+// Carica la memoria esistente
+$memoria = [];
+if (file_exists($filename)) {
+    $json = file_get_contents($filename);
+    $memoria = json_decode($json, true);
+    if ($memoria === null) {
+        $memoria = [];
+    }
+}
+
+// Aggiungi il nuovo record
+$memoria[] = $data;
+
+// Salva su file
+if (file_put_contents($filename, json_encode($memoria, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE))) {
+    echo json_encode(["status" => "success", "message" => "Memoria salvata"]);
+} else {
+    http_response_code(500);
+    echo json_encode(["status" => "error", "message" => "Errore nel salvataggio su file"]);
+}
+?>
