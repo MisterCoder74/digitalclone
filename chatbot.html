@@ -584,9 +584,7 @@ function createMemory(messages) {
   return memory;
 }
         
-// ============================================================
 // MEMORY CONFIGURATION (Phase 4 - Advanced Features)
-// ============================================================
 // 
 // This configuration object controls the advanced memory management features:
 //
@@ -718,7 +716,6 @@ function displayMemoryStats() {
   console.log(`  - Medium (7-30d): ${stats.byAge.medium}`);
   console.log(`  - Old (30-90d): ${stats.byAge.old}`);
   console.log(`  - Very old (>90d): ${stats.byAge.veryOld}`);
-  console.log("===================");
   return stats;
 }
 
@@ -1031,9 +1028,7 @@ async function manualSaveToMemory(userQuery, botResponse, btn) {
     btn.classList.replace("btn-secondary", "btn-success");
 }
 
-// ============================================================
 // CORE FUNCTION - openAIChat
-// ============================================================
 async function openAIChat(userMessage, options, chatMemory) {
   const apikey = localStorage.getItem("openaikey");
   document.getElementById("apikey").value = apikey;
@@ -1216,9 +1211,7 @@ async function openAIChat(userMessage, options, chatMemory) {
   }
 }
 
-// ============================================================
 // WRAPPER FUNCTIONS
-// ============================================================
 
 async function getChatGPTResponse(userInput, chatMemory = []) {
   // Costruzione userMessage con supporto currentFileId (document analyzer)
@@ -1948,12 +1941,12 @@ document.addEventListener("DOMContentLoaded", async function () {
   const existingMem = JSON.parse(localStorage.getItem("vivacityLongMemory") || "[]");
   let migrated = false;
   existingMem.forEach(item => {
-    if (item.vettore && item.vettore.length > 512) {
-      item.vettore = item.vettore.slice(0, 512).map(v => Number(v.toFixed(5)));
-      migrated = true;
-    } else if (item.vettore && item.vettore.some(v => v.toString().split('.')[1]?.length > 5)) {
+    if (item.vettore) {
+      const originalLen = item.vettore.length;
+      const originalJSON = JSON.stringify(item.vettore);
+      if (originalLen > 512) item.vettore = item.vettore.slice(0, 512);
       item.vettore = item.vettore.map(v => Number(v.toFixed(5)));
-      migrated = true;
+      if (originalLen !== item.vettore.length || JSON.stringify(item.vettore) !== originalJSON) migrated = true;
     }
   });
   if (migrated) {
