@@ -471,6 +471,7 @@ details[open] summary::after { transform: rotate(90deg); }
         <button class="btn btn-sm" onclick="exportAllMemory()">📤 Export Long Memory</button>
         <button class="btn btn-sm" onclick="window.location.href='exportMemory.php'">📤 Export Server Memory</button>
         <button class="btn btn-sm" onclick="syncServerMemory()">🔄 Sync Server Memory</button>
+        <button class="btn btn-sm" onclick="indexBiography()">🗂 Index Biography</button>
         <small id="memoryStatus"></small>
         <button class="btn btn-sm" id="savetxt">💾 Export this Session</button>
       </div>
@@ -867,6 +868,30 @@ async function searchBiography(query) {
   } catch (e) {
     console.error("searchBiography error:", e);
     return "";
+  }
+}
+
+async function indexBiography() {
+  const apikey = localStorage.getItem("openaikey");
+  if (!apikey) {
+    alert("No OpenAI API Key found.");
+    return;
+  }
+
+  showSpinner("Indexing Biography...");
+  try {
+    const res = await fetch(`indexBio.php?apiKey=${encodeURIComponent(apikey)}`);
+    const data = await res.json();
+    if (data.status === "success") {
+      alert("Success: " + data.message + " (" + data.files_processed + " files)");
+    } else {
+      alert("Error: " + (data.message || "Unknown error"));
+    }
+  } catch (e) {
+    console.error("indexBiography error:", e);
+    alert("An error occurred during indexing.");
+  } finally {
+    hideSpinner();
   }
 }
 
