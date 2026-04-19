@@ -1,0 +1,40 @@
+Competenze Tecniche Informatiche
+
+ Linguaggi e Tecnologie Web/Desktop
+- HTML: 3.2, 4.01, 5, HTML5 Canvas (livello avanzato)
+- CSS: CSS 3, CSS Flexbox (livello avanzato)
+- JavaScript: DHTML, JavaScript Events + DOM (livello buono)
+- Framework Web: Bootstrap 4-5 (livello medio)
+- CMS/Platform: WIX + Velo (ex Corvid), Wordpress (livello base), Webflow (livello medio)
+- Linguaggi Storici: WML 1.3-2.0, VRML 1.0-2.0-97, LOGO, Pascal
+- Desktop: VB.NET (livello buono), Blockly/App Inventor, Microsoft Powerapps (livello medio)
+- Programmazione Base: BASIC (varie forme), Pascal, Javascript, VRMLscript, Visual Basic 6
+
+ Sistemi Operativi
+- Windows NT4, 2000, 7, 8, 10 (livello avanzato)
+- OS/2 warp 4 (livello medio)
+- eComStation 2.0 (livello medio)
+
+ Tool Professionali
+- Grafica/Design: Paint Shop Pro 7, AutoCAD 2013-2017, Smartplant PID 2009-2014-2019, Figma, InVision
+- Sviluppo: Microsoft Visual Studio 2010-2013, Stellar HTML Editor (software proprietario), VS Code, Lazarus
+- Office: Microsoft Office 365, Visio, Sway, Forms, WPS Office, Open Office
+- AI/Chatbot: OpenAI API, ChatPDF API, SinCode AI, CopyAI, Fastbots AI, Chatsonic, Flowith, CTO, SureThing, Workshop, Claude, Claude Code, Zapier, Perplexity, Gemini, Suno, ElevenLabs, NotebookLM
+
+
+ Competenze Operative
+- Setup e configurazione di chatbot e agenti GPTs
+- Creazione di client-side Chatbots in HTML/CSS/JS/PHP e VB.NET
+- Integrazione chatbots e agenti AI in siti web
+- vibe coding base ed avanzato (CTO, Claude, Base44, Lovable, Workshop, SureThing)
+- automazioni AI (Zapier - livello base)
+- Setup e configurazione servers e reti piccole/medie
+- Cybersecurity e sicurezza e-mail, Digital Forensic su Windows
+- Project Management tramite Kanban/Gantt metodologie Agile, Scrum
+- User Research, User Journey, Wireframing
+
+
+Specializzazioni
+- creazione landing page e siti web
+- creazione webapp gestionali (appointment management, project management, store/ activity management) con particolare focus su tool di gestione saloni di bellezza, ristorazione, internet cafè, ed altre
+- creazione di chatbot collaborativi, digital personas, cloni digitali
