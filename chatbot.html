@@ -1038,7 +1038,11 @@ async function openAIChat(userMessage, options, chatMemory) {
   showSpinner(options.spinnerMessage || "Processing...");
 
   // Gestione memoria a lungo termine e biografia dinamica
-  const userTextQuery = typeof userMessage === 'string' ? userMessage : (userMessage.content?.[0]?.text || "");
+  const userTextQuery = typeof userMessage === 'string' 
+    ? userMessage 
+    : (typeof userMessage.content === 'string' 
+        ? userMessage.content 
+        : (userMessage.content?.[0]?.text || ""));
   let dynamicContext = "";
 
   if (options.searchMemory !== false && options.searchMemory !== undefined) {
@@ -1138,7 +1142,8 @@ async function openAIChat(userMessage, options, chatMemory) {
 
     // Aggiornamento chatMemory
     const userContent = typeof userMessage === 'string' ? userMessage : 
-      (userMessage.content?.[0]?.text || JSON.stringify(userMessage.content));
+      (typeof userMessage.content === 'string' ? userMessage.content : 
+      (userMessage.content?.[0]?.text || JSON.stringify(userMessage.content)));
     chatMemory.push({ role: "user", content: userContent });
     chatMemory.push({ role: "assistant", content: cleanResponse });
 
