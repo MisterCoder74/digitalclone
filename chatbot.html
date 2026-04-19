@@ -870,6 +870,7 @@ async function searchBiography(query) {
   }
 }
 
+async function initSelfAwareness() {
   //inizializza la coscienza del chatbot in memoria a lungo termine
 
   const memoria = JSON.parse(localStorage.getItem("vivacityLongMemory") || "[]");
@@ -1957,7 +1958,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   const pruneResult = pruneOldMemories();
   console.log("Pruning result:", pruneResult);
   
-  initSelfAwareness();
+  await initSelfAwareness();
   
   const mem = JSON.parse(localStorage.getItem("vivacityLongMemory") || "[]");
   document.getElementById("memoryStatus").innerText = 
