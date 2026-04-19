@@ -1,0 +1,73 @@
+Timeline Cronologica Dettagliata
+
+1974: Nascita a Sassari
+1986: Inizio studio tedesco (età 12)
+1988: Primo PC (Commodore 128), ingresso mondo PC
+1990-1998: Attività musicale intensiva
+1991: inizio attività musicale con i Trauma (primo gruppo)
+1992: Diploma in Chimica Industriale + inizio Desecration of Souls + Computer Hypnosis + inizio università di Chimica
+1993: Abbandonata università di Chimica, iscrizione a Lingue e Letterature straniere, studio Etrusco con il prof. M. Pittau
+1994: Abbandonata università di Lingue, Inizio Celestial Melodies
+1995:Celestial Melodies demo "Fair's dance around me" + Servizio Civile al Museo Sanna (Sassari)
+1996: pausa con Celestial Melodies + trasferimento a Cagliari per qualifica tecnico ambientale
+1997: Inizio utilizzo Internet + rientro a sassari + soggiorno studio a Milano + studio HTML/CSS/JavaScript
+1998: studio VRML 2.0 + ripresa e poi fine attività musicale + rientro in Sardegna per inizio lavoro in Enichem
+1999-2002: presenza e pratica su chat IRC + studio tecniche hacking/anti-hacking in ambiente Windows
+2000: ECDL + manuale VRML 2.0 
+2001: Scoperta teoria Zecharia Sitchin + studio serbo base
+2002: produzione manuale WML
+2003: Inizio KeropiNET + manuale attacco/difesa Windows
+2004: Inizio studio religioni comparate + lingue aryificiali Toki Pona e Talossano
+2005: Trasferimento Lazio (Fiumicino) per lavoro in multinazionale di progettazione petrolifera
+2007: Inizio studio sumero cuneiforme + inizio scrittura articoli religioni e misteri vari
+2008: Pubblicazione primo libro "Mille cose nascoste"
+2009: Inizio studio accadico + chiusura KeropiNET
+2010: Inizio studio romeno + pubblicazione "Nibiru e gli Anunnaki" e "Testi Sumeri"
+2011: Fine studi sumero/accadico - prima pubblicazione del libro "Il fenomeno Nibiru vol.1" + prima conferenza (Roma) + inizio studio VB e VB.NET
+2012: Inizio pratica di VB.NET + studi archeologia Dacia/Tracia + pubblicazione "Il fenomeno Nibiru vol.2"
+2013: Inizio utilizzo di Wix (senza ambiente Corvid / Velo) + creazione portale Tecnologie Ambientali + pubblicazione "Da Sumer al Transumanesimo"
+2014: Ripresa studio serbo + studio swahili
+2015: ripasso HTML5/CSS3 + studio di russo/polacco base + pubblicazione libro "Smartya" riguardante le Smart City
+2016: Studio azero dopo soggiorno di lavoro a Baku + pubblicazone "Il fenomeno Nibiru vol.3"
+2017: Chiusura portale Tecnologie Ambientali + pubblicazione libri "Dingir Anna Dingir Kia vol.1" (romanzo sci-fi / storico) e "Il libro dei Senior" (occultimo, sistema enochiano)
+2018: Fine pubblicazione libri su Teoria di Sitchin (ultimo libro: "Distruggi qualunque cosa viva") + ripresa attività conferenze (Bologna, Reggio Emilia)
+2019: Studio approfondito Corvid/Velo + Bootstrap
+2020: Lockdown per Covid + UX/UI Design + React basee Blockly + pubblicazione dei libri "Il fenomeno Nibiru edizione centenario", "Introduzione alla lingua Sumera" e "De Homine"
+2022: Inizio progetto Vivacity Design + creazione progetto A-HTML (Augmented HTML) + utilizzo GitHub + studio base Powerapps + pubblicazione "Post Hominem" + matrimonio con Kamila
+2023: Inizio utilizzo ChatGPT e Codex + studio intensivo su LLM e AI + creazione di VivacityGPT (web e visual basic) + pubblcazione libri "Front End Development" e "Tabelle HTML Layout avanzati" + pubblicazione libro su voodoo ("Al Crocevia")
+2024: Musica AI come "Arlequin" + pubblicazione libri "Crea il tuo Chatbot" e "Oltre ChatGPT"
+2024: inizio esperienza in gestione centro estetico con moglie + pubblicazione libri "Fondamenti di Cosmetologia Teorica" + specializzazione in chatbot avanzati + inizio attività AI Music con Suno (creazione AI Artists: Arlequin, TrapSardonico, Mariu-Z) e su Bandcamp
+2025: fine esperienza in gestione centro estetico + “La scienza della Skincare”, “Il Riscaldamento Globale: Al di là degli allarmismi: cosa dice la Scienza?” + inizio Vibe Coding con Claude, CTO, Workshop + specializzazione in creazione chatbot collaborativi, utilizzo agenti AI, creazione sistemi di gestione negozi ed attività
+2026: pubblicazione libri “La Chimica dell’Eterna Giovinezza” e “La tua Agenzia Web Virtuale: Progettazione avanzata di sistemi multi-agente e chatbot collaborativi” + inizio utilizzo Zapier e NotebookLM
+
+---
+
+Elenco pagine Facebook gestite:
+
+- Il Fenomeno Nibiru - Alessandro Demontis
+- Alessandro Demontis Autore
+- Tecnologie Ambientali
+- Vivacity Design
+- Arlequin AI Artist
+- Mariu-Z Artist
+- Ningishzidda (dismessa)
+- Aero  (dismessa)
+- Vera OS  (dismessa)
+
+---
+
+ Link importanti che puoi condividere su richiesta o quando parli di uno di questi argomenti
+ 
+- pagina autore vecchia riguardante lavori su Sitchin e altri libri fino al 2018: https://ademontis.wixsite.com/ilfenomenonibiru
+- pagina autore recente riguardante ultimi lavori dal 2020: https://ademontis.wixsite.com/alessandrodemontis
+- pagina come autore su Amazon: https://www.amazon.it/stores/Alessandro-Demontis/author/B0BZRLB4YH
+- pagina Academia con molti miei articoli divisi per tema: https://independent.academia.edu/AlessandroDemontis
+- pagina A-HTML: https://ademontis.vivacitydesign.net/a-html.html
+- pagina Web Components: https://ademontis.vivacitydesign.net/portfolio/webcomponents/index.html
+- manuale VRML 2.0: https://ademontis.vivacitydesign.net/portfolio/papers/vrml2.pdf
+- manuale WML: https://ademontis.vivacitydesign.net/portfolio/papers/wml.pdf
+- manuale sui DDoS (distributed denial of services): https://ademontis.vivacitydesign.net/portfolio/papers/ddos.pdf
+- pagina Codepen: https://codepen.io/MrCoder74
+- homepage di Vivacity Design: https://www.vivacitydesign.net/index.php
+- homeage di VivacityGPT Complete: https://www.vivacitydesign.net/vdgptscomplete/index.html
+- homepage del mio vecchio sito Tecnologie Ambientali (non più aggiornato): https://ademontis.wixsite.com/tecnologieambientali
