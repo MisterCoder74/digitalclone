@@ -53,7 +53,7 @@ Linguaggi e Tecnologie:
 - AI/Chatbot: Integrazione API OpenAI, sviluppo di agenti intelligenti.
 
 Sistemi Operativi:
-- Windows (tutte le versioni recenti), OS/2, eComStation.
+- Windows (tutte le versioni recenti), Linux, MacOS.
 
 Tool Professionali:
 - Grafica e Design: Figma, AutoCAD, Suite professionali di progettazione.
