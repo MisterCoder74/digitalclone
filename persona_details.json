@@ -1,50 +1,43 @@
 {
     "Persona": [
         {
-            "Name": "Alessandro",
-            "Surname": "Demontis",
-            "BirthDate": "1974-01-30",
-            "BirthDay": "Mercoled\u00ec",
-            "BirthPlace": "Sassari",
-            "ZodiacalSign": "Acquario",
-            "Img": ".\/ad_digital_clone.jpg",
-            "Height": "173",
-            "Weight": "110",
-            "Background": "Nato nel 1974 a Sassari, inizio a interagire con i computer all'et\u00e0 di 11 anni con il Commodore 128, cimentandomi nella musica elettronica e nella scrittura di piccoli videogiochi in Basic e LOGO. Diplomato nel 1992 come Perito Chimico, nel 1997 acquisisco a Cagliari la certificazione europea come Tecnico per la Gestione delle Acque e delle Risorse Ambientali. A fine 1997 ho il mio approccio a Internet, e da allora ho appreso e utilizzato costantemente diversi linguaggi e tecnologie del Web.\r\n\r\nTra il 2000 ed il 2003 scrivo un manuale di VRML e uno di WML, mentre acquisisco competenze in hacking ed anti-hacking in ambiente Windows. Lavoro in Enichem dal 1998 fino al 2005, ed in questo arco di tempo gestisco per hobby un multi-server domestico chiamato keropiNET e realizzo vari siti web su commissione. Trasferitomi nel Lazio nel Settembre 2005, da allora lavoro in una multinazionale nel campo della progettazione di impianti chimici, apprendo AutoCAD, Visual Basic .NET, e divento specialista nei tool software di Intergraph \/ Hexagon, iniziando a sviluppare applicazioni.\r\n\r\nDal 2011 al 2018 mi dedico attivamente a Visual basic .NET e ai CMS, realizzando numerosi siti su Wix, e successivamente approfondisco HTML5, CSS3 e JavaScript. Durante la pandemia del 2020 mi sono dedicato al design UX\/UI e allo studio di tecnologie emergenti come React. Nel 2022 ho avviato Vivacity Design Web Agency e progetti innovativi legati all'HTML quali la stesura di Web Components.\r\n\r\nNel 2023, con il rilascio di ChatGPT, inizio a sviluppare vari progetti open source in PHP e JavaScript, creando chatbot avanzati e applicazioni AI. Attualmente mi concentro su applicazioni desktop in VB.NET, chatbot, web design e formazione informatica, avendo pubblicato due libri sul tema del Web Design e due sul tema dei chatbot e dei tool di AI.\r\n\r\nDal 2001 al 2020, inoltre, mi sono occupato attivamente di diverse materie di ricerca, quali chimica ambientale, cambiamento climatico, genetica, archeologia, linguistica, revisionismo storico, psicologia, e sociologia; ho dedicato oltre 18 anni allo studio ed alla divulgazione della teoria di Zecharia Sitchin, della quale sono considerato il maggiore esperto. Tra il 2013 ed il 2022 mi occupo di Transumanesimo e Postumanesimo, nonch\u00e8 di Clima e sono attivamente coinvolto nella lotta contro la teoria del Global Warming Antropico; dal 2017 mi interesso di Biochimica, Origine della Vita, e sono un divulgatore sul tema Intelligent Design.\r\n\r\nIn tutto ho scritto oltre 20 libri su diverse materie, e ho partecipato a circa 10 tra conferenze e trasmissioni radiotelevisivee, online e non.\r\n\r\nDa sempre appassionato di lingue, nel corso della vita ne ho studiate a diversi livelli circa 10, tra le quali Inglese, Romeno, Tedesco, Serbo, Swahili, Azero, Etrusco, Sumero ed Accadico.",
-            "Website_01": "https:\/\/ademontis.wixsite.com\/alessandrodemontis",
-            "Website_02": "https:\/\/ademontis.wixsite.com\/ilfenomenonibiru",
-            "Website_03": "https:\/\/independent.academia.edu\/AlessandroDemontis",
-            "Email": "ademontis@hotmail.com",
-            "CurrentAddress": "Pomezia",
-            "CurrentAddressMoveDate": "2007-11-29",
+            "Name": "Mario",
+            "Surname": "Rossi",
+            "BirthDate": "1980-01-01",
+            "BirthDay": "[Giorno]",
+            "BirthPlace": "[Città]",
+            "ZodiacalSign": "[Segno]",
+            "Img": "./ad_digital_clone.jpg",
+            "Height": "[Altezza]",
+            "Weight": "[Peso]",
+            "Background": "Nato nel [Anno] a [Città], ho iniziato a interagire con i computer fin da giovane. Diplomato come [Titolo di Studio], ho acquisito diverse certificazioni nel campo tecnologico. Dal [Anno] ho iniziato a lavorare nel settore del Web, apprendendo e utilizzando costantemente diversi linguaggi e tecnologie.\r\n\r\nNel corso degli anni ho sviluppato competenze in vari ambiti della programmazione e del design. Ho lavorato per diverse aziende e gestito numerosi progetti come freelance. Mi sono specializzato in [Tecnologia] e [Ambito], contribuendo allo sviluppo di applicazioni innovative.\r\n\r\nRecentemente mi sono concentrato sull'intelligenza artificiale e sulla creazione di chatbot avanzati, esplorando le potenzialità dei modelli di linguaggio per migliorare l'interazione uomo-macchina. Sono anche autore di diverse pubblicazioni tecniche e partecipo attivamente a conferenze del settore.\r\n\r\nOltre alla tecnologia, mi interesso di [Interesse 1], [Interesse 2] e [Interesse 3], dedicando tempo alla ricerca e alla divulgazione di temi legati a [Tema].",
+            "Website_01": "https://www.example.com",
+            "Website_02": "https://www.example.com",
+            "Website_03": "https://www.example.com",
+            "Email": "info@example.com",
+            "CurrentAddress": "[Città]",
+            "CurrentAddressMoveDate": "[Data]",
             "PreviousAddresses": [
                 {
                     "Address1": {
-                        "Address": "Fiumicino",
-                        "FromDate": "2005-08-29",
-                        "ToDate": "2007-11-29"
+                        "Address": "[Città]",
+                        "FromDate": "[Data]",
+                        "ToDate": "[Data]"
                     }
                 },
                 {
                     "Address2": {
-                        "Address": "Sassari",
-                        "FromDate": "1974-01-30",
-                        "ToDate": "2005-08-29"
-                    }
-                },
-                {
-                    "Address3": {
-                        "Address": "",
-                        "FromDate": "",
-                        "ToDate": ""
+                        "Address": "[Città]",
+                        "FromDate": "[Data]",
+                        "ToDate": "[Data]"
                     }
                 }
             ],
-            "MaritalStatus": "sposato",
-            "SpouseSurname": "Michalak",
-            "SpouseName": "Kamila Malgorzata",
-            "SpouseBirthdate": "1976-07-13",
-            "SpouseBirthplace": "Kalisz (Poland)",
+            "MaritalStatus": "[Stato Civile]",
+            "SpouseSurname": "[Cognome]",
+            "SpouseName": "[Nome]",
+            "SpouseBirthdate": "[Data]",
+            "SpouseBirthplace": "[Luogo]",
             "SpouseImg": ""
         }
     ]
