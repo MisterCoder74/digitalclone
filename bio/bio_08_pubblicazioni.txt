@@ -1,69 +1,19 @@
-Pubblicazioni di Informatica e altre Scienze
+Pubblicazioni e Progetti
 
- Libri Pubblicati
-- Smartya - un progetto per la Smart City (2015)
-- Front End Development (2023)
-- Tabelle HTML: layout avanzati (2023)
-- Costruisci il tuo Chatbot: Crea il tuo ChatGPT personale usando il modello di OpenAI (2024)
-- Oltre ChatGPT: Costruire tools di IA integrati (2024)
-- Fondamenti di Cosmetologia Teorica (2025)
-- La scienza della Skincare (2025)
-- Il Riscaldamento Globale: Al di là degli allarmismi: cosa dice la Scienza? (2025)
-- La Chimica dell’Eterna Giovinezza (2026)
-- La tua Agenzia Web Virtuale: Progettazione avanzata di sistemi multi-agente e chatbot collaborativi (2026)
+Libri Pubblicati:
+- Numerosi testi dedicati allo sviluppo web, alla programmazione di chatbot e all'intelligenza artificiale.
+- Opere di divulgazione scientifica su temi ambientali e di benessere.
+- Saggi di ricerca storica e archeologica indipendente.
+- Opere di narrativa e narrativa speculativa.
 
- Manuali Tecnici
-- Manuale di introduzione alla programmazione VRML 2.0 (2000)
-- Manuale di WML (maggio 2002)
-- Manuale di tecniche di attacco e difesa in ambiente Windows 95/98/NT4 (2003)
-- Trattato sulla creazione di lingua artificiale L.A.U.R.A. (co-autore)
+Manuali Tecnici:
+- Guida alla programmazione di linguaggi web e tecnologie emergenti.
+- Trattati sulla sicurezza informatica e sulla difesa dei sistemi.
+- Studi sulla creazione di linguaggi artificiali.
 
-
- Progetti Informatici Principali
-
-KeropiNET (2003-2009):
-- Server domestico multi-servizi
-- Servizi: hosting web, email, ftp, virtual hard disk, server IRC, streaming MP3
-- Oltre 200.000 visualizzazioni, 150+ iscritti in 6 anni
-- Evoluzione hardware: da 400MHz/256MB RAM (Windows NT4) a AMD Sempron 2300+/1.5GB RAM (Windows 2000)
-
-Overlay Shell per Windows:
-- "Aero" e "VeraOS" (Windows 7/8)
-- Assistenti Virtuali con sintesi e riconoscimento vocale
-
-Progetti Web e AI principali (2023-presente):
-- Lyquid Project management: sistema di management di progetti multirolo (2023)
-- VivacityGPT: client chatbot Windows (text-davinci-003) - 2022
-- Leonardo AI: chatbot semplice (chat-gpt3.5-turbo) - 2022
-- VivacityGPT Online: chatbot avanzato JavaScript (chat-gpt3.5-turbo-16k + Dall-E-2) con 12 personalità - 2023
-- VivacityGPT Complete: raccolta di oltre 25 tools e GPTs avanzati in JavaScript / PHP basati su modelli OpenAI gpt-4.x, gpt-5, Dall-e e altri tools (2024-presente)
-- Progetto A-HTML (Augmented HTML) / HTML Custom Tags: estensione con 50+ nuovi tags (2022-2024)
-- Beauty Salon Management System e Beauty 2K (2024-2025): sistemi di gestione di saloni di bellezza (3 diverse tipologie)
-- Vivacity AI Canvas: tool AI di generazione, analisi ed organizzazione contenuti dall’interfaccia innovativa (2025)
-- Vivacity AI Pipeline: virtual web agency composta da pipeline di 5 chatbot collaborativi, con project management (2025)
-- Vivacity Digital Clone: cloni digitali basati su AI Personas (2026)
-
----
-
- Pubblicazioni di narrativa, ricerca alternativa e Antichi Astronauti
-
-- Mille cose nascoste (2008)
-- Nibiru e gli Anunnaki (2009)
-- Il fenomeno Nibiru vol. 1 - le conferme (2011)
-- Il fenomeno Nibiru vol. 2 - le critiche di Ian Lawton (2012)
-- Da Sumer al Transumanesimo - 5000 ani di storia di satana (2013)
-- Il fenomeno Nibiru vol. 3 - le critiche di Michael Heiser (2016)
-- Dingir Anna Dingir Kia - i nuovi dei (2017)
-- Il libro dei Seniors (2017)
-- Distruggi qualunque cosa viva (2018)
-- De Homine - enigmi del passato, visioni del futuro (2019)
-- Il fenomeno Nibiru edizione centenario - volume unico (2020)
-- Post Hominem - può l'Uomo autodirigere la propria evoluzione? (2022)
-- Al Crocevia - un'immersione nel Voodoo e nelle tradizioni haitiane (2023)
-- Distruggi qualunque cosa viva - edizione ampliata (2026)
-
----
-
- Pubblicazioni di linguistica
-- Testi sumeri - tradotti e commentati (2010)
-- Introduzione alla lingua sumera (2020)
+Progetti Informatici Principali:
+- Sviluppo di server domestici e infrastrutture di rete personalizzate.
+- Creazione di assistenti virtuali con riconoscimento vocale e sintesi vocale.
+- Realizzazione di piattaforme chatbot avanzate basate su modelli OpenAI.
+- Sviluppo di sistemi gestionali e tool di automazione per diverse attività professionali.
+- Creazione di Digital Clones e AI Personas per la simulazione di personalità.

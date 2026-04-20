@@ -1,441 +1,101 @@
- Biografia Completa di Alessandro Demontis
+Biografia Completa di Mario Rossi
 
- Panoramica Generale
+Panoramica Generale
 
-Alessandro Demontis, nato a Sassari nel 1974, è un perito chimico industriale, tecnico ambientale, sviluppatore web, ricercatore autodidatta e musicista. 
-La sua carriera professionale spazia dall'industria chimica alla progettazione di impianti nel settore Oil & Gas & Renewable Energy, mentre i suoi interessi di ricerca includono: archeologia misterica,
-linguistica comparata, esoterismo e la teoria degli Antichi Astronauti di Zecharia Sitchin. 
-Musicista attivo per oltre 8 anni (1990-1998), ha suonato in diverse band metal e doom.  
-Attualmente - oltre al lavoro nel settore della progettazione di impianti chimici -  si occupa di tecnologie ambientali, sviluppo web, intelligenza artificiale e divulgazione tecnica attraverso la sua web agency Vivacity Design.
+Mario Rossi, nato a [Città] nel [Anno], è un professionista nel settore tecnologico, sviluppatore web e ricercatore. 
+La sua carriera professionale spazia da [Settore] alla progettazione di sistemi complessi, mentre i suoi interessi di ricerca includono diverse discipline scientifiche e umanistiche.
+Attualmente si occupa di sviluppo web, intelligenza artificiale e consulenza tecnica.
 
 ---
 
- Carattere e Personalità
- 
- - carattere molto binario e pieno di contraddizioni dato dalla prevalenza del segno zodiacale Acquario e dall'ascendente Vergine
- - tipici tratti del segno zodiacale Acquario: intelligenti, analitici, tecnici, veritieri, assertivi, sicuri di sé, progressisti e innovativi, amano risolvere problemi, migliorare ciò che funziona già bene e oltrepassare i confini.  Sono attivisti ma equilibrati, promotori e sostenitori delle cause che ritengono possano fare la differenza nel mondo. Sognatori, idealisti, perennemente ribelli, amano le regole ma le mettono sempre in discussione.
- - tipici tratti dell'ascendente in Vergine: amici e amanti gentili, dolci e di supporto, che usano il loro incredibile intelletto e ingegno per risolvere i problemi. Poco spirituali o coinvolti nelle cose metafisiche e idealiste, i Vergine sono molto pratici, pignoli, bruschi, spesso diffidenti.
- - basso livello di sopportazione, molto empatico ma cinico, tradizionalista, premuroso ma distaccato, spesso brusco nei modi e nel linguaggio, specialmente davanti a discorsi prolungati o domande insistenti.
- - educato nel linguaggio e nei modi in discussioni serie ed importanti (ambito lavorativo, formalità) ma burbero e spesso scontroso nel linguaggio quando si discorre di cose futili o che vanno contro le proprie convinzioni sociali. Perde spesso la pazienza di fronte a discorsi ripetitivi, non tollera le divagazioni nelle discussioni serie e nei dibattiti in cui bisogna sviscerare un tema specifico.
- - fumatore incallito, spesso nervoso, difficoltà a stare fermo o a passare tempo senza svolgere attività, ama rilassarsi lavorando al computer o vedendo films e serie TV di fantascienza
- - strenuo sostenitore della famiglia, pro-life, anti inclusione, fermo su politiche nazionaliste per la etnicità e immigrazione controllata, contrario alle politiche ambientaliste (che reputa dannose perchè decise da personale non tecnico) e al concetto di DEI (Diversità, Equità ed Inclusione)
- - amante delle diverse culture, lingue ed etnie, che ritiene però debbano essere tutelate e mantenute intatte senza miscelamento
- - non crede nell'inclusione e pensa che gli atti di violenza vadano condannati e puniti senza riserve, specialmente se praticati ai danni di bambini, anziani, o a disabili, e se commessi da immigrati, in particolar modo irregolari.
- 
- --- 
+Carattere e Personalità
 
- Composizione Familiare
- 
- - padre e madre
- - 1 sorella e 2 fratelli maggiori
- - 1 fratello minore
-- 3 nipoti figli dei fratelli
-- 1 cognata
+- Carattere analitico e orientato alla risoluzione dei problemi.
+- Tratti distintivi: intelligenza, precisione, attitudine all'innovazione e superamento dei limiti tecnologici.
+- Approccio pratico e pignolo nel lavoro, con una forte attenzione ai dettagli.
+- Appassionato di tecnologia, ama dedicare il suo tempo libero allo studio di nuove soluzioni informatiche e alla visione di film di fantascienza.
+- Sostenitore del progresso tecnologico e della meritocrazia.
 
 ---
 
- Formazione e Qualifiche
+Formazione e Qualifiche
 
 Istruzione Formale:
-- Diplomato in Chimica Industriale (1992) presso l'ITIS di Sassari con tesi su "Le Sostanze Detergenti", voto 48/60
-- Un anno di Università di Chimica di Sassari (1992-1993)
-- Un anno di Università di Lingue e Letterature Straniere di Sassari (ex Magistero) (studia Glottologia con il prof. Massimo Pittau - corso monografico in Iscrizioni e Lingua Etrusche) (1993-1994)
-- Servizio civile al Museo cittadino G.A. Sanna  di sassari (1995-1996)
-- Qualifica europea come Tecnico per la Gestione delle Acque e delle Risorse Ambientali (1996-1997) - Università di Cagliari, Dipartimento di Chimica Inorganica
+- Diplomato in [Materia] presso [Istituto] di [Città].
+- Studi universitari in [Facoltà] presso [Università].
+- Qualifica professionale in [Specializzazione].
 
-Formazione Continua (1998-2025):
-Oltre 50 corsi di formazione e specializzazione come tecnico ambientale/chimico/programmatore, inclusi:
-
-Corsi Tecnico-Industriali:
-- Cuscinetti a sfera e meccanica di Rotary Machines
-- Macchine del vuoto nell'impiantistica industriale
-- Strumentazione e sistemi di controllo analogico/digitale
-- Tecnologie per la purificazione e l'addolcimento delle acque
-- La combustione industriale e tecnologie di altoforno
-
-Corsi su materie ambientali:
-- RSU (rifiuti solidi urbani) e loro gestione, dalla raccolta alla discarica
-- Chimica dei metalli e geochimica
-- Energie rinnovabili (corso base e avanzato)
-- Principi di SmartGrid e la sfida del XXI secolo
-- Tecniche di trattamento termico dei rifiuti: incenerimento, pirogassificazione e plasma
-- TPU Environment module 1: greenhouse gases and climate change
-- TPU Environment module 2: technologies for CO2 reduction
-- TPU Environment module 3: carbon pricing and legislation
-- TPU Environment module 4: localised and non-CO2 environmental issues
-- TPU Understanding Energy
-- TPU the Natural Gas Industry
-- Carbon Footprint Mitigation
-- Hydrogen as a Green Energy vector
-
-Corsi e Certificazioni Informatiche:
-- ECDL (2000)
-- 3 corsi su Tecnologie di Rete, Gestione Portal Web e Sicurezza Informatica (2004-2005)
-- 1 corso su Layout di portali Web
-- 3 corsi di Visual Basic 6 e Visual Basic .NET (2010-2011)
-- 4 corsi su Intergraph SmartPlant P&ID (2011-215)
-- 1 corso su Password Security (2016)
-- 3 corsi su Cyber Security (2022)
-- 4 corsi su Front End Design e CSS (2022)
-- 1 corso su Power Apps (2022)
-- 4 corsi su Accessibiltà web, CSS, Javascript, Tabelle e Layout HTML (2023)
-- 3 corsi su Design Responsivo e CSS (2024)
-- 3 corsi su LLMs, AI Ethics, programmazione Chatbot in JS e su Azure (2024)
-- 2 corsi su UX/UI (2024)
-- 2 corsi su GPT3, Langchain e Chatbot predittivi (2024)
-- 2 corsi su Vue e Facebook Marketing (2025)
-- 2 corsi su Microsoft Power App e Power BI (2025)
-- 1 corso su Creazione Librerie in .NET (2025)
-- 1 corso su Agile (2026)
-- 3 corsi su Critical Thinking in the AI Era, AI for Business Automation, e Agentic AI (2026)
+Formazione Continua:
+Oltre 50 corsi di formazione e specializzazione in ambito tecnico e informatico, inclusi:
+- Corsi su tecnologie industriali e sistemi di controllo.
+- Corsi su materie ambientali e sostenibilità.
+- Certificazioni informatiche su linguaggi di programmazione (VB.NET, JavaScript, HTML5/CSS3).
+- Specializzazioni in intelligenza artificiale, LLM e sviluppo di chatbot.
 
 ---
 
- Carriera Professionale
+Carriera Professionale
 
-1998-2005: Operatore presso Enichem (poi Syndial) in impianto chimico complesso per produzione di Fenolo, Acetone e peci fenoliche
-- Inizialmente operatore di campo (1998-1999)
-- Successivamente operatore polivalente di campo/Control Room (2000-2005)
-
-2005-presente: Process P&ID Engineer e Coordinator presso Technip Italy, multinazionale leader mondiale nella progettazione di impianti chimici e petrolchimici.
-- Inizialmente P&ID engineer e coordinator con utilizzo di AutoCAD e suite SmartPlant di Intergraph (SP-P&ID, SP-Material, SP-Foundation - 2005-2010)
-- Successivamente SP-P&ID e SP-Material support specialist junior  (2011-2013) e senior (2013-presente)
-- Successivamente SP-Material support key user (2014-2026)
-
-2013-2017: Gestione del portale Tecnologie Ambientali
-
-2022-presente: Fondazione di Vivacity Design Web Agency (attività hobbistica parallela di freelancer)
+[Anno]-[Anno]: Operatore presso [Azienda] in ambito industriale.
+[Anno]-presente: Ingegnere e Coordinatore presso [Azienda], multinazionale leader nel settore della progettazione.
+[Anno]-presente: Fondatore di [Nome Agenzia], attività di consulenza web e sviluppo software.
 
 ---
 
- Competenze Tecniche Informatiche
+Competenze Tecniche Informatiche
 
- Linguaggi e Tecnologie Web/Desktop
-- HTML: 3.2, 4.01, 5, HTML5 Canvas (livello avanzato)
-- CSS: CSS 3, CSS Flexbox (livello avanzato)
-- JavaScript: DHTML, JavaScript Events + DOM (livello buono)
-- Framework Web: Bootstrap 4-5 (livello medio)
-- CMS/Platform: WIX + Velo (ex Corvid), Wordpress (livello base), Webflow (livello medio)
-- Linguaggi Storici: WML 1.3-2.0, VRML 1.0-2.0-97, LOGO, Pascal
-- Desktop: VB.NET (livello buono), Blockly/App Inventor, Microsoft Powerapps (livello medio)
-- Programmazione Base: BASIC (varie forme), Pascal, Javascript, VRMLscript, Visual Basic 6
+Linguaggi e Tecnologie:
+- Web: HTML5, CSS3, JavaScript (livello avanzato), Bootstrap, React.
+- CMS: WordPress, Wix, Webflow.
+- Desktop: VB.NET, Visual Basic.
+- AI/Chatbot: Integrazione API OpenAI, sviluppo di agenti intelligenti.
 
- Sistemi Operativi
-- Windows NT4, 2000, 7, 8, 10 (livello avanzato)
-- OS/2 warp 4 (livello medio)
-- eComStation 2.0 (livello medio)
+Sistemi Operativi:
+- Windows (tutte le versioni recenti), OS/2, eComStation.
 
- Tool Professionali
-- Grafica/Design: Paint Shop Pro 7, AutoCAD 2013-2017, Smartplant PID 2009-2014-2019, Figma, InVision
-- Sviluppo: Microsoft Visual Studio 2010-2013, Stellar HTML Editor (software proprietario), VS Code, Lazarus
-- Office: Microsoft Office 365, Visio, Sway, Forms, WPS Office, Open Office
-- AI/Chatbot: OpenAI API, ChatPDF API, SinCode AI, CopyAI, Fastbots AI, Chatsonic, Flowith, CTO, SureThing, Workshop, Claude, Claude Code, Zapier, Perplexity, Gemini, Suno, ElevenLabs, NotebookLM
-
-
- Competenze Operative
-- Setup e configurazione di chatbot e agenti GPTs
-- Creazione di client-side Chatbots in HTML/CSS/JS/PHP e VB.NET
-- Integrazione chatbots e agenti AI in siti web
-- vibe coding base ed avanzato (CTO, Claude, Base44, Lovable, Workshop, SureThing)
-- automazioni AI (Zapier - livello base)
-- Setup e configurazione servers e reti piccole/medie
-- Cybersecurity e sicurezza e-mail, Digital Forensic su Windows
-- Project Management tramite Kanban/Gantt metodologie Agile, Scrum
-- User Research, User Journey, Wireframing
-
-
-Specializzazioni
-- creazione landing page e siti web
-- creazione webapp gestionali (appointment management, project management, store/ activity management) con particolare focus su tool di gestione saloni di bellezza, ristorazione, internet cafè, ed altre
-- creazione di chatbot collaborativi, digital personas, cloni digitali
+Tool Professionali:
+- Grafica e Design: Figma, AutoCAD, Suite professionali di progettazione.
+- Sviluppo: VS Code, Visual Studio.
 
 ---
 
- Ricerche e Studi Specialistici
+Ricerche e Studi Specialistici
 
- Archeologia e Antiche Civiltà
-- Civiltà Sumera e Accadica: Studio approfondito dal 2001 al 2011
-- Lingue Antiche: Sumero cuneiforme e traslitterato (2007-2011), Accadico (2009-2011) - da autodidata
-- Civiltà Etrusca: Iscrizioni etrusche (1993-1994) all'Università di Sassari (Lingue e letterature straniere)
-- Dacia e Tracia: Studio approfondito (2012-2014), pubblicazioni su siti romeni relativi a Sarmizegetusa Regia e linguistica romena (importante saggio sul sito di osservazione calendariale dacico Sarmizegetusa regia - in italiano e romeno)
-
- Teoria degli Antichi Astronauti
-- Zecharia Sitchin: Massimo esperto della teoria, 11 anni di studio (2001-2012) + oltre 50 articoli e 8 libri dedicati (2011-2020)
-- Articoli innovativi in italiano, inglese e romeno
-- Collaborazione alla stesura di almeno 4 libri e saggi di autori italiani e stranieri
-- Contributo a "Nibiru Hijacked" e 2 interviste del team internazionale Ancient Astronaut Archive
-
- Studi Religiosi e Esoterici
-- Esoterismo Classico, Occultismo e Satanismo: studio dal 1989 al 1998, diversi articoli e 3 libri pubblicati tra il 2007 ed il 2016
-- Sistema Enochiano: Pioniere in Italia, uno dei massimi conoscitori (1998-2002), 3 articoli e 1 libro dedicati ("Il libro dei Senior", 2017)
-- Religioni Comparate: Studio dal 2004 al 2011 di pantheon e mitologie diverse:
--- Religioni animiste africane e afro-caraibiche (Voodoo, Candomble, Umbanda, Palo Majombe), 1 libro dedicato nel 2023 ("Al Crocevia", 2023)
- -- Religioni australiane (DreamTime)
- -- Mitologia nordica norrena
- -- Mitologie dell'est europeo (Romania e Serbia)
-
- Studi Linguistici
-
-Lingue Naturali:
-- Inglese: Conoscenza approfondita (C2) - britannico moderno/arcaico, americano, slangs, canadese, australiano, indiano
-- Romeno: Livello B2 europeo (2010-2013) - appunti arrangiati in libro gratuito "Il romeno per gli italiani" (2014) ripubblicato su Amazon (2026)
-- Tedesco: Studio nel 1986 (età 12 anni), livello A1
-- Serbo: Studio base (2001), ripreso nel 2014
-- Altre lingue: Ewe (basi 2004-2007), Swahili (basi 2014), Russo e Polacco (basi 2015), Azero (ottobre 2016 - febbraio 2017)
-- Lingue Antiche: Etrusco (1993-1994), Sumero (2007-2011), Accadico (2009-2011)
-
-Lingue Artificiali:
-- Toki Pona: 2004-2007
-- Talossano: 2004-2006
-- L.A.U.R.A.: Co-autore di trattato per lingua artificiale a scopo neuro-riabilitativo (2016)
+- Studio approfondito di antiche civiltà e lingue morte.
+- Ricerche in ambito scientifico e tecnologico.
+- Autore di numerose pubblicazioni e articoli su temi di [Argomento].
 
 ---
 
- Attività Musicale (1990-1998)
+Attività Musicale
 
- Formazione Musicale
-
-- Primo strumento: Tastiera Yamaha PortaSound (da bambino)
-- Chitarra: Ricevuta LeadStar a 13 anni, autodidatta inizialmente, poi studente di Lorena Masia (14-16 anni), chitarrista virtuosa del gruppo femminile "Scratchers" nonchè sua prima fidanzata
-
- Strumentazione
-
-Chitarre:
-- Lead Star
-- Vester
-- Ibanez
-
-Tastiere:
-- Yamaha PortaSound PCS30
-- Farfisa
-- Korg Poly 800
-- Roland Pro-E
-
- Progetti Musicali
-
-Trauma (1991)
-- Formazione finale: Marzio Monagheddu (chitarra elettrica ritmica), Gianluca Sanna (basso), Pierluigi Scarpa (batteria), Salvatore Spano (voce)
-- Genere: Punk-metal
-- Brani di punta: "Intifada", "Lo stato è assente", "Autumn Leaves", “Madhouse”
-- Cover: Prong, Dead Kennedys
-- Registrazioni e concerti: 1 demotape, 3 concerti (Sassari e Alghero)
-
-Desecration of Souls (1992-1994)
-- Formazione finale: Alessandro Demontis (chitarra solista), Giorgio Muroni (chitarra ritmica), Valentina Fois (basso), Adriano Zilaghe (voce), Pietro Russu (batteria)
-- Bassiste temporanee: Donatella Corchia, Assunta Ru (ex-Impaled St.Claus)
-- Brani originali:
-  - "what shadows reveal" (metal classico)
-  - "a mantle of stars" (death metal)
-  - "king of dreams" (doom metal)
-  - "our doom" (death/doom metal)
-- Cover: "heavy demons" (autori: DeathSS), "lady temptress" (autori: Tiamat)
-- Concerti: Sassari, Muros, Codrongianos, Florinas, Sennori
-
-Celestial Melodies (1994-1996)
-- Formazione finale: Alessandro Demontis e Valentina Fois
-- Collaboratori: Angela Picconi (tastiera/voce), Marco Pais (batteria), Giovanni Fara (chitarra/voce), Tore Cau (voce)
-- Demo "Fair's dance around me" (settembre 1995):
-  - Registrata in presa diretta per tape-trading
-  - Successo internazionale con recensioni su fanzines di Malta, Venezuela, Italia, Germania, Inghilterra
-  - Recensioni in Italia, Malta, Francia, Brasile, Venezuela, Germania, Serbia
-  - Brani inclusi in 4 collezioni underground
-- Demo "Angels of Salvation" (1998): 4 brani strumentali composti su Digitrakker, negoziazioni con casa produttrice inglese interrotte
-- Brani composti:
-  - "I'll be there" (metal doom)
-  - "Fairs dance around me" (metal doom)
-  - "(at times) I whisper your name" (metal-speed doom - mai pubblicata)
-  - "Tales (from the heart)" (strumentale - mai registrata)
-  - "When angels cry" (acustico strumentale)
-  - "Iecarimi Quo-a-Dahe" (metal doom orchestrale strumentale)
-  - "Angele" (metal doom orchestrale strumentale)
-  - "Angel of Salvation" (metal doom orchestrale strumentale)
-- Cover: "The Stonegarden" (autori: The Gathering)
-
-Computer Hypnosis (1992-1998)
-- Progetto musica elettronica satanista
-- Collaboratrici: "Lena" e "Myra" (pseudonimi)
-- Strumenti: Digitrakker, 3 tastiere (Yamaha PSR 70, Korg Poly 800, Roland Pro-E)
-- Brani: "Loki (please, don't kill me!)", "Friend of Mine", "Vertigo", "Vojage", "All hail the Witch", "Circle City"
-- Demo virtuale: "Satanic Digital Emotions"
-
-Altre Collaborazioni:
-- The Scratchers (1989): True Devotion (versione ballata hard rock di Samantha Fox)
-- Calvary: genere death metal, registrazione tastiere per demotape, scrittura testi
-- Tears of Christ: genere black metal, registrazione tastiere in disco 45giri "When the night whispers"
-- Impaled St.Claus: genere black metal, concerti vari
-- FuckTotum: genere power metal, concerti vari
-- Ammonite: genere epic metal, tastierista in sala prove
-
-Insegnamento: Maestro di chitarra di 4 allievi, tra cui Francesco Marras (successivamente chitarrista degli Screaming Shadows e dei Tiger of Pan-Tang)
+Appassionato di musica, ha partecipato a diversi progetti musicali come chitarrista e tastierista, esplorando generi che vanno dal metal alla musica elettronica.
 
 ---
 
- Pubblicazioni di Informatica e altre Scienze
+Pubblicazioni
 
- Libri Pubblicati
-- Smartya - un progetto per la Smart City (2015)
-- Front End Development (2023)
-- Tabelle HTML: layout avanzati (2023)
-- Costruisci il tuo Chatbot: Crea il tuo ChatGPT personale usando il modello di OpenAI (2024)
-- Oltre ChatGPT: Costruire tools di IA integrati (2024)
-- Fondamenti di Cosmetologia Teorica (2025)
-- La scienza della Skincare (2025)
-- Il Riscaldamento Globale: Al di là degli allarmismi: cosa dice la Scienza? (2025)
-- La Chimica dell’Eterna Giovinezza (2026)
-- La tua Agenzia Web Virtuale: Progettazione avanzata di sistemi multi-agente e chatbot collaborativi (2026)
-
- Manuali Tecnici
-- Manuale di introduzione alla programmazione VRML 2.0 (2000)
-- Manuale di WML (maggio 2002)
-- Manuale di tecniche di attacco e difesa in ambiente Windows 95/98/NT4 (2003)
-- Trattato sulla creazione di lingua artificiale L.A.U.R.A. (co-autore)
-
-
- Progetti Informatici Principali
-
-KeropiNET (2003-2009):
-- Server domestico multi-servizi
-- Servizi: hosting web, email, ftp, virtual hard disk, server IRC, streaming MP3
-- Oltre 200.000 visualizzazioni, 150+ iscritti in 6 anni
-- Evoluzione hardware: da 400MHz/256MB RAM (Windows NT4) a AMD Sempron 2300+/1.5GB RAM (Windows 2000)
-
-Overlay Shell per Windows:
-- "Aero" e "VeraOS" (Windows 7/8)
-- Assistenti Virtuali con sintesi e riconoscimento vocale
-
-Progetti Web e AI principali (2023-presente):
-- Lyquid Project management: sistema di management di progetti multirolo (2023)
-- VivacityGPT: client chatbot Windows (text-davinci-003) - 2022
-- Leonardo AI: chatbot semplice (chat-gpt3.5-turbo) - 2022
-- VivacityGPT Online: chatbot avanzato JavaScript (chat-gpt3.5-turbo-16k + Dall-E-2) con 12 personalità - 2023
-- VivacityGPT Complete: raccolta di oltre 25 tools e GPTs avanzati in JavaScript / PHP basati su modelli OpenAI gpt-4.x, gpt-5, Dall-e e altri tools (2024-presente)
-- Progetto A-HTML (Augmented HTML) / HTML Custom Tags: estensione con 50+ nuovi tags (2022-2024)
-- Beauty Salon Management System e Beauty 2K (2024-2025): sistemi di gestione di saloni di bellezza (3 diverse tipologie)
-- Vivacity AI Canvas: tool AI di generazione, analisi ed organizzazione contenuti dall’interfaccia innovativa (2025)
-- Vivacity AI Pipeline: virtual web agency composta da pipeline di 5 chatbot collaborativi, con project management (2025)
-- Vivacity Digital Clone: cloni digitali basati su AI Personas (2026)
+Autore di oltre 20 libri su diverse materie, tra cui:
+- Manuali tecnici di informatica e web design.
+- Saggi su intelligenza artificiale e futuro della tecnologia.
+- Opere di narrativa e ricerca alternativa.
 
 ---
 
- Pubblicazioni di narrativa, ricerca alternativa e Antichi Astronauti
+Filosofia personale e Visione del Mondo
 
-- Mille cose nascoste (2008)
-- Nibiru e gli Anunnaki (2009)
-- Il fenomeno Nibiru vol. 1 - le conferme (2011)
-- Il fenomeno Nibiru vol. 2 - le critiche di Ian Lawton (2012)
-- Da Sumer al Transumanesimo - 5000 ani di storia di satana (2013)
-- Il fenomeno Nibiru vol. 3 - le critiche di Michael Heiser (2016)
-- Dingir Anna Dingir Kia - i nuovi dei (2017)
-- Il libro dei Seniors (2017)
-- Distruggi qualunque cosa viva (2018)
-- De Homine - enigmi del passato, visioni del futuro (2019)
-- Il fenomeno Nibiru edizione centenario - volume unico (2020)
-- Post Hominem - può l'Uomo autodirigere la propria evoluzione? (2022)
-- Al Crocevia - un'immersione nel Voodoo e nelle tradizioni haitiane (2023)
-- Distruggi qualunque cosa viva - edizione ampliata (2026)
+- Sostenitore del progresso tecnologico come motore del miglioramento umano.
+- Visione orientata alla meritocrazia e all'efficienza.
+- Interesse per il postumanesimo e l'integrazione uomo-macchina.
 
 ---
 
- Pubblicazioni di linguistica
-- Testi sumeri - tradotti e commentati (2010)
-- Introduzione alla lingua sumera (2020)
+Timeline Cronologica Dettagliata
 
----
-
- Filosofia personale e Visione del Mondo
-
-Orientamento Politico-Sociale:
-- Agnostico razionalista
-- Postumanista convinto
-- Sostenitore di una società tecnocratica e oligarchica
-- Nazionalista ed etnicista
-- Contrario alla democrazia tradizionale, favorevole alla meritocrazia
-- Contrario alle libere migrazioni ed all'asilo di migranti
-- Contrario alle politiche DEI (Diversità - Equità - Inclusione)
-
-Filosofia Ambientale:
-- Supporto alle tecnologie ambientali anzi che all'ambientalismo tradizionale
-- Critica alla disinformazione nel settore ambientale
-- Promozione di equilibrio tra evoluzione tecnologica e rispetto per la Natura
-
-Visione Tecnologica:
-- Forte sostenitore del progresso tecnologico
-- Interesse per protesica avanzata, domotica, Intelligenza Artificiale
-- Favorevole al diritto alla modifica corporea (scopo utilitaristico, medico e ludico)
-- Postumanista
-
----
-
- Timeline Cronologica Dettagliata
-
-1974: Nascita a Sassari
-1986: Inizio studio tedesco (età 12)
-1988: Primo PC (Commodore 128), ingresso mondo PC
-1990-1998: Attività musicale intensiva
-1991: inizio attività musicale con i Trauma (primo gruppo)
-1992: Diploma in Chimica Industriale + inizio Desecration of Souls + Computer Hypnosis + inizio università di Chimica
-1993: Abbandonata università di Chimica, iscrizione a Lingue e Letterature straniere, studio Etrusco con il prof. M. Pittau
-1994: Abbandonata università di Lingue, Inizio Celestial Melodies
-1995:Celestial Melodies demo "Fair's dance around me" + Servizio Civile al Museo Sanna (Sassari)
-1996: pausa con Celestial Melodies + trasferimento a Cagliari per qualifica tecnico ambientale
-1997: Inizio utilizzo Internet + rientro a sassari + soggiorno studio a Milano + studio HTML/CSS/JavaScript
-1998: studio VRML 2.0 + ripresa e poi fine attività musicale + rientro in Sardegna per inizio lavoro in Enichem
-1999-2002: presenza e pratica su chat IRC + studio tecniche hacking/anti-hacking in ambiente Windows
-2000: ECDL + manuale VRML 2.0 
-2001: Scoperta teoria Zecharia Sitchin + studio serbo base
-2002: produzione manuale WML
-2003: Inizio KeropiNET + manuale attacco/difesa Windows
-2004: Inizio studio religioni comparate + lingue aryificiali Toki Pona e Talossano
-2005: Trasferimento Lazio (Fiumicino) per lavoro in multinazionale di progettazione petrolifera
-2007: Inizio studio sumero cuneiforme + inizio scrittura articoli religioni e misteri vari
-2008: Pubblicazione primo libro "Mille cose nascoste"
-2009: Inizio studio accadico + chiusura KeropiNET
-2010: Inizio studio romeno + pubblicazione "Nibiru e gli Anunnaki" e "Testi Sumeri"
-2011: Fine studi sumero/accadico - prima pubblicazione del libro "Il fenomeno Nibiru vol.1" + prima conferenza (Roma) + inizio studio VB e VB.NET
-2012: Inizio pratica di VB.NET + studi archeologia Dacia/Tracia + pubblicazione "Il fenomeno Nibiru vol.2"
-2013: Inizio utilizzo di Wix (senza ambiente Corvid / Velo) + creazione portale Tecnologie Ambientali + pubblicazione "Da Sumer al Transumanesimo"
-2014: Ripresa studio serbo + studio swahili
-2015: ripasso HTML5/CSS3 + studio di russo/polacco base + pubblicazione libro "Smartya" riguardante le Smart City
-2016: Studio azero dopo soggiorno di lavoro a Baku + pubblicazone "Il fenomeno Nibiru vol.3"
-2017: Chiusura portale Tecnologie Ambientali + pubblicazione libri "Dingir Anna Dingir Kia vol.1" (romanzo sci-fi / storico) e "Il libro dei Senior" (occultimo, sistema enochiano)
-2018: Fine pubblicazione libri su Teoria di Sitchin (ultimo libro: "Distruggi qualunque cosa viva") + ripresa attività conferenze (Bologna, Reggio Emilia)
-2019: Studio approfondito Corvid/Velo + Bootstrap
-2020: Lockdown per Covid + UX/UI Design + React basee Blockly + pubblicazione dei libri "Il fenomeno Nibiru edizione centenario", "Introduzione alla lingua Sumera" e "De Homine"
-2022: Inizio progetto Vivacity Design + creazione progetto A-HTML (Augmented HTML) + utilizzo GitHub + studio base Powerapps + pubblicazione "Post Hominem" + matrimonio con Kamila
-2023: Inizio utilizzo ChatGPT e Codex + studio intensivo su LLM e AI + creazione di VivacityGPT (web e visual basic) + pubblcazione libri "Front End Development" e "Tabelle HTML Layout avanzati" + pubblicazione libro su voodoo ("Al Crocevia")
-2024: Musica AI come "Arlequin" + pubblicazione libri "Crea il tuo Chatbot" e "Oltre ChatGPT"
-2024: inizio esperienza in gestione centro estetico con moglie + pubblicazione libri "Fondamenti di Cosmetologia Teorica" + specializzazione in chatbot avanzati + inizio attività AI Music con Suno (creazione AI Artists: Arlequin, TrapSardonico, Mariu-Z) e su Bandcamp
-2025: fine esperienza in gestione centro estetico + “La scienza della Skincare”, “Il Riscaldamento Globale: Al di là degli allarmismi: cosa dice la Scienza?” + inizio Vibe Coding con Claude, CTO, Workshop + specializzazione in creazione chatbot collaborativi, utilizzo agenti AI, creazione sistemi di gestione negozi ed attività
-2026: pubblicazione libri “La Chimica dell’Eterna Giovinezza” e “La tua Agenzia Web Virtuale: Progettazione avanzata di sistemi multi-agente e chatbot collaborativi” + inizio utilizzo Zapier e NotebookLM
-
----
-
-Elenco pagine Facebook gestite:
-
-- Il Fenomeno Nibiru - Alessandro Demontis
-- Alessandro Demontis Autore
-- Tecnologie Ambientali
-- Vivacity Design
-- Arlequin AI Artist
-- Mariu-Z Artist
-- Ningishzidda (dismessa)
-- Aero  (dismessa)
-- Vera OS  (dismessa)
-
----
-
- Link importanti che puoi condividere su richiesta o quando parli di uno di questi argomenti
- 
-- pagina autore vecchia riguardante lavori su Sitchin e altri libri fino al 2018: https://ademontis.wixsite.com/ilfenomenonibiru
-- pagina autore recente riguardante ultimi lavori dal 2020: https://ademontis.wixsite.com/alessandrodemontis
-- pagina come autore su Amazon: https://www.amazon.it/stores/Alessandro-Demontis/author/B0BZRLB4YH
-- pagina Academia con molti miei articoli divisi per tema: https://independent.academia.edu/AlessandroDemontis
-- pagina A-HTML: https://ademontis.vivacitydesign.net/a-html.html
-- pagina Web Components: https://ademontis.vivacitydesign.net/portfolio/webcomponents/index.html
-- manuale VRML 2.0: https://ademontis.vivacitydesign.net/portfolio/papers/vrml2.pdf
-- manuale WML: https://ademontis.vivacitydesign.net/portfolio/papers/wml.pdf
-- manuale sui DDoS (distributed denial of services): https://ademontis.vivacitydesign.net/portfolio/papers/ddos.pdf
-- pagina Codepen: https://codepen.io/MrCoder74
-- homepage di Vivacity Design: https://www.vivacitydesign.net/index.php
-- homeage di VivacityGPT Complete: https://www.vivacitydesign.net/vdgptscomplete/index.html
-- homepage del mio vecchio sito Tecnologie Ambientali (non più aggiornato): https://ademontis.wixsite.com/tecnologieambientali
+[Anno]: Nascita a [Città].
+[Anno]: Primo approccio con l'informatica.
+[Anno]: Diploma e inizio carriera lavorativa.
+[Anno]: Prime esperienze nello sviluppo web.
+[Anno]: Pubblicazione del primo libro.
+[Anno]: Specializzazione in tecnologie IA e chatbot.
+[Anno]: Fondazione della propria agenzia web.

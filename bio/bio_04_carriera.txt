@@ -1,14 +1,6 @@
 Carriera Professionale
 
-1998-2005: Operatore presso Enichem (poi Syndial) in impianto chimico complesso per produzione di Fenolo, Acetone e peci fenoliche
-- Inizialmente operatore di campo (1998-1999)
-- Successivamente operatore polivalente di campo/Control Room (2000-2005)
-
-2005-presente: Process P&ID Engineer e Coordinator presso Technip Italy, multinazionale leader mondiale nella progettazione di impianti chimici e petrolchimici.
-- Inizialmente P&ID engineer e coordinator con utilizzo di AutoCAD e suite SmartPlant di Intergraph (SP-P&ID, SP-Material, SP-Foundation - 2005-2010)
-- Successivamente SP-P&ID e SP-Material support specialist junior  (2011-213) e senior (2013-presente)
-- Successivamente SP-Material support key user (2014-2026)
-
-2013-2017: Gestione del portale Tecnologie Ambientali
-
-2022-presente: Fondazione di Vivacity Design Web Agency (attività hobbistica parallela di freelancer)
+[Anno]-[Anno]: Operatore tecnico presso [Azienda] nel settore chimico e industriale.
+[Anno]-presente: Ingegnere e Coordinatore presso [Azienda], multinazionale leader nella progettazione di impianti complessi. Specializzato nell'utilizzo di software di ingegneria avanzata.
+[Anno]-[Anno]: Gestione di portali informativi dedicati alle tecnologie ambientali.
+[Anno]-presente: Fondatore di [Nome Agenzia], realtà operante nel settore del web design e dello sviluppo di soluzioni basate su intelligenza artificiale.
