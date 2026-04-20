@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Clone | AI Persona Landing Page</title>
+  <style>
+    :root {
+      --bg-gradient: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+      --accent-gradient: linear-gradient(90deg, #4facfe, #00f2fe);
+      --glass-bg: rgba(255, 255, 255, 0.05);
+      --glass-border: rgba(255, 255, 255, 0.1);
+      --text-main: #ffffff;
+      --text-dim: rgba(255, 255, 255, 0.7);
+      --text-muted: rgba(255, 255, 255, 0.5);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Segoe UI", Roboto, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-gradient);
+      background-attachment: fixed;
+      color: var(--text-main);
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* --- Navigation --- */
+    nav {
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--glass-border);
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 800;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-decoration: none;
+    }
+
+    .nav-links a {
+      color: var(--text-main);
+      text-decoration: none;
+      margin-left: 30px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #4facfe;
+    }
+
+    /* --- Hero Section --- */
+    .hero {
+      padding: 100px 0 60px;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      margin-bottom: 20px;
+      letter-spacing: -1px;
+      line-height: 1.1;
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      color: var(--text-dim);
+      max-width: 700px;
+      margin: 0 auto 40px;
+    }
+
+    .cta-group {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 32px;
+      border-radius: 50px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.3s;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .btn-primary {
+      background: var(--accent-gradient);
+      color: #0f0c29;
+      box-shadow: 0 4px 15px rgba(79, 172, 254, 0.4);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(79, 172, 254, 0.6);
+    }
+
+    .btn-secondary {
+      background: var(--glass-bg);
+      color: var(--text-main);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(10px);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateY(-2px);
+    }
+
+    /* --- Features Section --- */
+    .features {
+      padding: 80px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .section-title h2 {
+      font-size: 2.2rem;
+      margin-bottom: 10px;
+    }
+
+    .section-title p {
+      color: var(--text-dim);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .feature-card {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(10px);
+      padding: 40px;
+      border-radius: 24px;
+      transition: transform 0.3s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-10px);
+      border-color: rgba(79, 172, 254, 0.3);
+    }
+
+    .feature-icon {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .feature-card h3 {
+      font-size: 1.4rem;
+      margin-bottom: 15px;
+      color: #4facfe;
+    }
+
+    .feature-card p {
+      color: var(--text-dim);
+      font-size: 0.95rem;
+    }
+
+    /* --- Configuration Section --- */
+    .config {
+      padding: 80px 0;
+    }
+
+    .config-box {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(10px);
+      padding: 50px;
+      border-radius: 24px;
+    }
+
+    .config-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .config-steps {
+      list-style: none;
+    }
+
+    .config-steps li {
+      margin-bottom: 20px;
+      display: flex;
+      align-items: flex-start;
+      gap: 15px;
+    }
+
+    .step-num {
+      background: var(--accent-gradient);
+      color: #0f0c29;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.8rem;
+      flex-shrink: 0;
+      margin-top: 4px;
+    }
+
+    .step-content h4 {
+      font-size: 1.1rem;
+      margin-bottom: 5px;
+    }
+
+    .step-content p {
+      font-size: 0.9rem;
+      color: var(--text-dim);
+    }
+
+    code {
+      background: rgba(79, 172, 254, 0.15);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: #4facfe;
+      font-family: monospace;
+      font-size: 0.9em;
+    }
+
+    /* --- Footer --- */
+    footer {
+      padding: 60px 0 40px;
+      border-top: 1px solid var(--glass-border);
+      text-align: center;
+    }
+
+    .footer-content p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .author-info {
+      margin-top: 20px;
+      font-style: italic;
+    }
+
+    /* --- Responsive --- */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+      .config-grid {
+        grid-template-columns: 1fr;
+      }
+      .nav-links {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <nav>
+      <a href="#" class="logo">DIGITAL CLONE</a>
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#config">Setup</a>
+        <a href="Documentation_Digital_Clone.html">Docs</a>
+      </div>
+    </nav>
+
+    <header class="hero">
+      <h1>Digital Clone: Your AI Persona</h1>
+      <p>A sophisticated AI chatbot designed to simulate a specific personality using biographical data, semantic memory, and an emotional matrix.</p>
+      <div class="cta-group">
+        <a href="chatbot.html" class="btn btn-primary">Launch Chatbot</a>
+        <a href="#" class="btn btn-secondary">View Source</a>
+      </div>
+    </header>
+
+    <section id="features" class="features">
+      <div class="section-title">
+        <h2>Powerful Capabilities</h2>
+        <p>Beyond simple chat, Digital Clone offers advanced cognitive features.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <span class="feature-icon">🧠</span>
+          <h3>Semantic Memory RAG</h3>
+          <p>Utilizes Retrieval-Augmented Generation with composite scoring (Similarity + Recency) to provide contextually relevant responses based on past interactions.</p>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon">📂</span>
+          <h3>Document & Image Analysis</h3>
+          <p>Built-in support for analyzing PDFs, text files, and images. The AI can "see" and "read" your files to provide detailed insights and data extraction.</p>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon">🎭</span>
+          <h3>Personality Matrix</h3>
+          <p>Leverages a complex emotional matrix and biographical indexing to maintain a consistent persona, reflecting specific traits, history, and voice.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="config" class="config">
+      <div class="config-box">
+        <div class="config-grid">
+          <div class="config-text">
+            <h2>Quick Configuration</h2>
+            <p style="margin-bottom: 20px; color: var(--text-dim);">Get your Digital Clone up and running in minutes by following these simple steps.</p>
+            <ul class="config-steps">
+              <li>
+                <div class="step-num">1</div>
+                <div class="step-content">
+                  <h4>API Key Setup</h4>
+                  <p>Open the chatbot and click on <code>🔑 API Key</code> to enter your OpenAI API key. It will be securely stored in your browser's <code>localStorage</code>.</p>
+                </div>
+              </li>
+              <li>
+                <div class="step-num">2</div>
+                <div class="step-content">
+                  <h4>PHP Environment</h4>
+                  <p>Ensure your server supports PHP for file uploads (<code>vupload.php</code>) and memory synchronization (<code>saveMemory.php</code>, <code>getMemory.php</code>).</p>
+                </div>
+              </li>
+              <li>
+                <div class="step-num">3</div>
+                <div class="step-content">
+                  <h4>Biographical Indexing</h4>
+                  <p>Click <code>🗂 Index Biography</code> to process the bio files and create the semantic embeddings necessary for the persona's memory.</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div style="text-align: center;">
+            <img src="ad_digital_clone.jpg" alt="Digital Clone Preview" style="max-width: 100%; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border: 1px solid var(--glass-border);">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-content">
+        <p>&copy; 2024 Digital Clone Project. All rights reserved.</p>
+        <p class="author-info">Digital Clone is by Alessandro Demontis for <strong>Vivacity Design</strong> web agency, Pomezia.</p>
+      </div>
+    </footer>
+  </div>
+
+</body>
+</html>
