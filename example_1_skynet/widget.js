@@ -8,10 +8,14 @@
         searchBioFile: "searchBio.php",
         saveMemoryFile: "saveMemory.php",
         getMemoryFile: "getMemory.php",
-        model: "gpt-4o-mini", // Using a standard model for the template
+        uploadFile: "widget_vupload.php",
+        logChatFile: "widget_log_chat.php",
+        model: "gpt-4o-mini",
+        visionModel: "gpt-4.1-mini",
         embeddingModel: "text-embedding-3-small",
         embeddingDimensions: 512,
-        kbSimilarityThreshold: 0.5
+        kbSimilarityThreshold: 0.5,
+        maxVisionTokens: 28000
     };
 
     let chatMemory = [];
@@ -33,15 +37,17 @@
             <span style="font-size: 30px;">🤖</span>
         </div>
         <div class="skynet-chat-window" id="skynet-chat-window">
-            <div class="skynet-chat-header">
-                <h3>Skynet Expert: Marco Rossi</h3>
+            <div class="skynet-chat-header" id="skynet-chat-header">
+                <h3>Skynet Expert: <span id="skynet-persona-name">Marco Rossi</span></h3>
                 <span class="skynet-close-btn" id="skynet-close">&times;</span>
             </div>
             <div class="skynet-chat-history" id="skynet-history">
-                <div class="skynet-message bot">Hello! I am Marco Rossi, an expert here at Skynet. How can I assist you today with AI, defense, or robotics?</div>
+                <div class="skynet-message bot" id="skynet-initial-message">Hello! I am Marco Rossi, an expert here at Skynet. How can I assist you today with AI, defense, or robotics?</div>
             </div>
             <div id="skynet-loading" class="skynet-loading" style="padding: 0 12px;">Marco is thinking...</div>
             <div class="skynet-chat-input-area">
+                <input type="file" id="skynet-image-input" accept="image/*" style="display: none;">
+                <button class="skynet-upload-btn" id="skynet-upload" title="Upload Image">📎</button>
                 <textarea class="skynet-chat-input" id="skynet-input" placeholder="Type a message..." rows="1"></textarea>
                 <button class="skynet-send-btn" id="skynet-send">Send</button>
             </div>
@@ -56,6 +62,9 @@
     const sendBtn = document.getElementById("skynet-send");
     const history = document.getElementById("skynet-history");
     const loading = document.getElementById("skynet-loading");
+    const uploadBtn = document.getElementById("skynet-upload");
+    const imageInput = document.getElementById("skynet-image-input");
+    const initialMessage = document.getElementById("skynet-initial-message");
 
     // Toggle window
     trigger.onclick = () => {
@@ -71,6 +80,19 @@
         chatWindow.classList.remove("open");
     };
 
+    // Handle image upload button
+    uploadBtn.onclick = () => {
+        imageInput.click();
+    };
+
+    // Handle image selection
+    imageInput.onchange = async (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            await handleImageUpload(file);
+        }
+    };
+
     // Handle Send
     sendBtn.onclick = sendMessage;
     input.onkeydown = (e) => {
@@ -79,6 +101,109 @@
             sendMessage();
         }
     };
+
+    async function handleImageUpload(file) {
+        const apiKey = localStorage.getItem("openaikey");
+        if (!apiKey) {
+            const key = prompt("Please enter your OpenAI API Key:");
+            if (key) {
+                localStorage.setItem("openaikey", key);
+            } else {
+                return;
+            }
+        }
+
+        addImageMessage("user", file);
+        loading.style.display = "block";
+        loading.innerText = "Uploading and analyzing image...";
+
+        try {
+            // Upload image to server
+            const formData = new FormData();
+            formData.append("file", file);
+
+            const uploadRes = await fetch(CONFIG.uploadFile, {
+                method: "POST",
+                body: formData
+            });
+            const uploadData = await uploadRes.json();
+
+            if (uploadData.status !== "success") {
+                throw new Error(uploadData.message || "Upload failed");
+            }
+
+            const imageUrl = uploadData.url;
+            
+            // Analyze image with Vision
+            const analysis = await analyzeImage(imageUrl, apiKey);
+            addMessage("bot", analysis);
+            
+            // Save to long-term memory
+            await saveImageToMemory(imageUrl, analysis, apiKey);
+            
+            // Log the chat
+            await logChat("", imageUrl, analysis, apiKey);
+
+        } catch (error) {
+            console.error(error);
+            addMessage("bot", "Sorry, I encountered an error analyzing the image. Please try again.");
+        } finally {
+            loading.style.display = "none";
+            loading.innerText = "Marco is thinking...";
+            imageInput.value = "";
+        }
+    }
+
+    async function analyzeImage(imageUrl, apiKey) {
+        const fullName = personaData ? `${personaData.Name} ${personaData.Surname}` : "Marco Rossi";
+        
+        const visionPrompt = `You are ${fullName}, an expert at Skynet specializing in Artificial Intelligence, Defense Systems, and advanced Robotics.
+
+Analyze this image carefully and provide a detailed response in the style of an expert consultation. Consider:
+
+1. What does the image contain? Provide a thorough description.
+2. If there are technical elements (code, diagrams, schematics, engineering drawings), analyze them in detail.
+3. If there are people, describe their appearance, activities, and context.
+4. If applicable, relate the image content to AI, defense systems, robotics, or technology topics.
+5. Provide expert insights and commentary relevant to your area of expertise.
+
+Persona: ${JSON.stringify(personaData)}
+Emotional Matrix: ${emotionalMatrix}
+
+Respond as ${fullName} would, maintaining professional expertise and analytical perspective. Include your expert opinion on any notable aspects of the image.`;
+
+        const response = await fetch(CONFIG.apiEndpoint, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${apiKey}`
+            },
+            body: JSON.stringify({
+                model: CONFIG.visionModel,
+                messages: [
+                    {
+                        role: "user",
+                        content: [
+                            {
+                                type: "text",
+                                text: visionPrompt
+                            },
+                            {
+                                type: "image_url",
+                                image_url: { url: imageUrl }
+                            }
+                        ]
+                    }
+                ],
+                max_tokens: CONFIG.maxVisionTokens
+            })
+        });
+
+        const data = await response.json();
+        if (data.error) throw new Error(data.error.message);
+
+        return data.choices[0].message.content;
+    }
 
     async function sendMessage() {
         const text = input.value.trim();
@@ -101,6 +226,9 @@
         try {
             const response = await getAIResponse(text);
             addMessage("bot", response);
+            
+            // Log the chat
+            await logChat(text, null, response, apiKey);
         } catch (error) {
             console.error(error);
             addMessage("bot", "Sorry, I encountered an error. Please check your API key.");
@@ -117,6 +245,25 @@
         history.scrollTop = history.scrollHeight;
     }
 
+    function addImageMessage(role, file) {
+        const msg = document.createElement("div");
+        msg.className = `skynet-message ${role}`;
+        
+        const img = document.createElement("img");
+        img.src = URL.createObjectURL(file);
+        img.className = "skynet-uploaded-image";
+        img.onload = () => URL.revokeObjectURL(img.src);
+        
+        const caption = document.createElement("span");
+        caption.className = "skynet-image-caption";
+        caption.innerText = file.name;
+        
+        msg.appendChild(img);
+        msg.appendChild(caption);
+        history.appendChild(msg);
+        history.scrollTop = history.scrollHeight;
+    }
+
     async function initPersona() {
         try {
             const [pRes, eRes] = await Promise.all([
@@ -126,12 +273,25 @@
             personaData = (await pRes.json()).Persona[0];
             emotionalMatrix = await eRes.text();
 
+            // Update dynamic identity
+            const nameSpan = document.getElementById("skynet-persona-name");
+            if (nameSpan && personaData) {
+                nameSpan.textContent = `${personaData.Name} ${personaData.Surname}`;
+            }
+
+            // Update initial message if available
+            if (initialMessage && personaData && personaData.InitialMessage) {
+                initialMessage.innerText = personaData.InitialMessage;
+            }
+
+            const fullName = personaData ? `${personaData.Name} ${personaData.Surname}` : "Marco Rossi";
+
             chatMemory = [{
                 role: "system",
-                content: `You are Marco Rossi, a digital clone expert at Skynet. 
+                content: `You are ${fullName}, a digital clone expert at Skynet. 
                 Persona Data: ${JSON.stringify(personaData)}. 
                 Emotional Matrix: ${emotionalMatrix}.
-                Answer as Marco Rossi. Be professional, expert, and concise. 
+                Answer as ${fullName}. Be professional, expert, and concise. 
                 Do not mention you are an AI unless asked. 
                 Always stick to your persona and emotional matrix.
                 STRICT COMPLIANCE: 
@@ -255,6 +415,50 @@
                 body: JSON.stringify({ testo: text, vettore: vector, data: memoryObj.date })
             });
         } catch (e) { console.warn("Save memory failed", e); }
+    }
+
+    async function saveImageToMemory(imageUrl, analysis, apiKey) {
+        const text = `Image Analysis: ${imageUrl}\nMarco's Analysis: ${analysis}`;
+        try {
+            const res = await fetch(CONFIG.embeddingEndpoint, {
+                method: "POST",
+                headers: { "Content-Type": "application/json", "Authorization": `Bearer ${apiKey}` },
+                body: JSON.stringify({ model: CONFIG.embeddingModel, input: text, dimensions: CONFIG.embeddingDimensions })
+            });
+            const data = await res.json();
+            const vector = data.data[0].embedding;
+
+            const memoryObj = { text, vector, date: new Date().toISOString(), type: "image_analysis", imageUrl: imageUrl };
+            
+            // Local
+            const localMem = JSON.parse(localStorage.getItem("skynetLongMemory") || "[]");
+            localMem.push(memoryObj);
+            if (localMem.length > 100) localMem.shift();
+            localStorage.setItem("skynetLongMemory", JSON.stringify(localMem));
+
+            // Server
+            fetch(CONFIG.saveMemoryFile, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ testo: text, vettore: vector, data: memoryObj.date, type: "image_analysis", imageUrl: imageUrl })
+            });
+        } catch (e) { console.warn("Save image memory failed", e); }
+    }
+
+    async function logChat(userText, imageUrl, response, apiKey) {
+        try {
+            await fetch(CONFIG.logChatFile, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    userText: userText,
+                    imageUrl: imageUrl,
+                    response: response,
+                    timestamp: new Date().toISOString(),
+                    persona: personaData ? `${personaData.Name} ${personaData.Surname}` : "Marco Rossi"
+                })
+            });
+        } catch (e) { console.warn("Log chat failed", e); }
     }
 
     function cosineSimilarity(a, b) {

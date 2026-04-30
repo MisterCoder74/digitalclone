@@ -1,3 +1,9 @@
 .DS_Store
 *.log
 .env
+
+# Digital Clone Widget files
+example_1_skynet/uploads/
+example_1_skynet/widget_chat_logs.json
+example_1_skynet/memoria_salvata.json
+example_1_skynet/biography_index.json
