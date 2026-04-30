@@ -22,7 +22,7 @@
     // Load styles
     const link = document.createElement("link");
     link.rel = "stylesheet";
-    link.href = "widget.css";
+    link.href = "widget.css?v=<?php echo time(); ?>";
     document.head.appendChild(link);
 
     // Create Widget HTML
