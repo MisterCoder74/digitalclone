@@ -26,6 +26,21 @@
         }
         h1 { color: #0f0c29; }
         p { color: #666; line-height: 1.6; }
+        .btn-activate {
+            display: inline-block;
+            padding: 12px 24px;
+            margin-top: 20px;
+            background-color: #0f0c29;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        .btn-activate:hover {
+            background-color: #302b63;
+            transform: translateY(-2px);
+        }
         .footer { margin-top: 20px; font-size: 0.8rem; color: #aaa; }
     </style>
 </head>
@@ -34,6 +49,7 @@
         <h1>Welcome to Skynet Corporate</h1>
         <p>This is a demo page for the Marco Rossi Digital Clone. Marco is our lead expert in AI and Defense Systems. You can interact with him using the chat widget in the bottom-right corner.</p>
         <p>Marco uses advanced RAG (Retrieval-Augmented Generation) to provide accurate information based on his biography and past interactions.</p>
+        <a href="activate.php" class="btn-activate">Activate Digital Clone</a>
         <div class="footer">Skynet Corp &copy; 2024. All rights reserved.</div>
     </div>
 
