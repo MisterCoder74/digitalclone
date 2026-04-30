@@ -33,8 +33,8 @@
     position: absolute;
     bottom: 80px;
     right: 0;
-    width: 350px;
-    height: 500px;
+    width: 450px;
+    height: 600px;
     background: #1a1a3e;
     border: 1px solid rgba(79,172,254,0.3);
     border-radius: 14px;
@@ -59,7 +59,7 @@
 
 .skynet-chat-header h3 {
     margin: 0;
-    font-size: 1rem;
+    font-size: 1.3rem;
     color: #4facfe;
 }
 
@@ -76,7 +76,7 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-    background: rgba(255,255,255,0.02);
+    background: rgba(255,255,255,0.1);
 }
 
 .skynet-chat-history::-webkit-scrollbar {
@@ -92,8 +92,8 @@
     max-width: 80%;
     padding: 8px 12px;
     border-radius: 12px;
-    font-size: 0.85rem;
-    line-height: 1.4;
+    font-size: 0.95rem;
+    line-height: 1.5;
     word-break: break-word;
 }
 
@@ -127,7 +127,7 @@
     border-radius: 8px;
     color: #fff;
     padding: 8px;
-    font-size: 0.85rem;
+    font-size: 0.95rem;
     outline: none;
     resize: none;
 }
@@ -148,7 +148,7 @@
 }
 
 .skynet-loading {
-    font-size: 0.75rem;
+    font-size: 0.85rem;
     color: #4facfe;
     font-style: italic;
     margin-bottom: 5px;
@@ -171,3 +171,4 @@
     background: #0f0c29;
     color: #fff;
 }
+
