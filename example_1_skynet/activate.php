@@ -133,12 +133,15 @@
                 <input type="password" id="apiKey" name="apiKey" placeholder="sk-..." required>
             </div>
             <button type="submit" id="submitBtn">Initialize Protocol</button>
+                
         </form>
+            <button type="submit" id="gobackBtn" disabled>Back to Homepage</button>
     </div>
 
     <script>
         const form = document.getElementById('activationForm');
         const submitBtn = document.getElementById('submitBtn');
+            const gobackBtn = document.getElementById('gobackBtn');
         const toastContainer = document.getElementById('toast-container');
 
         function showToast(message, type = 'success') {
@@ -177,6 +180,8 @@
                 
                 if (response.ok && result.status === 'success') {
                     showToast(result.message || 'Activation successful!', 'success');
+                        submitBtn.disabled = true;
+                        gobackBtn.disabled = false;
                 } else {
                     showToast(result.message || 'Activation failed!', 'error');
                 }
@@ -184,10 +189,13 @@
                 console.error('Error:', error);
                 showToast('An error occurred during activation.', 'error');
             } finally {
-                submitBtn.disabled = false;
+                submitBtn.disabled = true;
                 submitBtn.textContent = 'Initialize Protocol';
             }
         });
+            gobackBtn.addEventListener('click', () => {
+window.location.href = 'index.php';
+});
     </script>
 </body>
 </html>
