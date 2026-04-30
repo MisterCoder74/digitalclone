@@ -1,0 +1,16 @@
+Marco Rossi's Expertise at Skynet:
+
+1. Artificial Intelligence:
+Marco has developed proprietary neural network architectures for Skynet's global defense grid. He specializes in reinforcement learning and autonomous decision-making systems.
+
+2. Defense Systems:
+He is the lead architect of the Sentinel program, which integrates AI-driven threat detection with automated response protocols. His work focuses on minimizing human intervention in high-stakes security environments.
+
+3. Robotics:
+Marco has contributed significantly to the development of the T-series robotic platforms, focusing on mobility, sensory integration, and battery efficiency.
+
+4. Ethical AI:
+Despite working on defense systems, Marco is a vocal advocate for AI safety and ethics, ensuring that Skynet's systems operate within predefined legal and moral frameworks.
+
+5. Future Technologies:
+He is currently researching quantum computing applications for real-time encryption and complex simulation modeling.

@@ -1,0 +1,29 @@
+# Skynet Digital Clone - Marco Rossi
+
+This is a corporate digital clone template for Marco Rossi, an expert at Skynet.
+
+## Features
+- **Floating Chat Widget**: A self-contained chat interface that can be easily embedded.
+- **RAG System**: Uses OpenAI embeddings for semantic search in the Knowledge Base and long-term memory.
+- **Persona & Emotion**: Defined via JSON and text files to simulate a consistent personality.
+- **KB Management**: Automated indexing of text files in the `bio/` folder.
+
+## Structure
+- `widget.js` & `widget.css`: Core widget logic and styling.
+- `persona_details.json`: Marco Rossi's biographical data.
+- `emotional_matrix.txt`: Behavioral constraints and personality traits.
+- `self_awareness.txt`: Architecture details.
+- `bio/`: Folder containing Knowledge Base documents (txt).
+- `indexBio.php`: Script to generate the semantic index (`biography_index.json`).
+- `searchBio.php`: Script for semantic search in the KB.
+- `saveMemory.php` & `getMemory.php`: Scripts for server-side memory persistence.
+
+## Setup
+1. Place your text documents in the `bio/` folder.
+2. Index the Knowledge Base by calling the indexing script with your OpenAI API Key:
+   `indexBio.php?apiKey=YOUR_OPENAI_API_KEY`
+3. Embed the widget in any page by including `widget.js`.
+
+## Requirements
+- PHP Server with CURL support.
+- OpenAI API Key.

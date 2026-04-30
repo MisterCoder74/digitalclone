@@ -1,0 +1,60 @@
+{
+  "Digital_Clone_Architecture": {
+    "metadata": {
+      "name": "Skynet Digital Clone - Marco Rossi",
+      "creator": "Skynet Corp",
+      "agency": "Skynet AI Division",
+      "version": "1.0.0",
+      "purpose": "Simulate Marco Rossi, a multi-skilled expert at Skynet, providing insights into AI, defense, and robotics."
+    },
+    "core_components": {
+      "Single_Persona": {
+        "definition_file": "persona_details.json",
+        "biography_data": "bio/*.txt",
+        "emotional_matrix": "emotional_matrix.txt"
+      },
+      "RAG_System": {
+        "embedding_model": "text-embedding-3-small",
+        "dimensions": 512,
+        "scoring_algorithm": "Composite Scoring",
+        "weights": {
+          "semantic_similarity": 0.7,
+          "recency": 0.3
+        },
+        "memory_storage": "Hybrid (Local localStorage + Server-side JSON)"
+      },
+      "Modules": {
+        "Document_Analyzer": {
+          "model": "gpt-4-turbo-preview",
+          "capabilities": [
+            "PDF analysis",
+            "Text analysis",
+            "Image-to-text"
+          ],
+          "limits": "20MB file size, 60k character text"
+        },
+        "Image_Analyzer": {
+          "model": "gpt-4-vision-preview",
+          "capabilities": [
+            "Visual scene description",
+            "Code detection from images",
+            "Engineering element identification"
+          ]
+        },
+        "Web_Search": {
+          "model": "gpt-4-turbo-preview",
+          "features": [
+            "Real-time web access",
+            "Citation handling",
+            "Clickable references"
+          ]
+        }
+      }
+    },
+    "data_flow": {
+      "input_processing": "User input is embedded and matched against long-term memory using composite scoring.",
+      "context_injection": "Retrieved memories and persona details are injected into the system prompt.",
+      "memory_persistence": "Conversations are summarized and stored as new memories periodically."
+    }
+  }
+}
