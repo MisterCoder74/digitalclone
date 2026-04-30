@@ -52,10 +52,10 @@
         <div style="margin-top: 30px;">
             <a href="activate.php" class="btn-activate">⚡ Activate Digital Clone</a>
         </div>
-        <div class="footer">Skynet Corp &copy; 2024. All rights reserved.</div>
+        <div class="footer">Skynet Corp &copy; <?php echo Date('Y'); ?>. All rights reserved.</div>
     </div>
 
     <!-- Digital Clone Widget -->
-    <script src="widget.js"></script>
+    <script src="widget.js?v=<?php echo time(); ?>"></script>
 </body>
 </html>
