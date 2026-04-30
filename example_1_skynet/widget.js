@@ -138,11 +138,16 @@
             const analysis = await analyzeImage(imageUrl, apiKey);
             addMessage("bot", analysis);
             
+            // Update chat memory
+            const userMsg = `[Image Upload: ${file.name}]`;
+            chatMemory.push({ role: "user", content: userMsg });
+            chatMemory.push({ role: "assistant", content: analysis });
+
             // Save to long-term memory
             await saveImageToMemory(imageUrl, analysis, apiKey);
             
             // Log the chat
-            await logChat("", imageUrl, analysis, apiKey);
+            await logChat(userMsg, imageUrl, analysis, apiKey);
 
         } catch (error) {
             console.error(error);
@@ -172,6 +177,24 @@ Emotional Matrix: ${emotionalMatrix}
 
 Respond as ${fullName} would, maintaining professional expertise and analytical perspective. Include your expert opinion on any notable aspects of the image.`;
 
+        const messages = [];
+        if (chatMemory.length > 0 && chatMemory[0].role === "system") {
+            messages.push(chatMemory[0]);
+        }
+        messages.push({
+            role: "user",
+            content: [
+                {
+                    type: "text",
+                    text: visionPrompt
+                },
+                {
+                    type: "image_url",
+                    image_url: { url: imageUrl }
+                }
+            ]
+        });
+
         const response = await fetch(CONFIG.apiEndpoint, {
             method: "POST",
             headers: {
@@ -180,21 +203,7 @@ Respond as ${fullName} would, maintaining professional expertise and analytical 
             },
             body: JSON.stringify({
                 model: CONFIG.visionModel,
-                messages: [
-                    {
-                        role: "user",
-                        content: [
-                            {
-                                type: "text",
-                                text: visionPrompt
-                            },
-                            {
-                                type: "image_url",
-                                image_url: { url: imageUrl }
-                            }
-                        ]
-                    }
-                ],
+                messages: messages,
                 max_tokens: CONFIG.maxVisionTokens
             })
         });
