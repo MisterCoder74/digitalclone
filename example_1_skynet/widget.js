@@ -10,7 +10,8 @@
         getMemoryFile: "getMemory.php",
         model: "gpt-4o-mini", // Using a standard model for the template
         embeddingModel: "text-embedding-3-small",
-        embeddingDimensions: 512
+        embeddingDimensions: 512,
+        kbSimilarityThreshold: 0.5
     };
 
     let chatMemory = [];
@@ -132,7 +133,11 @@
                 Emotional Matrix: ${emotionalMatrix}.
                 Answer as Marco Rossi. Be professional, expert, and concise. 
                 Do not mention you are an AI unless asked. 
-                Always stick to your persona and emotional matrix.`
+                Always stick to your persona and emotional matrix.
+                STRICT COMPLIANCE: 
+                1. Answer ONLY using 'Relevant information from my biography', 'Past conversation context', or 'Persona Data'. 
+                2. If the information is not in these sources, say: "I'm sorry, but I don't have that information in my knowledge base."
+                3. No external knowledge or hallucinations.`
             }];
         } catch (error) {
             console.error("Failed to load persona", error);
@@ -152,8 +157,9 @@
             });
             if (bioRes.ok) {
                 const matches = await bioRes.json();
-                if (matches.length > 0) {
-                    context += "\n\nRelevant information from my biography:\n" + matches.map(m => m.text).join("\n---\n");
+                const filteredMatches = matches.filter(m => m.similarity >= CONFIG.kbSimilarityThreshold);
+                if (filteredMatches.length > 0) {
+                    context += "\n\nRelevant information from my biography:\n" + filteredMatches.map(m => m.text).join("\n---\n");
                 }
             }
         } catch (e) { console.warn("Bio search failed", e); }
@@ -167,10 +173,9 @@
         } catch (e) { console.warn("Memory search failed", e); }
 
         // Prepare messages
-        const messages = [...chatMemory];
-        if (context) {
-            messages[0].content += context;
-        }
+        const messages = chatMemory.map((msg, index) => 
+            index === 0 ? { ...msg, content: msg.content + context } : msg
+        );
         messages.push({ role: "user", content: userInput });
 
         // 3. Call OpenAI
