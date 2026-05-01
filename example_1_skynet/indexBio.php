@@ -5,13 +5,15 @@
  * Richiede apiKey via POST o GET per le chiamate a OpenAI
  */
 
+require_once 'api_config.php';
+
 header('Content-Type: application/json');
 
-$apiKey = $_REQUEST['apiKey'] ?? '';
+$apiKey = getOpenAIKey();
 
 if (!$apiKey) {
     http_response_code(400);
-    echo json_encode(["status" => "error", "message" => "OpenAI API Key is required"]);
+    echo json_encode(["status" => "error", "message" => "OpenAI API Key is not configured on server"]);
     exit;
 }
 

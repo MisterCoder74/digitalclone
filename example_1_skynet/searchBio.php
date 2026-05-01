@@ -4,17 +4,19 @@
  * Ricerca semantica nell'indice della biografia
  */
 
+require_once 'api_config.php';
+
 header('Content-Type: application/json');
 
 $input = file_get_contents('php://input');
 $data = json_decode($input, true);
 
 $query = $data['query'] ?? '';
-$apiKey = $data['apiKey'] ?? '';
+$apiKey = getOpenAIKey();
 
 if (!$query || !$apiKey) {
     http_response_code(400);
-    echo json_encode(["status" => "error", "message" => "Query and API Key are required"]);
+    echo json_encode(["status" => "error", "message" => "Query is required and API Key must be configured on server"]);
     exit;
 }
 
