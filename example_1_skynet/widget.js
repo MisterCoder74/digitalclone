@@ -14,7 +14,7 @@
         visionModel: "gpt-4.1-mini",
         embeddingModel: "text-embedding-3-small",
         embeddingDimensions: 512,
-        kbSimilarityThreshold: 0.5,
+        kbSimilarityThreshold: 0.15,
         maxVisionTokens: 28000
     };
 
