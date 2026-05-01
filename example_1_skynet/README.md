@@ -20,7 +20,7 @@ This is a corporate digital clone template for Marco Rossi, an expert at Skynet.
 
 ## Setup
 1. Place your text documents in the `bio/` folder.
-2. Configure your OpenAI API Key in `api_config.php`. Run the provided `encodeKey` function to obfuscate your key.
+2. Configure your OpenAI API Key in `api_config.php`. You can use the included `setup-key.php` utility to encode your key.
 3. Index the Knowledge Base by calling the indexing script:
    `indexBio.php`
 4. Embed the widget in any page by including `widget.js`.
