@@ -9,6 +9,8 @@
 $adminPassword = 'skynet_admin_2024';
 $isAuthenticated = false;
 
+require_once 'api_config.php';
+
 // Check authentication
 session_start();
 if (isset($_SESSION['admin_auth']) && $_SESSION['admin_auth'] === true) {
@@ -19,6 +21,39 @@ if (isset($_SESSION['admin_auth']) && $_SESSION['admin_auth'] === true) {
 if (isset($_POST['password']) && $_POST['password'] === $adminPassword) {
     $_SESSION['admin_auth'] = true;
     $isAuthenticated = true;
+}
+
+// Handle API Key Encoding & Saving
+if ($isAuthenticated && isset($_GET['action']) && $_GET['action'] === 'encode_api_key' && isset($_POST['plain_key'])) {
+    header('Content-Type: application/json');
+    $plainKey = $_POST['plain_key'];
+    
+    if (empty($plainKey)) {
+        echo json_encode(['status' => 'error', 'message' => 'API Key cannot be empty']);
+        exit;
+    }
+    
+    $encodedKey = encodeKey($plainKey);
+    $configFile = __DIR__ . '/api_config.php';
+    $configContent = file_get_contents($configFile);
+    
+    // Replace the OBFUSCATED_API_KEY value
+    $pattern = '/\$OBFUSCATED_API_KEY\s*=\s*\'[^\']*\';/';
+    $replacement = "\$OBFUSCATED_API_KEY = '$encodedKey';";
+    $newConfigContent = preg_replace($pattern, $replacement, $configContent);
+    
+    if ($newConfigContent !== null && $newConfigContent !== $configContent) {
+        if (file_put_contents($configFile, $newConfigContent)) {
+            echo json_encode(['status' => 'success', 'message' => 'API Key encoded and saved successfully!']);
+        } else {
+            echo json_encode(['status' => 'error', 'message' => 'Failed to write to api_config.php. Check file permissions.']);
+        }
+    } else if ($newConfigContent === $configContent) {
+         echo json_encode(['status' => 'success', 'message' => 'API Key is already set to this value.']);
+    } else {
+        echo json_encode(['status' => 'error', 'message' => 'Failed to update api_config.php. Pattern not found.']);
+    }
+    exit;
 }
 
 // Handle logout
@@ -251,16 +286,33 @@ if (isset($_GET['action']) && $_GET['action'] === 'logout') {
             <a href="?action=logout" class="btn btn-danger">Logout</a>
         </div>
         
+        <!-- API Key Setup (New Section) -->
+        <div class="card" id="apiKeySetupSection">
+            <h2>🔑 API Key Setup</h2>
+            <p style="font-size: 0.85rem; color: rgba(255,255,255,0.6); margin-bottom: 16px;">
+                Enter your plain OpenAI API key here. It will be encoded and saved to <code>api_config.php</code> server-side.
+            </p>
+            <div class="form-group">
+                <label for="plainApiKey">Plain API Key</label>
+                <div style="display: flex; gap: 8px;">
+                    <input type="password" id="plainApiKey" placeholder="sk-..." style="font-family: monospace;">
+                    <button type="button" class="btn" id="toggleKeyVisibility" title="Show/Hide Key">👁️</button>
+                </div>
+            </div>
+            <div class="warning-text" style="background: rgba(255,165,0,0.1); border-left: 4px solid #ffa500; padding: 10px; margin-bottom: 16px; font-size: 0.8rem;">
+                <strong>⚠️ Security Warning:</strong> This will update the server-side configuration file. Ensure you are using a secure connection.
+            </div>
+            <button id="encodeSaveBtn" class="btn btn-primary">Encode & Save</button>
+            <div id="setupFeedback" class="feedback" style="display: none;"></div>
+        </div>
+        
         <!-- API Key Configuration -->
         <div class="card">
-            <h2>🔑 OpenAI API Configuration</h2>
-            <div class="form-group">
-                <label for="apikey">API Key (stored in localStorage on client)</label>
-                <input type="text" id="apikey" name="apikey" placeholder="sk-..." style="font-family: monospace;">
-            </div>
-            <p style="font-size: 0.8rem; color: rgba(255,255,255,0.5); margin-top: 8px;">
-                Note: For admin operations, the API key will be requested when processing files.
+            <h2>⚙️ API Configuration</h2>
+            <p style="font-size: 0.9rem; color: rgba(255,255,255,0.8); margin-bottom: 12px;">
+                API Key is managed server-side via <code>api_config.php</code>
             </p>
+            <button onclick="document.getElementById('apiKeySetupSection').scrollIntoView({behavior: 'smooth'})" class="btn">Update Encoded Key</button>
         </div>
         
         <!-- PDF Upload -->
@@ -340,26 +392,70 @@ if (isset($_GET['action']) && $_GET['action'] === 'logout') {
         </div>
         
         <script>
-            const apiKeyInput = document.getElementById('apikey');
-            let currentApiKey = localStorage.getItem('openaikey') || '';
-            if (apiKeyInput && currentApiKey) {
-                apiKeyInput.value = currentApiKey;
-            }
-            
-            apiKeyInput?.addEventListener('change', function() {
-                localStorage.setItem('openaikey', this.value);
+            // Server-side API key for client-side operations
+            const serverApiKey = <?php echo json_encode($isAuthenticated ? getOpenAIKey() : ""); ?>;
+
+            // Toggle API Key visibility
+            document.getElementById('toggleKeyVisibility')?.addEventListener('click', function() {
+                const input = document.getElementById('plainApiKey');
+                if (input.type === 'password') {
+                    input.type = 'text';
+                    this.textContent = '🙈';
+                } else {
+                    input.type = 'password';
+                    this.textContent = '👁️';
+                }
             });
-            
+
+            // Encode & Save API Key
+            document.getElementById('encodeSaveBtn')?.addEventListener('click', async function() {
+                const plainKey = document.getElementById('plainApiKey').value.trim();
+                const feedback = document.getElementById('setupFeedback');
+
+                if (!plainKey) {
+                    showFeedback('setupFeedback', 'error', 'Please enter an API Key.');
+                    return;
+                }
+
+                this.disabled = true;
+                this.innerHTML = '⏳ Encoding & Saving...';
+
+                try {
+                    const formData = new FormData();
+                    formData.append('plain_key', plainKey);
+
+                    const res = await fetch('?action=encode_api_key', {
+                        method: 'POST',
+                        body: formData
+                    });
+
+                    const data = await res.json();
+
+                    if (data.status === 'success') {
+                        showFeedback('setupFeedback', 'success', data.message);
+                        // Reload the page after a short delay to use the new key
+                        setTimeout(() => window.location.reload(), 1500);
+                    } else {
+                        showFeedback('setupFeedback', 'error', data.message);
+                    }
+                } catch (error) {
+                    showFeedback('setupFeedback', 'error', 'Error: ' + error.message);
+                } finally {
+                    this.disabled = false;
+                    this.innerHTML = 'Encode & Save';
+                }
+            });
+
             // PDF Upload Form
             document.getElementById('uploadForm')?.addEventListener('submit', async function(e) {
                 e.preventDefault();
-                
-                const apiKey = localStorage.getItem('openaikey');
+
+                const apiKey = serverApiKey;
                 if (!apiKey) {
-                    showFeedback('uploadFeedback', 'error', 'Please enter your OpenAI API Key first.');
+                    showFeedback('uploadFeedback', 'error', 'API Key is not configured on server. Please use the API Key Setup section above.');
                     return;
                 }
-                
+
                 const fileInput = document.getElementById('pdfFile');
                 const docName = document.getElementById('docName').value.trim();
                 
@@ -456,7 +552,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'logout') {
                     }
                     
                     // Step 4: Rebuild index
-                    await rebuildIndex(apiKey);
+                    await rebuildIndex();
                     
                     showFeedback('uploadFeedback', 'success', 
                         'PDF processed successfully! Extracted ' + extractedText.length + ' characters. File saved as ' + docName + '.txt');
@@ -474,21 +570,21 @@ if (isset($_GET['action']) && $_GET['action'] === 'logout') {
             // Text Entry Form
             document.getElementById('textForm')?.addEventListener('submit', async function(e) {
                 e.preventDefault();
-                
+
                 const title = document.getElementById('textTitle').value.trim();
                 const content = document.getElementById('textContent').value.trim();
-                const apiKey = localStorage.getItem('openaikey');
-                
+                const apiKey = serverApiKey;
+
                 if (!title || !content) {
                     showFeedback('textFeedback', 'error', 'Please fill in both title and content.');
                     return;
                 }
-                
+
                 if (!apiKey) {
-                    showFeedback('textFeedback', 'error', 'Please enter your OpenAI API Key first.');
+                    showFeedback('textFeedback', 'error', 'API Key is not configured on server. Please use the API Key Setup section above.');
                     return;
                 }
-                
+
                 try {
                     const res = await fetch('widget_save_bio.php', {
                         method: 'POST',
@@ -498,39 +594,39 @@ if (isset($_GET['action']) && $_GET['action'] === 'logout') {
                             content: content
                         })
                     });
-                    
+
                     if (!res.ok) {
                         throw new Error('Failed to save text');
                     }
-                    
+
                     // Rebuild index
-                    await rebuildIndex(apiKey);
-                    
+                    await rebuildIndex();
+
                     showFeedback('textFeedback', 'success', 'Text saved as ' + title + '.txt and knowledgebase updated.');
                     loadFileList();
                     updateStats();
-                    
+
                     document.getElementById('textTitle').value = '';
                     document.getElementById('textContent').value = '';
-                    
+
                 } catch (error) {
                     showFeedback('textFeedback', 'error', 'Error: ' + error.message);
                 }
             });
-            
+
             // Index Button
             document.getElementById('indexBtn')?.addEventListener('click', async function() {
-                const apiKey = localStorage.getItem('openaikey');
+                const apiKey = serverApiKey;
                 if (!apiKey) {
-                    showFeedback('indexFeedback', 'error', 'Please enter your OpenAI API Key first.');
+                    showFeedback('indexFeedback', 'error', 'API Key is not configured on server. Please use the API Key Setup section above.');
                     return;
                 }
-                
+
                 this.disabled = true;
                 this.innerHTML = '⏳ Rebuilding...';
-                
+
                 try {
-                    await rebuildIndex(apiKey);
+                    await rebuildIndex();
                     showFeedback('indexFeedback', 'success', 'Biography index rebuilt successfully!');
                     updateStats();
                 } catch (error) {
@@ -540,18 +636,18 @@ if (isset($_GET['action']) && $_GET['action'] === 'logout') {
                     this.innerHTML = '🔄 Rebuild Index';
                 }
             });
-            
-            async function rebuildIndex(apiKey) {
-                const res = await fetch('indexBio.php?apiKey=' + encodeURIComponent(apiKey));
+
+            async function rebuildIndex() {
+                const res = await fetch('indexBio.php');
                 const data = await res.json();
-                
+
                 if (data.status !== 'success') {
                     throw new Error(data.message || 'Index rebuild failed');
                 }
-                
+
                 return data;
             }
-            
+
             function showFeedback(elementId, type, message) {
                 const el = document.getElementById(elementId);
                 el.className = 'feedback ' + type;
