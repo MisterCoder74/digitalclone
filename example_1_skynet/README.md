@@ -20,10 +20,12 @@ This is a corporate digital clone template for Marco Rossi, an expert at Skynet.
 
 ## Setup
 1. Place your text documents in the `bio/` folder.
-2. Index the Knowledge Base by calling the indexing script with your OpenAI API Key:
-   `indexBio.php?apiKey=YOUR_OPENAI_API_KEY`
-3. Embed the widget in any page by including `widget.js`.
+2. Configure your OpenAI API Key in `api_config.php`. Run the provided `encodeKey` function to obfuscate your key.
+3. Index the Knowledge Base by calling the indexing script:
+   `indexBio.php`
+4. Embed the widget in any page by including `widget.js`.
 
-## Requirements
-- PHP Server with CURL support.
-- OpenAI API Key.
+## Security
+- API Key is stored only on the server in `api_config.php` (obfuscated).
+- All OpenAI calls from the widget are routed through `proxy.php`.
+- The client-side widget never has access to the raw API key.

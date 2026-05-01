@@ -1,8 +1,8 @@
 (function() {
     // Configuration
     const CONFIG = {
-        apiEndpoint: "https://api.openai.com/v1/chat/completions",
-        embeddingEndpoint: "https://api.openai.com/v1/embeddings",
+        apiEndpoint: "proxy.php?path=chat",
+        embeddingEndpoint: "proxy.php?path=embeddings",
         personaFile: "persona_details.json",
         emotionFile: "emotional_matrix.txt",
         searchBioFile: "searchBio.php",
@@ -103,16 +103,6 @@
     };
 
     async function handleImageUpload(file) {
-        const apiKey = localStorage.getItem("openaikey");
-        if (!apiKey) {
-            const key = prompt("Please enter your OpenAI API Key:");
-            if (key) {
-                localStorage.setItem("openaikey", key);
-            } else {
-                return;
-            }
-        }
-
         addImageMessage("user", file);
         loading.style.display = "block";
         loading.innerText = "Uploading and analyzing image...";
@@ -135,7 +125,7 @@
             const imageUrl = uploadData.url;
             
             // Analyze image with Vision
-            const analysis = await analyzeImage(imageUrl, apiKey);
+            const analysis = await analyzeImage(imageUrl);
             addMessage("bot", analysis);
             
             // Update chat memory
@@ -144,10 +134,10 @@
             chatMemory.push({ role: "assistant", content: analysis });
 
             // Save to long-term memory
-            await saveImageToMemory(imageUrl, analysis, apiKey);
+            await saveImageToMemory(imageUrl, analysis);
             
             // Log the chat
-            await logChat(userMsg, imageUrl, analysis, apiKey);
+            await logChat(userMsg, imageUrl, analysis);
 
         } catch (error) {
             console.error(error);
@@ -159,7 +149,7 @@
         }
     }
 
-    async function analyzeImage(imageUrl, apiKey) {
+    async function analyzeImage(imageUrl) {
         const fullName = personaData ? `${personaData.Name} ${personaData.Surname}` : "Marco Rossi";
         
         const visionPrompt = `You are ${fullName}, an expert at Skynet specializing in Artificial Intelligence, Defense Systems, and advanced Robotics.
@@ -198,8 +188,7 @@ Respond as ${fullName} would, maintaining professional expertise and analytical 
         const response = await fetch(CONFIG.apiEndpoint, {
             method: "POST",
             headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${apiKey}`
+                "Content-Type": "application/json"
             },
             body: JSON.stringify({
                 model: CONFIG.visionModel,
@@ -218,16 +207,6 @@ Respond as ${fullName} would, maintaining professional expertise and analytical 
         const text = input.value.trim();
         if (!text) return;
 
-        const apiKey = localStorage.getItem("openaikey");
-        if (!apiKey) {
-            const key = prompt("Please enter your OpenAI API Key:");
-            if (key) {
-                localStorage.setItem("openaikey", key);
-            } else {
-                return;
-            }
-        }
-
         addMessage("user", text);
         input.value = "";
         loading.style.display = "block";
@@ -237,10 +216,10 @@ Respond as ${fullName} would, maintaining professional expertise and analytical 
             addMessage("bot", response);
             
             // Log the chat
-            await logChat(text, null, response, apiKey);
+            await logChat(text, null, response);
         } catch (error) {
             console.error(error);
-            addMessage("bot", "Sorry, I encountered an error. Please check your API key.");
+            addMessage("bot", "Sorry, I encountered an error. Please try again later.");
         } finally {
             loading.style.display = "none";
         }
@@ -314,15 +293,13 @@ Respond as ${fullName} would, maintaining professional expertise and analytical 
     }
 
     async function getAIResponse(userInput) {
-        const apiKey = localStorage.getItem("openaikey");
-        
         // 1. RAG - Search Biography
         let context = "";
         try {
             const bioRes = await fetch(CONFIG.searchBioFile, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ query: userInput, apiKey: apiKey })
+                body: JSON.stringify({ query: userInput })
             });
             if (bioRes.ok) {
                 const matches = await bioRes.json();
@@ -335,7 +312,7 @@ Respond as ${fullName} would, maintaining professional expertise and analytical 
 
         // 2. RAG - Search Long Term Memory
         try {
-            const memContext = await searchMemory(userInput, apiKey);
+            const memContext = await searchMemory(userInput);
             if (memContext) {
                 context += "\n\nPast conversation context:\n" + memContext;
             }
@@ -347,12 +324,11 @@ Respond as ${fullName} would, maintaining professional expertise and analytical 
         );
         messages.push({ role: "user", content: userInput });
 
-        // 3. Call OpenAI
+        // 3. Call OpenAI via Proxy
         const res = await fetch(CONFIG.apiEndpoint, {
             method: "POST",
             headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${apiKey}`
+                "Content-Type": "application/json"
             },
             body: JSON.stringify({
                 model: CONFIG.model,
@@ -370,18 +346,18 @@ Respond as ${fullName} would, maintaining professional expertise and analytical 
         chatMemory.push({ role: "assistant", content: aiResponse });
 
         // 4. Save to long term memory (background)
-        saveToMemory(userInput, aiResponse, apiKey);
+        saveToMemory(userInput, aiResponse);
 
         return aiResponse;
     }
 
-    async function searchMemory(query, apiKey) {
+    async function searchMemory(query) {
         const localMem = JSON.parse(localStorage.getItem("skynetLongMemory") || "[]");
         if (localMem.length === 0) return "";
 
         const res = await fetch(CONFIG.embeddingEndpoint, {
             method: "POST",
-            headers: { "Content-Type": "application/json", "Authorization": `Bearer ${apiKey}` },
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ model: CONFIG.embeddingModel, input: query, dimensions: CONFIG.embeddingDimensions })
         });
         const data = await res.json();
@@ -398,12 +374,12 @@ Respond as ${fullName} would, maintaining professional expertise and analytical 
         return matches.map(m => m.text).join("\n---\n");
     }
 
-    async function saveToMemory(userInput, aiResponse, apiKey) {
+    async function saveToMemory(userInput, aiResponse) {
         const text = `User: ${userInput}\nMarco: ${aiResponse}`;
         try {
             const res = await fetch(CONFIG.embeddingEndpoint, {
                 method: "POST",
-                headers: { "Content-Type": "application/json", "Authorization": `Bearer ${apiKey}` },
+                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ model: CONFIG.embeddingModel, input: text, dimensions: CONFIG.embeddingDimensions })
             });
             const data = await res.json();
@@ -426,12 +402,12 @@ Respond as ${fullName} would, maintaining professional expertise and analytical 
         } catch (e) { console.warn("Save memory failed", e); }
     }
 
-    async function saveImageToMemory(imageUrl, analysis, apiKey) {
+    async function saveImageToMemory(imageUrl, analysis) {
         const text = `Image Analysis: ${imageUrl}\nMarco's Analysis: ${analysis}`;
         try {
             const res = await fetch(CONFIG.embeddingEndpoint, {
                 method: "POST",
-                headers: { "Content-Type": "application/json", "Authorization": `Bearer ${apiKey}` },
+                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ model: CONFIG.embeddingModel, input: text, dimensions: CONFIG.embeddingDimensions })
             });
             const data = await res.json();
@@ -454,7 +430,7 @@ Respond as ${fullName} would, maintaining professional expertise and analytical 
         } catch (e) { console.warn("Save image memory failed", e); }
     }
 
-    async function logChat(userText, imageUrl, response, apiKey) {
+    async function logChat(userText, imageUrl, response) {
         try {
             await fetch(CONFIG.logChatFile, {
                 method: "POST",
