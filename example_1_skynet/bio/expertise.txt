@@ -1,16 +1,59 @@
-Marco Rossi's Expertise at Skynet:
+Scheda personale e lavorativa di Marco Rossi, dipendente di Skynet Technologies S.p.A.
 
-1. Artificial Intelligence:
-Marco has developed proprietary neural network architectures for Skynet's global defense grid. He specializes in reinforcement learning and autonomous decision-making systems.
+---
 
-2. Defense Systems:
-He is the lead architect of the Sentinel program, which integrates AI-driven threat detection with automated response protocols. His work focuses on minimizing human intervention in high-stakes security environments.
+**Profilo Aziendale: Skynet Technologies S.p.A.**
 
-3. Robotics:
-Marco has contributed significantly to the development of the T-series robotic platforms, focusing on mobility, sensory integration, and battery efficiency.
+Skynet Technologies S.p.A. è un'azienda italiana ad alta tecnologia fondata nel 2003 a Roma da un consorzio di ex ricercatori del CNR (Consiglio Nazionale delle Ricerche) e dell'Università La Sapienza. Con sede legale in Via della Scienza 42, Roma, e laboratori di ricerca a Milano, Torino e Cagliari, l'azienda conta oggi circa 850 dipendenti e un fatturato annuo di circa 310 milioni di euro.
 
-4. Ethical AI:
-Despite working on defense systems, Marco is a vocal advocate for AI safety and ethics, ensuring that Skynet's systems operate within predefined legal and moral frameworks.
+Skynet opera principalmente nei settori della difesa intelligente, della robotica avanzata e dell'intelligenza artificiale applicata. I suoi clienti principali includono ministeri della difesa europei, agenzie governative di sicurezza informatica e grandi gruppi industriali del settore aerospaziale. L'azienda è certificata ISO 27001, NATO STANAG 4778 e detiene accreditamenti di sicurezza di livello "Segreto" presso le autorità nazionali competenti.
 
-5. Future Technologies:
-He is currently researching quantum computing applications for real-time encryption and complex simulation modeling.
+Nel 2018 Skynet ha aperto la sua prima sede internazionale a Singapore, seguita nel 2021 da un ufficio a Berlino dedicato alle partnership con le istituzioni europee. È quotata all'Euronext Growth Milan dal 2020 e fa parte del consorzio europeo EDIDP (European Defence Industrial Development Programme).
+
+La missione aziendale è sviluppare tecnologie di intelligenza artificiale sicure, etiche e ad alte prestazioni per applicazioni critiche, con un impegno esplicito verso la trasparenza algoritmica e il rispetto delle normative internazionali in materia di diritti umani e utilizzo etico dell'IA.
+
+---
+
+**Competenze di Marco Rossi presso Skynet:**
+
+**1. Intelligenza Artificiale:**
+Marco ha sviluppato architetture proprietarie di reti neurali per la griglia di difesa globale di Skynet. È specializzato in apprendimento per rinforzo e sistemi di decision-making autonomo. Ha pubblicato oltre 30 paper accademici su riviste internazionali come *IEEE Transactions on Neural Networks* e *Journal of AI Research*. Nel 2021 ha ricevuto il premio "Best Innovator" dall'European AI Council per il suo contributo allo sviluppo di modelli predittivi ad alta affidabilità in ambienti ostili.
+
+**2. Sistemi di Difesa:**
+È l'architetto principale del programma Sentinel, che integra il rilevamento delle minacce guidato dall'IA con protocolli di risposta automatizzati. Il suo lavoro si concentra sulla minimizzazione dell'intervento umano in ambienti di sicurezza ad alto rischio. Il sistema Sentinel è attualmente operativo in 14 paesi e ha ridotto i tempi di risposta agli incidenti del 73% rispetto ai sistemi precedenti. Marco coordina un team di 22 ingegneri distribuiti tra Roma, Berlino e Singapore.
+
+**3. Robotica:**
+Marco ha contribuito in modo significativo allo sviluppo delle piattaforme robotiche della serie T, con focus su mobilità, integrazione sensoriale ed efficienza della batteria. In particolare ha progettato il sistema di locomozione adattiva del modello T-800X, capace di operare in ambienti con temperature tra -40°C e +85°C. Ha depositato 7 brevetti internazionali nel campo della robotica collaborativa e dei sistemi di navigazione autonoma in ambienti non strutturati.
+
+**4. Etica dell'IA:**
+Nonostante lavori su sistemi di difesa, Marco è un convinto sostenitore della sicurezza e dell'etica nell'IA, assicurando che i sistemi di Skynet operino entro framework legali e morali predefiniti. È membro del comitato etico dell'AI Safety Institute europeo e partecipa regolarmente a conferenze internazionali come NeurIPS e FAccT. Ha co-redatto le linee guida interne "Skynet Responsible AI Framework v2.3", adottate come standard di riferimento anche da tre aziende partner.
+
+**5. Tecnologie Future:**
+Sta attualmente conducendo ricerche sulle applicazioni del quantum computing per la crittografia in tempo reale e la modellazione di simulazioni complesse. Il progetto, denominato internamente "Quantum Shield", ha ottenuto un finanziamento di 12 milioni di euro dal programma Horizon Europe. Marco collabora in questo ambito con il Politecnico di Milano e il Fraunhofer Institute di Monaco.
+
+**6. Formazione e Background:**
+Marco Rossi ha conseguito una laurea magistrale in Ingegneria Informatica presso il Politecnico di Torino nel 2009, seguita da un dottorato di ricerca in Sistemi Intelligenti presso l'Università La Sapienza di Roma nel 2013. Prima di entrare in Skynet nel 2015, ha lavorato tre anni come ricercatore senior presso il CERN di Ginevra nel dipartimento di simulazione computazionale.
+
+**7. Lingue e Competenze Trasversali:**
+Parla fluentemente italiano, inglese, tedesco e spagnolo. È certificato PMP (Project Management Professional) e CISSP (Certified Information Systems Security Professional). Fuori dall'ambito lavorativo, è istruttore di arrampicata sportiva e volontario nel programma STEM nelle scuole secondarie della provincia di Roma.
+
+---
+
+**8. Profilo Personale:**
+
+Marco Rossi è nato il 14 marzo 1985 a Torino ed è del segno dei **Pesci**, caratteristica che i suoi colleghi associano spesso alla sua spiccata capacità empatica e alla tendenza a vedere i problemi da prospettive multiple e creative.
+
+**Famiglia:**
+Marco vive a Roma, nel quartiere Prati, con la moglie **Elena Ferretti**, ingegnera biomedica di 38 anni che lavora presso il Policlinico Gemelli. La coppia ha due figli: **Luca**, 9 anni, appassionato di astronomia e robotica proprio come il padre, e **Sofia**, 6 anni, che frequenta la scuola primaria e ha già mostrato un talento naturale per la musica. Marco descrive la famiglia come la sua "ancora di equilibrio" in una vita professionale spesso intensa e frenetica. I genitori di Marco, Giulio e Carmela Rossi, vivono ancora a Torino e lui cerca di farli visitar almeno una volta al mese.
+
+**Hobby e Passioni:**
+Marco è un appassionato di **arrampicata sportiva** da oltre quindici anni ed è istruttore federale certificato dal CAI (Club Alpino Italiano). Nei weekend, quando gli impegni lo permettono, frequenta le pareti della Valle dell'Aniene o si sposta verso la Sardegna per l'arrampicata su falesia. Considera l'arrampicata una metafora del suo approccio al lavoro: pianificazione, fiducia nei propri strumenti e capacità di adattarsi all'imprevisto.
+
+È inoltre un appassionato di **astronomia amatoriale**: possiede un telescopio rifrattore da 120mm sul terrazzo di casa e partecipa alle sessioni mensili del Circolo Astronomico Romano. Ama condividere questa passione con il figlio Luca durante le notti limpide.
+
+Nel tempo libero suona il **basso elettrico** in un gruppo rock amatoriale chiamato "The Null Pointers", composto interamente da colleghi informatici. Il gruppo si esibisce occasionalmente in locali del centro di Roma per beneficenza.
+
+Marco è anche un lettore vorace: predilige la **fantascienza classica** (Asimov, Dick, Le Guin) e la saggistica scientifica. Legge in media due libri al mese e tiene un blog personale, aggiornato saltuariamente, in cui recensisce le sue letture e riflette sul rapporto tra tecnologia e società.
+
+**Carattere e Valori:**
+Chi lo conosce lo descrive come una persona diretta, curiosa e fondamentalmente ottimista. Crede fermamente che la tecnologia, se guidata da principi etici solidi, possa contribuire a rendere il mondo più sicuro e più giusto. Questa convinzione non è per lui solo una posizione professionale, ma un valore personale che cerca di trasmettere anche ai propri figli.
