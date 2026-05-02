@@ -11,6 +11,8 @@
         uploadFile: "widget_vupload.php",
         logChatFile: "widget_log_chat.php",
         model: "gpt-4o-mini",
+        webSearchEnabled: true,
+        webSearchModel: "gpt-5-search-api",
         visionModel: "gpt-4.1-mini",
         embeddingModel: "text-embedding-3-small",
         embeddingDimensions: 512,
@@ -22,6 +24,7 @@
     let personaData = null;
     let emotionalMatrix = "";
     let isOpen = false;
+    let isWebSearchMode = false;
 
     // Markdown to HTML converter
     function markdownToHtml(text) {
@@ -43,6 +46,9 @@
         
         // Bold (**...**)
         html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+        
+        // Links ([text](url))
+        html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>');
         
         // Italic (*...*)
         html = html.replace(/\*([^*]+)\*/g, '<em>$1</em>');
@@ -95,6 +101,12 @@
                 <div class="skynet-message bot" id="skynet-initial-message">Hello! I am Marco Rossi, an expert here at Skynet. How can I assist you today with AI, defense, or robotics?</div>
             </div>
             <div id="skynet-loading" class="skynet-loading" style="padding: 0 12px;">Marco is thinking...</div>
+            <div class="skynet-chat-mode-selector" id="skynet-mode-selector" style="${CONFIG.webSearchEnabled ? '' : 'display: none;'}">
+                <div class="skynet-mode-toggle" id="skynet-mode-toggle">
+                    <span class="skynet-mode-option active" data-mode="chat">Simple Chat</span>
+                    <span class="skynet-mode-option" data-mode="web">🔍 Web Search</span>
+                </div>
+            </div>
             <div class="skynet-chat-input-area">
                 <input type="file" id="skynet-image-input" accept="image/*" style="display: none;">
                 <button class="skynet-upload-btn" id="skynet-upload" title="Upload Image">📎</button>
@@ -115,6 +127,23 @@
     const uploadBtn = document.getElementById("skynet-upload");
     const imageInput = document.getElementById("skynet-image-input");
     const initialMessage = document.getElementById("skynet-initial-message");
+    const modeToggle = document.getElementById("skynet-mode-toggle");
+    const modeOptions = document.querySelectorAll(".skynet-mode-option");
+
+    // Toggle mode
+    modeOptions.forEach(option => {
+        option.onclick = () => {
+            modeOptions.forEach(opt => opt.classList.remove("active"));
+            option.classList.add("active");
+            isWebSearchMode = option.dataset.mode === "web";
+            
+            if (isWebSearchMode) {
+                input.placeholder = "Ask Marco to search the web...";
+            } else {
+                input.placeholder = "Type a message...";
+            }
+        };
+    });
 
     // Toggle window
     trigger.onclick = () => {
@@ -260,6 +289,9 @@ Respond as ${fullName} would, maintaining professional expertise and analytical 
         addMessage("user", text);
         input.value = "";
         loading.style.display = "block";
+        if (isWebSearchMode) {
+            loading.innerText = "Marco is searching the web...";
+        }
 
         try {
             const response = await getAIResponse(text);
@@ -272,6 +304,7 @@ Respond as ${fullName} would, maintaining professional expertise and analytical 
             addMessage("bot", "Sorry, I encountered an error. Please try again later.");
         } finally {
             loading.style.display = "none";
+            loading.innerText = "Marco is thinking...";
         }
     }
 
@@ -375,27 +408,64 @@ Respond as ${fullName} would, maintaining professional expertise and analytical 
         } catch (e) { console.warn("Memory search failed", e); }
 
         // Prepare messages
+        let systemPrompt = chatMemory.length > 0 ? chatMemory[0].content : "";
+        
+        if (isWebSearchMode) {
+            systemPrompt += "\n\nRESEARCH MODE: You have access to web search. Please provide detailed answers, include citations and reference sources when using information from the web. Use the provided tools if necessary.";
+        }
+
         const messages = chatMemory.map((msg, index) => 
-            index === 0 ? { ...msg, content: msg.content + context } : msg
+            index === 0 ? { ...msg, content: systemPrompt + context } : msg
         );
+        
+        if (messages.length === 0) {
+            messages.push({ role: "system", content: systemPrompt + context });
+        }
+        
         messages.push({ role: "user", content: userInput });
 
         // 3. Call OpenAI via Proxy
-        const res = await fetch(CONFIG.apiEndpoint, {
+        const endpoint = isWebSearchMode ? "proxy.php?path=websearch" : CONFIG.apiEndpoint;
+        const requestBody = {
+            model: isWebSearchMode ? CONFIG.webSearchModel : CONFIG.model,
+            messages: messages
+        };
+
+        if (isWebSearchMode) {
+            requestBody.web_search_options = { search_context_size: "medium" };
+        }
+
+        const res = await fetch(endpoint, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({
-                model: CONFIG.model,
-                messages: messages
-            })
+            body: JSON.stringify(requestBody)
         });
 
         const data = await res.json();
         if (data.error) throw new Error(data.error.message);
 
-        const aiResponse = data.choices[0].message.content;
+        let aiResponse = data.choices[0].message.content;
+        
+        // Handle citations if present
+        if (isWebSearchMode && data.choices[0].message.annotations) {
+            const annotations = data.choices[0].message.annotations;
+            const citationLinks = [];
+            
+            annotations.forEach(annotation => {
+                if (annotation.type === 'url_citation' && annotation.url_citation) {
+                    citationLinks.push({
+                        title: annotation.url_citation.title,
+                        url: annotation.url_citation.url
+                    });
+                }
+            });
+            
+            if (citationLinks.length > 0) {
+                aiResponse += "\n\n**References:**\n" + citationLinks.map(link => `- [${link.title}](${link.url})`).join("\n");
+            }
+        }
         
         // Update memory
         chatMemory.push({ role: "user", content: userInput });

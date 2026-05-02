@@ -34,7 +34,7 @@
     bottom: 80px;
     right: 0;
     width: 450px;
-    height: 600px;
+    height: 620px;
     background: #1a1a3e;
     border: 1px solid rgba(79,172,254,0.3);
     border-radius: 14px;
@@ -127,6 +127,47 @@
     font-style: italic;
 }
 
+/* Chat Mode Selector */
+.skynet-chat-mode-selector {
+    padding: 8px 12px;
+    background: #151535;
+    border-top: 1px solid rgba(79,172,254,0.1);
+    display: flex;
+    justify-content: center;
+}
+
+.skynet-mode-toggle {
+    display: flex;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 20px;
+    padding: 2px;
+    width: 100%;
+}
+
+.skynet-mode-option {
+    flex: 1;
+    text-align: center;
+    padding: 6px 10px;
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.6);
+    cursor: pointer;
+    border-radius: 18px;
+    transition: all 0.2s;
+    font-weight: 600;
+}
+
+.skynet-mode-option.active {
+    background: rgba(79,172,254,0.2);
+    color: #4facfe;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.skynet-mode-option:hover:not(.active) {
+    background: rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.9);
+}
+
 .skynet-chat-input-area {
     padding: 12px;
     background: #10102b;
@@ -157,6 +198,9 @@
     cursor: pointer;
     font-weight: bold;
     transition: background 0.2s;
+    height: 36px;
+    display: flex;
+    align-items: center;
 }
 
 .skynet-send-btn:hover {
@@ -288,6 +332,15 @@
     background: none;
     padding: 0;
     color: #00f2a0;
+}
+
+.skynet-message.bot a {
+    color: #00f2fe;
+    text-decoration: underline;
+}
+
+.skynet-message.bot a:hover {
+    color: #4facfe;
 }
 
 .skynet-message.bot ul,

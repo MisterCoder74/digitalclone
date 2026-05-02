@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 $path = isset($_GET['path']) ? $_GET['path'] : '';
 $openai_url = '';
 
-if ($path === 'chat') {
+if ($path === 'chat' || $path === 'websearch') {
     $openai_url = 'https://api.openai.com/v1/chat/completions';
 } elseif ($path === 'embeddings') {
     $openai_url = 'https://api.openai.com/v1/embeddings';
