@@ -110,7 +110,7 @@
             border: 1px solid rgba(255,255,255,0.1);
             border-radius: 10px;
             padding: 12px 20px;
-            width: 250px;
+            width: 280px;
             text-align: center;
             font-weight: 700;
             position: relative;
@@ -120,6 +120,14 @@
             color: #4facfe;
             font-size: 20px;
             font-weight: bold;
+        }
+
+        .important {
+            border-left: 4px solid #ff4b2b;
+            background: rgba(255, 75, 43, 0.1);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 10px 10px 0;
         }
 
         /* Responsive */
@@ -135,125 +143,108 @@
     <header class="page-header">
         <div class="page-header-text">
             <h1>Manuale Operativo Digital Clone</h1>
-            <p>Guida alla configurazione, gestione e sincronizzazione del clone virtuale.</p>
+            <p>Guida completa alla configurazione, gestione e sincronizzazione del clone virtuale.</p>
         </div>
     </header>
 
     <hr class="divider">
 
     <section class="card">
-        <h2>🚀 Introduzione</h2>
+        <h2>👤 1. Configurazione Identità</h2>
         <p>
-            Il <strong>Digital Clone</strong> è un'istanza avanzata di intelligenza artificiale progettata per replicare l'identità, la biografia e i tratti caratteriali di una persona reale. Utilizza un'architettura ibrida che combina Large Language Models (LLM) con un sistema di memoria semantica a lungo termine e una matrice emozionale dinamica.
+            L'identità del clone è definita nel file <code>persona_details.json</code>. Questo file contiene le informazioni fondamentali che il chatbot utilizzerà per capire chi è e come rispondere.
         </p>
-        <p>
-            Questa guida spiega come configurare i file core per personalizzare il comportamento del clone e come gestire il flusso di dati tra il browser e il server.
-        </p>
-    </section>
-
-    <section class="card">
-        <h2>👤 Configurazione Identità</h2>
-        <p>
-            Il file principale per definire chi è il Digital Clone è <code>persona_details.json</code>. Questo file JSON contiene i dati anagrafici, i contatti e, soprattutto, il <strong>Background</strong>.
-        </p>
-        <h3>Struttura di persona_details.json</h3>
+        <h3>File: <code>persona_details.json</code></h3>
         <pre><code>{
   "Persona": [
     {
       "Name": "Mario",
       "Surname": "Rossi",
-      "BirthDate": "1980-01-01",
-      "Background": "Nato nel 1980 a Roma...",
-      "Website_01": "https://...",
-      "Email": "info@example.com"
+      "BirthDate": "...",
+      "Background": "Esempio di biografia breve che definisce l'identità...",
+      "Website_01": "...",
+      "Email": "..."
     }
   ]
 }</code></pre>
         <p>
-            Il campo <code>Background</code> è fondamentale: viene iniettato nel sistema di prompt per fornire al clone la consapevolezza di sé. Modifica questo campo per descrivere la tua storia, le tue competenze e la tua visione del mondo.
+            Il campo <strong>Background</strong> è il più critico: descrive la storia personale, le competenze e la visione del mondo che il clone deve adottare come proprie.
         </p>
     </section>
 
     <section class="card">
-        <h2>🎭 Matrice Emozionale</h2>
+        <h2>📚 2. Gestione Biografia</h2>
         <p>
-            La personalità del clone non è statica. Attraverso il file <code>emotional_matrix.txt</code>, puoi calibrare i tratti caratteriali su una scala da 0 a 10.
+            Per fornire al clone una conoscenza approfondita del proprio passato e dei propri interessi, si utilizza un sistema di biografia modulare basato su file di testo.
         </p>
-        <pre><code>Empatia: 5/10
-Humor: 9/10
-Cinismo: 8/10
+        <h3>Procedura:</h3>
+        <ol>
+            <li>Inserisci i tuoi file biografici in formato <code>.txt</code> nella cartella <code>/bio/</code>.</li>
+            <li>Puoi suddividere la biografia in più file per argomento (es. <code>carriera.txt</code>, <code>interessi.txt</code>, <code>viaggi.txt</code>).</li>
+            <li>Per rendere questi file consultabili dal chatbot, è necessario indicizzarli cliccando sul pulsante <span class="btn-sm">🗂 Index Biography</span> nella barra laterale.</li>
+        </ol>
+        <p>
+            L'indicizzazione crea il file <code>biography_index.json</code> contenente i vettori (embeddings) necessari per la ricerca semantica durante la conversazione.
+        </p>
+    </section>
+
+    <section class="card">
+        <h2>🎭 3. Matrice Emozionale</h2>
+        <p>
+            Il temperamento del clone può essere finemente calibrato tramite il file <code>emotional_matrix.txt</code>. Ogni tratto caratteriale è espresso su una scala da <strong>0 a 10</strong>.
+        </p>
+        <pre><code>Empatia: 7/10
+Humor: 6/10
+Cinismo: 2/10
 Curiosità: 9/10
 Affidabilità: 10/10</code></pre>
         <p>
-            Questi valori influenzano direttamente il <em>System Message</em> inviato alle API di OpenAI. Ad esempio, un alto valore di <strong>Humor</strong> renderà le risposte più scherzose, mentre un alto <strong>Cinismo</strong> porterà a risposte più scettiche e dirette.
+            Questi parametri influenzano il tono delle risposte: un valore elevato di <em>Humor</em> renderà il clone più propenso alle battute, mentre un alto valore di <em>Cinismo</em> lo renderà più scettico e diretto.
         </p>
     </section>
 
     <section class="card">
-        <h2>📚 Biografia e Indicizzazione</h2>
+        <h2>🧠 4. Addestramento Manuale</h2>
         <p>
-            La biografia estesa è gestita in modo modulare. Invece di un singolo file enorme, puoi suddividere la tua storia in più file di testo.
-        </p>
-        <h3>Gestione dei file</h3>
-        <ol>
-            <li>Inserisci i file <code>.txt</code> nella cartella <code>/bio/</code>.</li>
-            <li>Ogni file dovrebbe trattare un argomento specifico (es. <code>istruzione.txt</code>, <code>carriera.txt</code>, <code>hobby.txt</code>).</li>
-        </ol>
-        <h3>Indicizzazione Semantica</h3>
-        <p>
-            Affinché il chatbot possa "leggere" questi file, devono essere trasformati in vettori matematici (embeddings).
+            Oltre alla biografia statica, il clone può imparare dalle interazioni in tempo reale.
         </p>
         <ul>
-            <li>Clicca sul pulsante <span class="btn-sm">🗂 Index Biography</span> nella barra laterale del chatbot.</li>
-            <li>Verrà richiamato lo script <code>indexBio.php</code> che genererà il file <code>biography_index.json</code>.</li>
-            <li>Questo processo consuma token OpenAI (<code>text-embedding-3-small</code>) ma viene eseguito una sola volta per ogni aggiornamento della biografia.</li>
+            <li>Sotto ogni risposta del chatbot è presente il pulsante <span class="btn-sm">💾 Save to Memory</span>.</li>
+            <li>Cliccando su questo pulsante, l'informazione contenuta nella risposta viene salvata nella memoria a lungo termine del clone.</li>
+            <li>Questo permette di "istruire" il clone su nuovi fatti o opinioni emersi durante la chat.</li>
         </ul>
     </section>
 
     <section class="card">
-        <h2>🧠 Sistema di Memoria</h2>
-        <p>Il Digital Clone utilizza due livelli di memoria per simulare la ritenzione cognitiva:</p>
+        <h2>🔄 5. Gestione Memoria e Sincronizzazione</h2>
+        <p>
+            Il sistema di memoria del Digital Clone è progettato per essere sia veloce che persistente, ma richiede attenzione nella gestione tra diversi dispositivi.
+        </p>
         
-        <h3>1. Memoria di Sessione</h3>
-        <p>Contiene la cronologia recente della conversazione corrente. È volatile e viene persa al rinfresco della pagina, a meno che non venga esportata manualmente con <span class="btn-sm">💾 Export this Session</span>.</p>
-
-        <h3>2. Memoria a Lungo Termine</h3>
-        <p>Utilizza la tecnologia dei vettori (embeddings) per memorizzare informazioni importanti in modo permanente.</p>
+        <h3>Memoria Locale vs Server</h3>
         <ul>
-            <li><strong>Salvataggio:</strong> Sotto ogni risposta del bot è presente il comando <span class="btn-sm">💾 Save to Memory</span>.</li>
-            <li><strong>Recupero:</strong> Quando fai una domanda, il sistema cerca nelle memorie salvate quelle più rilevanti usando uno score composito: <strong>70% Similitudine Semantica + 30% Recenza</strong>.</li>
-            <li><strong>Persistenza:</strong> Inizialmente le memorie sono salvate nel <code>localStorage</code> del browser.</li>
+            <li><strong>localStorage:</strong> Le memorie salvate risiedono inizialmente nella memoria del browser (localStorage). Questo significa che sono specifiche per il singolo browser e dispositivo in uso.</li>
+            <li><strong>Problema delle Memorie Divergenti:</strong> Se utilizzi il clone su Chrome (PC) e poi su Safari (iPhone), i due dispositivi avranno memorie diverse. Questo crea una divergenza nella personalità e nei ricordi del clone.</li>
         </ul>
-    </section>
 
-    <section class="card">
-        <h2>🔄 Sincronizzazione Browser-Server</h2>
-        <p>
-            Per evitare di perdere le memorie se pulisci la cache del browser o se cambi dispositivo, il sistema offre una sincronizzazione server-side.
-        </p>
-        <h3>Il Workflow di Sincronizzazione</h3>
-        <div class="workflow-container">
-            <div class="flow-box">Browser (localStorage)</div>
-            <div class="flow-arrow">▼</div>
-            <div class="flow-box">Pulsante "Sync Server Memory"</div>
-            <div class="flow-arrow">▼</div>
-            <div class="flow-box">saveMemory.php</div>
-            <div class="flow-arrow">▼</div>
-            <div class="flow-box">memoria_salvata.json (Server)</div>
+        <div class="important">
+            <h3>⚠️ Procedura Obbligatoria di Riallineamento</h3>
+            <p>
+                Per sincronizzare tutti i dispositivi con la <strong>"Verità Centrale"</strong> ospitata sul server, segui rigorosamente questa procedura:
+            </p>
+            <div class="workflow-container">
+                <div class="flow-box">1. Clicca su <br><strong>"Clear Long Memory"</strong><br><small>(Pulisce la memoria locale divergente)</small></div>
+                <div class="flow-arrow">▼</div>
+                <div class="flow-box">2. Clicca subito dopo su <br><strong>"Sync Server Memory"</strong><br><small>(Scarica la memoria consolidata dal server)</small></div>
+            </div>
+            <p>
+                Questa operazione garantisce che il browser corrente sia perfettamente allineato con l'archivio centrale (<code>memoria_salvata.json</code>) presente sul server.
+            </p>
         </div>
-        <p>
-            Quando clicchi <span class="btn-sm">🔄 Sync Server Memory</span>:
-        </p>
-        <ol>
-            <li>Il browser invia tutte le memorie locali al server.</li>
-            <li>Il server le unisce a quelle già presenti in <code>memoria_salvata.json</code> (evitando duplicati).</li>
-            <li>Il browser scarica eventuali memorie presenti sul server che non ha ancora in locale.</li>
-        </ol>
-        <p>In questo modo, il file <code>memoria_salvata.json</code> funge da "Cervello Centrale" condiviso.</p>
     </section>
 
     <footer style="text-align: center; padding: 20px; color: rgba(255,255,255,0.4); font-size: 0.8rem;">
-        Digital Clone Operating Manual &copy; 2024 - Documentazione Tecnica
+        Digital Clone Operating Manual &copy; 2024 - Documentazione Operativa
     </footer>
 </div>
 
