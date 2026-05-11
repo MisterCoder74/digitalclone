@@ -821,7 +821,10 @@ async function searchLongMemory(query, topK = 3) {
     });
     const data = await res.json();
     const queryVettore = data.data[0].embedding.map(v => Number(v.toFixed(5)));
-    const risultati = memoria
+    
+    // 1. Calculate scores for all candidates
+    const allScored = memoria
+      .filter(item => item.vettore) // Robustness: skip items without vectors
       .map(item => {
         const similarityScore = cosineSimilarity(queryVettore, item.vettore);
         const recencyScore = calculateRecencyScore(item.data);
@@ -834,14 +837,39 @@ async function searchLongMemory(query, topK = 3) {
           compositeScore
         };
       })
+      .sort((a, b) => b.compositeScore - a.compositeScore);
+
+    // 2-4. Diagnostic logging
+    console.groupCollapsed(`🔍 Memory Search Diagnostic: "${query}"`);
+    console.log("Configuration:", {
+      threshold: MEMORY_CONFIG.SIMILARITY_THRESHOLD,
+      weights: {
+        similarity: MEMORY_CONFIG.SIMILARITY_WEIGHT,
+        recency: MEMORY_CONFIG.RECENCY_WEIGHT
+      },
+      totalMemories: memoria.length
+    });
+
+    const tableData = allScored.slice(0, 10).map(item => ({
+      'Composite': item.compositeScore.toFixed(4),
+      'Similarity': item.similarityScore.toFixed(4),
+      'Recency': item.recencyScore.toFixed(4),
+      'Status': item.compositeScore >= MEMORY_CONFIG.SIMILARITY_THRESHOLD ? '✅ PASS' : '❌ FAIL',
+      'Snippet': item.testo.substring(0, 50) + '...',
+      'Date': new Date(item.data).toLocaleDateString()
+    }));
+    
+    console.table(tableData);
+    console.groupEnd();
+
+    // 5. Final Selection
+    const risultati = allScored
       .filter(item => item.compositeScore >= MEMORY_CONFIG.SIMILARITY_THRESHOLD)
-      .sort((a, b) => b.compositeScore - a.compositeScore)
       .slice(0, topK);
     
     if (risultati.length === 0) return "";
     
-    console.log(`Found ${risultati.length} relevant memories. Top scores:`, 
-      risultati.map(r => ({ composite: r.compositeScore.toFixed(3), similarity: r.similarityScore.toFixed(3), recency: r.recencyScore.toFixed(3) })));
+    console.log(`Selected ${risultati.length} memories for context.`);
     
     return "Relevant memories from past conversations:\n" + risultati.map(r => `[${r.data}] ${r.testo}`).join("\n---\n");
           
